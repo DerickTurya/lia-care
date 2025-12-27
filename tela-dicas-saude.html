@@ -237,8 +237,11 @@
             const content = document.createElement('div');
             content.className = 'message-content';
             
-            // Formata texto com quebras de linha
-            const textoFormatado = texto.replace(/\n/g, '<br>');
+            // Formata texto: markdown + quebras de linha
+            let textoFormatado = texto
+                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')  // **negrito**
+                .replace(/\n/g, '<br>');  // quebras de linha
+            
             content.innerHTML = textoFormatado;
             
             messageDiv.appendChild(avatar);
