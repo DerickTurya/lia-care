@@ -1,6 +1,6 @@
 {
   "pagamento_empresa": {
-    "keywords": ["salário", "salario", "pagamento", "receber", "quanto", "dinheiro", "empresa paga", "quando vou receber", "prazos"],
+    "keywords": ["salário", "salario", "pagamento", "receber", "quanto", "dinheiro", "empresa paga", "quando vou receber", "quando vou receber o pagamento", "prazos", "pagamento e prazos"],
     "resposta": "💰 **Pagamento durante afastamento:**\n\n📌 **Até 15 dias:**\n• Empresa paga 100% do salário\n• Pagamento normal na folha\n• Desconta dia trabalhado se houver\n\n📌 **Acima de 15 dias:**\n• Empresa paga os primeiros 15 dias\n• INSS paga a partir do 16º dia\n• Valor: 91% do salário de benefício\n\n📞 Dúvidas? Fale com o RH!"
   },
   "calculo_beneficio": {
