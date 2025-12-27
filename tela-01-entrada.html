@@ -66,7 +66,7 @@
                             <li>Acessa dicas de saúde</li>
                         </ul>
                     </div>
-                    <div style="font-size: 32px; color: var(--aiia-blue);">
+                    <div style="font-size: 32px; color: var(--aiia-blue);" class="desktop-only">
                         ⚡
                     </div>
                     <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
@@ -85,13 +85,29 @@
                 </div>
             </div>
 
+            <style>
+                @media (max-width: 768px) {
+                    .desktop-only {
+                        display: none !important;
+                    }
+                    div[style*="grid-template-columns: 1fr auto 1fr"] {
+                        grid-template-columns: 1fr !important;
+                        gap: 12px !important;
+                    }
+                }
+            </style>
+
             <div style="margin-top: 32px;">
                 <a href="tela-02-identificacao.html" class="btn btn-primary btn-block btn-large">
                     Cadastrar atestado médico
                 </a>
                 
-                <a href="#" class="btn btn-secondary btn-block">
-                    ❓ Tenho dúvidas sobre licença
+                <a href="tela-dicas-saude.html" class="btn btn-secondary btn-block">
+                    💬 Falar com a LIA
+                </a>
+
+                <a href="evolucao-nivel3.html" class="btn btn-secondary btn-block" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white;">
+                    🚀 Ver Evolução Enterprise (Nível 3)
                 </a>
             </div>
         </div>

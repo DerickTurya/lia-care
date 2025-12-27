@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retorno ao Trabalho - Lia Care</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .rtw-header {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 30px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #48bb78, #4299E1);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -28px;
+            top: 25px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #48bb78;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #48bb78;
+        }
+
+        .timeline-item.pending::before {
+            background: #e2e8f0;
+            box-shadow: 0 0 0 3px #e2e8f0;
+        }
+
+        .timeline-date {
+            font-size: 13px;
+            color: #718096;
+            margin-bottom: 8px;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .checkin-form {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .form-question {
+            margin-bottom: 24px;
+        }
+
+        .form-question label {
+            display: block;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 12px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            flex: 1;
+            min-width: 100px;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .radio-option:hover {
+            border-color: #4299E1;
+            background: #f7fafc;
+        }
+
+        .radio-option input[type="radio"] {
+            display: none;
+        }
+
+        .radio-option input[type="radio"]:checked + label {
+            color: #4299E1;
+            font-weight: 600;
+        }
+
+        .radio-option input[type="radio"]:checked ~ .radio-option {
+            border-color: #4299E1;
+            background: rgba(66, 153, 225, 0.1);
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #4299E1;
+        }
+
+        .emoji-scale {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .emoji-option {
+            flex: 1;
+            padding: 20px 10px;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .emoji-option:hover {
+            transform: scale(1.05);
+            border-color: #4299E1;
+        }
+
+        .emoji-option.selected {
+            border-color: #4299E1;
+            background: rgba(66, 153, 225, 0.1);
+        }
+
+        .emoji-option .emoji {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .emoji-option .label {
+            font-size: 12px;
+            color: #718096;
+        }
+
+        .recommendations {
+            background: linear-gradient(135deg, rgba(66, 153, 225, 0.1), rgba(107, 70, 193, 0.1));
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #4299E1;
+            margin-top: 20px;
+        }
+
+        .recommendations .title {
+            font-weight: 700;
+            color: #2c5282;
+            margin-bottom: 12px;
+        }
+
+        .recommendation-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .recommendation-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .alert-manager {
+            background: #fff5f5;
+            border-left: 4px solid #f6ad55;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .alert-manager .title {
+            font-weight: 700;
+            color: #c05621;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Retorno ao Trabalho</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <span>👤 João Silva</span>
+                <a href="tela-01-entrada.html" style="margin-left: 20px; color: #718096;">← Voltar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="rtw-header">
+            <div style="font-size: 48px; margin-bottom: 12px;">🧭</div>
+            <h2 style="margin: 0 0 8px 0;">Programa de Retorno ao Trabalho</h2>
+            <p style="margin: 0; opacity: 0.9;">Acompanhamento pós-alta para garantir sua adaptação e bem-estar</p>
+        </div>
+
+        <!-- MENSAGEM DA LIA -->
+        <div class="ai-message">
+            <div class="ai-message-header">
+                <span>🤖</span>
+                <span>LIA - Assistente Inteligente</span>
+            </div>
+            <div class="ai-message-content">
+                <p style="margin-bottom: 16px; font-size: 17px;"><strong>Oi João! 👋 Bem-vindo de volta!</strong></p>
+                <p style="margin-bottom: 12px;">
+                    Vi que você voltou ao trabalho hoje após seu afastamento por lombalgia. 
+                    Quero acompanhar sua adaptação e garantir que está tudo bem! 💙
+                </p>
+                <p style="margin-bottom: 12px;">
+                    <strong>Vou fazer check-ins regulares:</strong>
+                </p>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
+                    <li>✅ <strong>Hoje</strong> - 1º dia de retorno</li>
+                    <li>📅 <strong>Em 1 semana</strong> - Como você está se adaptando</li>
+                    <li>📅 <strong>Em 1 mês</strong> - Avaliação completa</li>
+                </ul>
+                <p style="margin-top: 16px;">
+                    <strong>Precisa de alguma adaptação?</strong> Posso ajudar com ergonomia, horário flexível, 
+                    ou qualquer outra coisa. Fique à vontade! 😊
+                </p>
+            </div>
+        </div>
+
+        <!-- CHECK-IN FORM -->
+        <div class="checkin-form">
+            <h3 style="margin: 0 0 20px 0; color: #2d3748;">📋 Check-in do 1º Dia</h3>
+            
+            <div class="form-question">
+                <label>Como você está se sentindo hoje?</label>
+                <div class="emoji-scale">
+                    <div class="emoji-option" onclick="selectFeeling(this, 1)">
+                        <div class="emoji">😞</div>
+                        <div class="label">Mal</div>
+                    </div>
+                    <div class="emoji-option" onclick="selectFeeling(this, 2)">
+                        <div class="emoji">😕</div>
+                        <div class="label">Ruim</div>
+                    </div>
+                    <div class="emoji-option" onclick="selectFeeling(this, 3)">
+                        <div class="emoji">😐</div>
+                        <div class="label">Ok</div>
+                    </div>
+                    <div class="emoji-option" onclick="selectFeeling(this, 4)">
+                        <div class="emoji">🙂</div>
+                        <div class="label">Bem</div>
+                    </div>
+                    <div class="emoji-option" onclick="selectFeeling(this, 5)">
+                        <div class="emoji">😄</div>
+                        <div class="label">Ótimo</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-question">
+                <label>Você está sentindo dor ou desconforto?</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="pain" value="none">
+                        <span>Nenhuma</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="pain" value="light">
+                        <span>Leve</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="pain" value="moderate">
+                        <span>Moderada</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="pain" value="severe">
+                        <span>Forte</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-question">
+                <label>Seu ambiente de trabalho está adequado?</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="environment" value="yes">
+                        <span>✅ Sim</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="environment" value="needs-adjustment">
+                        <span>🔧 Precisa ajustes</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="environment" value="no">
+                        <span>❌ Não adequado</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-question">
+                <label>Precisa de alguma adaptação específica?</label>
+                <textarea placeholder="Ex: cadeira ergonômica, suporte para monitor, horário flexível, pausas adicionais..."></textarea>
+            </div>
+
+            <div class="form-question">
+                <label>Comentários adicionais (opcional)</label>
+                <textarea placeholder="Conte-me qualquer coisa que você acha importante..."></textarea>
+            </div>
+
+            <button class="btn btn-primary btn-block" onclick="submitCheckin()">
+                Enviar Check-in
+            </button>
+        </div>
+
+        <!-- RECOMENDAÇÕES -->
+        <div class="recommendations" id="recommendations" style="display: none;">
+            <div class="title">💡 Recomendações Personalizadas da LIA</div>
+            
+            <div class="recommendation-item">
+                <div style="font-weight: 600; color: #2d3748; margin-bottom: 4px;">
+                    🪑 Avaliação Ergonômica Solicitada
+                </div>
+                <p style="font-size: 13px; color: #718096; margin: 0;">
+                    Notifiquei o RH para agendar uma avaliação ergonômica do seu posto de trabalho. 
+                    Esperamos realizar até o final desta semana.
+                </p>
+            </div>
+
+            <div class="recommendation-item">
+                <div style="font-weight: 600; color: #2d3748; margin-bottom: 4px;">
+                    🧘 Pausas para Alongamento
+                </div>
+                <p style="font-size: 13px; color: #718096; margin: 0;">
+                    Recomendo fazer pausas de 5 minutos a cada hora para alongamento. 
+                    Vou te enviar lembretes durante o dia!
+                </p>
+            </div>
+
+            <div class="recommendation-item">
+                <div style="font-weight: 600; color: #2d3748; margin-bottom: 4px;">
+                    🏥 Fisioterapia Preventiva
+                </div>
+                <p style="font-size: 13px; color: #718096; margin: 0;">
+                    Considerando seu histórico, sugiro sessões de fisioterapia preventiva. 
+                    Você pode agendar pelo plano de saúde da empresa.
+                </p>
+            </div>
+        </div>
+
+        <!-- ALERTA PARA GESTOR -->
+        <div class="alert-manager" id="managerAlert" style="display: none;">
+            <div class="title">👔 Alerta Enviado ao Gestor</div>
+            <p style="margin: 0; color: #744210;">
+                Notifiquei Maria Santos (sua gestora) sobre seu retorno e as adaptações necessárias. 
+                Ela entrará em contato para alinhar expectativas e garantir um retorno tranquilo.
+            </p>
+        </div>
+
+        <!-- TIMELINE DE ACOMPANHAMENTO -->
+        <div class="card" style="margin-top: 30px;">
+            <div class="card-header">
+                <h3 class="card-title">📅 Linha do Tempo - Acompanhamento RTW</h3>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Hoje - 27/12/2025</div>
+                    <div class="timeline-title">✅ 1º Dia de Retorno</div>
+                    <p style="font-size: 13px; color: #718096; margin: 8px 0 0 0;">
+                        Check-in realizado. Adaptações solicitadas registradas.
+                    </p>
+                </div>
+
+                <div class="timeline-item pending">
+                    <div class="timeline-date">03/01/2026 (1 semana)</div>
+                    <div class="timeline-title">📋 Check-in Semanal</div>
+                    <p style="font-size: 13px; color: #718096; margin: 8px 0 0 0;">
+                        Avaliaremos sua adaptação e progresso. A LIA enviará uma notificação.
+                    </p>
+                </div>
+
+                <div class="timeline-item pending">
+                    <div class="timeline-date">27/01/2026 (1 mês)</div>
+                    <div class="timeline-title">📊 Avaliação Completa</div>
+                    <p style="font-size: 13px; color: #718096; margin: 8px 0 0 0;">
+                        Revisão final do processo de retorno. Feedback sobre adaptações implementadas.
+                    </p>
+                </div>
+
+                <div class="timeline-item pending">
+                    <div class="timeline-date">27/03/2026 (3 meses)</div>
+                    <div class="timeline-title">🎯 Acompanhamento Preventivo</div>
+                    <p style="font-size: 13px; color: #718096; margin: 8px 0 0 0;">
+                        Check-in de prevenção para garantir que não há recorrência.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- O QUE ISSO MOSTRA -->
+        <div class="card" style="background: linear-gradient(135deg, rgba(72, 187, 120, 0.1), rgba(56, 161, 105, 0.1)); margin-top: 30px;">
+            <div class="card-header">
+                <h3 class="card-title">✨ Isso demonstra:</h3>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                <div style="background: white; padding: 20px; border-radius: 12px; text-align: center;">
+                    <div style="font-size: 36px; margin-bottom: 8px;">💚</div>
+                    <div style="font-weight: 600; color: #2d3748;">Cuidado</div>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 12px; text-align: center;">
+                    <div style="font-size: 36px; margin-bottom: 8px;">🤗</div>
+                    <div style="font-weight: 600; color: #2d3748;">Humanização</div>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 12px; text-align: center;">
+                    <div style="font-size: 36px; margin-bottom: 8px;">🤖</div>
+                    <div style="font-weight: 600; color: #2d3748;">IA Responsável</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function selectFeeling(element, value) {
+            document.querySelectorAll('.emoji-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            window.selectedFeeling = value;
+        }
+
+        function submitCheckin() {
+            const recommendations = document.getElementById('recommendations');
+            const managerAlert = document.getElementById('managerAlert');
+            
+            recommendations.style.display = 'block';
+            managerAlert.style.display = 'block';
+            
+            // Smooth scroll to recommendations
+            setTimeout(() => {
+                recommendations.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+            
+            // Show success message
+            alert('✅ Check-in enviado com sucesso!\n\n' +
+                  '🤖 A LIA analisou suas respostas e gerou recomendações personalizadas.\n\n' +
+                  '👔 Seu gestor foi notificado sobre as adaptações necessárias.\n\n' +
+                  '📅 Você receberá um lembrete para o próximo check-in em 1 semana.');
+        }
+    </script>
+</body>
+</html>

@@ -137,8 +137,12 @@
             </div>
 
             <div style="margin-top: 32px;">
-                <a href="tela-05a-confirmacao.html" class="btn btn-primary btn-block">
-                    🧪 Simular cadastro de licença (Teste)
+                <button onclick="createTestLicense()" class="btn btn-primary btn-block">
+                    ✨ Criar licença de teste
+                </button>
+                
+                <a href="tela-05a-confirmacao.html" class="btn btn-secondary btn-block">
+                    🧪 Simular cadastro de licença
                 </a>
                 
                 <button onclick="clearAllData()" class="btn btn-secondary btn-block">
@@ -153,23 +157,48 @@
 
         // Atualizar dashboard ao carregar
         window.addEventListener('DOMContentLoaded', () => {
+            console.log('🔄 Carregando dashboard do gestor...');
             updateDashboard();
             
-            // Auto-refresh a cada 5 segundos
-            setInterval(updateDashboard, 5000);
+            // Auto-refresh a cada 3 segundos
+            setInterval(() => {
+                console.log('🔄 Auto-refresh...');
+                updateDashboard();
+            }, 3000);
         });
 
         // Atualizar estatísticas e lista
         function updateDashboard() {
-            const stats = liaSync.getStats();
+            const licenses = liaSync.getLicenses();
+            
+            console.log('📊 Atualizando dashboard. Total de licenças:', licenses.length);
+            
+            // Remover duplicatas antes de contar
+            const uniqueLicenses = [];
+            const seenKeys = new Set();
+            
+            licenses.forEach(license => {
+                const key = `${license.employeeName || license.employee}-${license.startDate}`;
+                if (!seenKeys.has(key)) {
+                    seenKeys.add(key);
+                    uniqueLicenses.push(license);
+                }
+            });
+            
+            console.log('📊 Licenças únicas:', uniqueLicenses.length);
+            
+            const stats = {
+                total: uniqueLicenses.length,
+                active: uniqueLicenses.filter(l => l.status !== 'Concluída').length,
+                pending: uniqueLicenses.filter(l => !l.managerViewed).length
+            };
             
             document.getElementById('statTotal').textContent = stats.total;
             document.getElementById('statActive').textContent = stats.active;
             document.getElementById('statPending').textContent = stats.pending;
             
             // Atualizar lista de licenças
-            const licenses = liaSync.getLicenses();
-            renderLicenses(licenses);
+            renderLicenses(uniqueLicenses);
         }
 
         // Renderizar lista de licenças
@@ -189,19 +218,7 @@
             
             let html = '';
             
-            // Remover duplicatas baseado no nome do colaborador e data de início
-            const uniqueLicenses = [];
-            const seenKeys = new Set();
-            
             licenses.forEach(license => {
-                const key = `${license.employeeName}-${license.startDate}`;
-                if (!seenKeys.has(key)) {
-                    seenKeys.add(key);
-                    uniqueLicenses.push(license);
-                }
-            });
-            
-            uniqueLicenses.forEach(license => {
                 const badge = !license.managerViewed ? '<span class="badge badge-new">NOVA</span>' : '';
                 const statusColor = license.status === 'Aguardando INSS' ? 'var(--warning-color)' : 'var(--success-color)';
                 const employeeName = license.employeeName || license.employee || 'Colaborador';
@@ -281,11 +298,39 @@
         // Limpar todos os dados
         function clearAllData() {
             if (confirm('Tem certeza que deseja limpar todos os dados de teste?')) {
-                localStorage.removeItem('lia-licenses');
-                localStorage.removeItem('lia-notifications');
+                liaSync.clearAll();
+                sessionStorage.clear(); // Limpa também o sessionStorage
                 alert('✅ Dados limpos com sucesso!');
-                location.reload();
+                updateDashboard();
             }
+        }
+        
+        // Criar licença de teste diretamente
+        function createTestLicense() {
+            console.log('🧪 Criando licença de teste...');
+            
+            const licenseData = {
+                employeeName: 'João Silva',
+                employeeId: 'COL-12345',
+                position: 'Desenvolvedor Frontend',
+                department: 'Tecnologia',
+                manager: 'Maria Santos',
+                cid: 'M54.5',
+                condition: 'Lombalgia',
+                days: 15,
+                startDate: new Date().toLocaleDateString('pt-BR'),
+                endDate: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000).toLocaleDateString('pt-BR'),
+                doctorName: 'Dr. Carlos Mendes',
+                doctorCRM: 'CRM 12345-SP'
+            };
+            
+            const license = liaSync.createLicense(licenseData);
+            console.log('✅ Licença criada:', license);
+            
+            setTimeout(() => {
+                updateDashboard();
+                alert('✅ Licença de teste criada com sucesso!');
+            }, 500);
         }
 
         // Auto-refresh

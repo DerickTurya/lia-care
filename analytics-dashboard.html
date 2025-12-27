@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics de Risco - Lia Care</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .dashboard-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid #4299E1;
+        }
+
+        .stat-card.warning { border-left-color: #f6ad55; }
+        .stat-card.danger { border-left-color: #f56565; }
+        .stat-card.success { border-left-color: #48bb78; }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #2d3748;
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        .stat-change {
+            font-size: 13px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .stat-change.up { color: #f56565; }
+        .stat-change.down { color: #48bb78; }
+
+        .chart-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .chart-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 20px;
+            height: 200px;
+            padding: 20px 0;
+        }
+
+        .bar {
+            flex: 1;
+            background: linear-gradient(180deg, #4299E1, #6B46C1);
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .bar:hover {
+            opacity: 0.8;
+            transform: translateY(-5px);
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -30px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 12px;
+            color: #718096;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .risk-alerts {
+            background: #fff5f5;
+            border-left: 4px solid #f56565;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .risk-alerts .title {
+            font-weight: 700;
+            color: #c53030;
+            margin-bottom: 12px;
+        }
+
+        .alert-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .alert-item:last-child { margin-bottom: 0; }
+
+        .alert-item .alert-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+
+        .alert-item .alert-desc {
+            font-size: 13px;
+            color: #718096;
+        }
+
+        .predictions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .prediction-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .prediction-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .prediction-icon {
+            font-size: 32px;
+        }
+
+        .prediction-title {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .probability-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 12px 0;
+        }
+
+        .probability-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #48bb78, #38a169);
+            transition: width 1s ease-out;
+        }
+
+        .probability-fill.medium {
+            background: linear-gradient(90deg, #f6ad55, #ed8936);
+        }
+
+        .probability-fill.high {
+            background: linear-gradient(90deg, #f56565, #e53e3e);
+        }
+
+        .governance-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(66, 153, 225, 0.1), rgba(107, 70, 193, 0.1));
+            border: 2px solid #4299E1;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #2c5282;
+            margin-top: 10px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: #718096;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: #4299E1;
+            border-bottom-color: #4299E1;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Analytics Enterprise</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <span>👔 RH/Analytics</span>
+                <a href="tela-01-entrada.html" style="margin-left: 20px; color: #718096;">← Voltar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h2 style="margin: 0 0 8px 0;">📊 Analytics de Risco - Dashboard</h2>
+            <p style="margin: 0; opacity: 0.9;">Inteligência preventiva com governança e responsabilidade</p>
+            <div class="governance-badge" style="background: rgba(255,255,255,0.2); border-color: white; color: white; margin-top: 16px;">
+                🛡️ Dados anonimizados • Análise estatística • Foco em prevenção
+            </div>
+        </div>
+
+        <!-- MÉTRICAS PRINCIPAIS -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total de Afastamentos (2025)</div>
+                <div class="stat-value">247</div>
+                <div class="stat-change up">↑ 12% vs 2024</div>
+            </div>
+
+            <div class="stat-card warning">
+                <div class="stat-label">Tempo Médio de Afastamento</div>
+                <div class="stat-value">12.4</div>
+                <p style="font-size: 13px; color: #718096; margin: 5px 0 0 0;">dias por ocorrência</p>
+            </div>
+
+            <div class="stat-card danger">
+                <div class="stat-label">Alto Risco de Prolongamento</div>
+                <div class="stat-value">18</div>
+                <div class="stat-change up">↑ 5 casos este mês</div>
+            </div>
+
+            <div class="stat-card success">
+                <div class="stat-label">Taxa de Retorno Bem-Sucedido</div>
+                <div class="stat-value">87%</div>
+                <div class="stat-change down">↑ 8% vs trimestre anterior</div>
+            </div>
+        </div>
+
+        <!-- ALERTAS DE RISCO -->
+        <div class="risk-alerts">
+            <div class="title">⚠️ Alertas Preventivos Ativos</div>
+            
+            <div class="alert-item">
+                <div class="alert-title">🔴 Equipe de Tecnologia - Risco de Burnout Elevado</div>
+                <div class="alert-desc">
+                    5 colaboradores com padrão de afastamentos recorrentes. Recomenda-se: reunião com gestão, avaliação de carga de trabalho, programa de bem-estar.
+                </div>
+                <span class="governance-badge">IA Preditiva • Conf: 78%</span>
+            </div>
+
+            <div class="alert-item">
+                <div class="alert-title">🟡 Padrão Sazonal Detectado - Gripes (Inverno)</div>
+                <div class="alert-desc">
+                    Aumento de 45% em afastamentos por gripe comparado ao trimestre anterior. Sugestão: campanha de vacinação preventiva.
+                </div>
+                <span class="governance-badge">Análise Estatística</span>
+            </div>
+
+            <div class="alert-item">
+                <div class="alert-title">🟠 3 Gestores Precisam de Orientação Antecipada</div>
+                <div class="alert-desc">
+                    Equipes sob gestão de Maria S., Carlos T. e João M. apresentam taxa de reincidência acima da média. Recomenda-se treinamento em gestão humanizada.
+                </div>
+                <span class="governance-badge">Anonimizado • Preventivo</span>
+            </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('overview')">📊 Visão Geral</button>
+            <button class="tab" onclick="switchTab('predictions')">🔮 Predições IA</button>
+            <button class="tab" onclick="switchTab('patterns')">📈 Padrões por Área</button>
+        </div>
+
+        <!-- TAB: OVERVIEW -->
+        <div id="tab-overview" class="tab-content active">
+            <div class="chart-container">
+                <div class="chart-title">Afastamentos por CID-10 (Top 5)</div>
+                <div class="bar-chart">
+                    <div class="bar" style="height: 85%;">
+                        <div class="bar-value">42</div>
+                        <div class="bar-label">M54 Lombalgia</div>
+                    </div>
+                    <div class="bar" style="height: 65%;">
+                        <div class="bar-value">32</div>
+                        <div class="bar-label">J00 Gripe</div>
+                    </div>
+                    <div class="bar" style="height: 55%;">
+                        <div class="bar-value">27</div>
+                        <div class="bar-label">F43 Estresse</div>
+                    </div>
+                    <div class="bar" style="height: 40%;">
+                        <div class="bar-value">20</div>
+                        <div class="bar-label">A09 Virose</div>
+                    </div>
+                    <div class="bar" style="height: 30%;">
+                        <div class="bar-value">15</div>
+                        <div class="bar-label">M65 Tendinite</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Evolução Mensal - 2025</div>
+                <div class="bar-chart">
+                    <div class="bar" style="height: 45%;">
+                        <div class="bar-value">18</div>
+                        <div class="bar-label">Jan</div>
+                    </div>
+                    <div class="bar" style="height: 50%;">
+                        <div class="bar-value">20</div>
+                        <div class="bar-label">Fev</div>
+                    </div>
+                    <div class="bar" style="height: 60%;">
+                        <div class="bar-value">24</div>
+                        <div class="bar-label">Mar</div>
+                    </div>
+                    <div class="bar" style="height: 55%;">
+                        <div class="bar-value">22</div>
+                        <div class="bar-label">Abr</div>
+                    </div>
+                    <div class="bar" style="height: 70%;">
+                        <div class="bar-value">28</div>
+                        <div class="bar-label">Mai</div>
+                    </div>
+                    <div class="bar" style="height: 85%;">
+                        <div class="bar-value">34</div>
+                        <div class="bar-label">Jun</div>
+                    </div>
+                    <div class="bar" style="height: 75%;">
+                        <div class="bar-value">30</div>
+                        <div class="bar-label">Jul</div>
+                    </div>
+                    <div class="bar" style="height: 65%;">
+                        <div class="bar-value">26</div>
+                        <div class="bar-label">Ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: PREDIÇÕES -->
+        <div id="tab-predictions" class="tab-content">
+            <div class="predictions-grid">
+                <div class="prediction-card">
+                    <div class="prediction-header">
+                        <div class="prediction-icon">🔴</div>
+                        <div>
+                            <div class="prediction-title">Afastamento Prolongado</div>
+                            <div style="font-size: 12px; color: #718096;">Próximos 30 dias</div>
+                        </div>
+                    </div>
+                    <div>Probabilidade de novos casos >15 dias</div>
+                    <div class="probability-bar">
+                        <div class="probability-fill high" style="width: 0%;" data-width="72%"></div>
+                    </div>
+                    <div style="font-size: 14px; font-weight: 600; color: #2d3748;">72% de probabilidade</div>
+                    <p style="font-size: 13px; color: #718096; margin: 8px 0 0 0;">
+                        Baseado em: histórico, sazonalidade, dados demográficos
+                    </p>
+                </div>
+
+                <div class="prediction-card">
+                    <div class="prediction-header">
+                        <div class="prediction-icon">🟡</div>
+                        <div>
+                            <div class="prediction-title">Necessidade de Perícia</div>
+                            <div style="font-size: 12px; color: #718096;">Casos em andamento</div>
+                        </div>
+                    </div>
+                    <div>Casos que exigirão perícia do INSS</div>
+                    <div class="probability-bar">
+                        <div class="probability-fill medium" style="width: 0%;" data-width="58%"></div>
+                    </div>
+                    <div style="font-size: 14px; font-weight: 600; color: #2d3748;">58% de probabilidade</div>
+                    <p style="font-size: 13px; color: #718096; margin: 8px 0 0 0;">
+                        8 casos ativos com potencial de ultrapassar 15 dias
+                    </p>
+                </div>
+
+                <div class="prediction-card">
+                    <div class="prediction-header">
+                        <div class="prediction-icon">🟢</div>
+                        <div>
+                            <div class="prediction-title">Taxa de Retorno</div>
+                            <div style="font-size: 12px; color: #718096;">Próximo mês</div>
+                        </div>
+                    </div>
+                    <div>Retornos bem-sucedidos sem reincidência</div>
+                    <div class="probability-bar">
+                        <div class="probability-fill" style="width: 0%;" data-width="89%"></div>
+                    </div>
+                    <div style="font-size: 14px; font-weight: 600; color: #2d3748;">89% de sucesso esperado</div>
+                    <p style="font-size: 13px; color: #718096; margin: 8px 0 0 0;">
+                        Melhoria devido a programa RTW implementado
+                    </p>
+                </div>
+
+                <div class="prediction-card">
+                    <div class="prediction-header">
+                        <div class="prediction-icon">🔵</div>
+                        <div>
+                            <div class="prediction-title">Áreas de Risco</div>
+                            <div style="font-size: 12px; color: #718096;">Análise preditiva</div>
+                        </div>
+                    </div>
+                    <div>Departamentos com maior risco</div>
+                    <div style="margin: 12px 0;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="font-size: 13px;">Tecnologia</span>
+                            <span style="font-size: 13px; font-weight: 600;">Alto</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="font-size: 13px;">Operações</span>
+                            <span style="font-size: 13px; font-weight: 600;">Médio</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="font-size: 13px;">Administrativo</span>
+                            <span style="font-size: 13px; font-weight: 600;">Baixo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="title">🤖 Como a IA funciona aqui:</div>
+                <p style="margin: 8px 0 0 0; color: #2d3748;">
+                    A LIA analisa <strong>padrões históricos, sazonalidade, dados demográficos</strong> e <strong>condições de trabalho</strong> 
+                    para gerar previsões. <strong>Importante:</strong> estas são probabilidades estatísticas, não certezas. 
+                    A decisão final sempre é humana.
+                </p>
+            </div>
+        </div>
+
+        <!-- TAB: PADRÕES -->
+        <div id="tab-patterns" class="tab-content">
+            <div class="chart-container">
+                <div class="chart-title">Padrões por Departamento (Anonimizado)</div>
+                <div style="margin-top: 20px;">
+                    <div style="margin-bottom: 24px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-weight: 600; color: #2d3748;">Tecnologia (85 colaboradores)</span>
+                            <span style="font-weight: 600; color: #f56565;">12.8% absenteísmo</span>
+                        </div>
+                        <div style="height: 12px; background: #e2e8f0; border-radius: 6px; overflow: hidden;">
+                            <div style="width: 12.8%; height: 100%; background: linear-gradient(90deg, #f56565, #e53e3e);"></div>
+                        </div>
+                        <p style="font-size: 13px; color: #718096; margin: 8px 0 0 0;">
+                            Principal causa: Lombalgia (40%) • Recomendação: programa de ergonomia
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 24px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-weight: 600; color: #2d3748;">Operações (120 colaboradores)</span>
+                            <span style="font-weight: 600; color: #f6ad55;">8.5% absenteísmo</span>
+                        </div>
+                        <div style="height: 12px; background: #e2e8f0; border-radius: 6px; overflow: hidden;">
+                            <div style="width: 8.5%; height: 100%; background: linear-gradient(90deg, #f6ad55, #ed8936);"></div>
+                        </div>
+                        <p style="font-size: 13px; color: #718096; margin: 8px 0 0 0;">
+                            Principal causa: Virose (35%) • Recomendação: campanha de higiene
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 24px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-weight: 600; color: #2d3748;">Atendimento (95 colaboradores)</span>
+                            <span style="font-weight: 600; color: #f6ad55;">7.2% absenteísmo</span>
+                        </div>
+                        <div style="height: 12px; background: #e2e8f0; border-radius: 6px; overflow: hidden;">
+                            <div style="width: 7.2%; height: 100%; background: linear-gradient(90deg, #f6ad55, #ed8936);"></div>
+                        </div>
+                        <p style="font-size: 13px; color: #718096; margin: 8px 0 0 0;">
+                            Principal causa: Estresse (38%) • Recomendação: programa de saúde mental
+                        </p>
+                    </div>
+
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-weight: 600; color: #2d3748;">Administrativo (60 colaboradores)</span>
+                            <span style="font-weight: 600; color: #48bb78;">4.1% absenteísmo</span>
+                        </div>
+                        <div style="height: 12px; background: #e2e8f0; border-radius: 6px; overflow: hidden;">
+                            <div style="width: 4.1%; height: 100%; background: linear-gradient(90deg, #48bb78, #38a169);"></div>
+                        </div>
+                        <p style="font-size: 13px; color: #718096; margin: 8px 0 0 0;">
+                            Principal causa: Gripe (30%) • Status: dentro da média nacional
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="success-box" style="margin-top: 20px;">
+                <div class="title">✅ Governança de Dados</div>
+                <ul style="margin: 12px 0 0 0; padding-left: 20px; color: #22543d;">
+                    <li>Dados agregados por departamento (sem identificação individual)</li>
+                    <li>Análise estatística focada em prevenção, não punição</li>
+                    <li>Recomendações visam bem-estar coletivo</li>
+                    <li>Auditoria trimestral de algoritmos para detectar viés</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- AÇÕES RECOMENDADAS -->
+        <div class="card" style="background: linear-gradient(135deg, rgba(72, 187, 120, 0.1), rgba(56, 161, 105, 0.1)); margin-top: 30px;">
+            <div class="card-header">
+                <h3 class="card-title">💡 Ações Recomendadas pela IA</h3>
+            </div>
+
+            <div style="display: grid; gap: 16px;">
+                <div style="background: white; padding: 20px; border-radius: 12px; border-left: 4px solid #48bb78;">
+                    <div style="font-weight: 600; color: #2d3748; margin-bottom: 8px;">
+                        🏥 Programa de Ergonomia - Tecnologia
+                    </div>
+                    <p style="font-size: 13px; color: #718096; margin: 0;">
+                        Implementar avaliação ergonômica e fornecer equipamentos adequados. 
+                        Potencial de reduzir lombalgia em 35-40%.
+                    </p>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 12px; border-left: 4px solid #4299E1;">
+                    <div style="font-weight: 600; color: #2d3748; margin-bottom: 8px;">
+                        🧘 Programa de Saúde Mental - Atendimento
+                    </div>
+                    <p style="font-size: 13px; color: #718096; margin: 0;">
+                        Oferecer sessões de terapia, mindfulness e gestão de estresse. 
+                        Meta: reduzir afastamentos por estresse em 25%.
+                    </p>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 12px; border-left: 4px solid #f6ad55;">
+                    <div style="font-weight: 600; color: #2d3748; margin-bottom: 8px;">
+                        👔 Treinamento de Gestores - Gestão Humanizada
+                    </div>
+                    <p style="font-size: 13px; color: #718096; margin: 0;">
+                        Capacitar gestores em liderança empática e detecção precoce de burnout. 
+                        Foco em prevenção e acolhimento.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to selected tab
+            event.target.classList.add('active');
+            document.getElementById('tab-' + tabName).classList.add('active');
+            
+            // Animate probability bars if predictions tab
+            if (tabName === 'predictions') {
+                setTimeout(() => {
+                    document.querySelectorAll('.probability-fill').forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-width');
+                    });
+                }, 100);
+            }
+        }
+
+        // Animate probability bars on load
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.probability-fill').forEach(bar => {
+                    if (bar.closest('.tab-content.active')) {
+                        bar.style.width = bar.getAttribute('data-width');
+                    }
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>

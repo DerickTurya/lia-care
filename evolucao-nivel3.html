@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolução da LIA - Nível 3 Enterprise</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero-section h1 {
+            font-size: 42px;
+            margin: 0 0 16px 0;
+        }
+
+        .hero-section p {
+            font-size: 18px;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .architecture-diagram {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin: 40px 0;
+        }
+
+        .arch-layer {
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border-left: 4px solid #4299E1;
+            position: relative;
+        }
+
+        .arch-layer:last-child {
+            margin-bottom: 0;
+        }
+
+        .arch-layer .title {
+            font-weight: 700;
+            color: #2d3748;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .arch-layer .description {
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .arch-layer .components {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .component-tag {
+            background: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #4299E1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .arrow-down {
+            text-align: center;
+            font-size: 32px;
+            color: #4299E1;
+            margin: -8px 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-top: 4px solid #4299E1;
+        }
+
+        .feature-card.analytics {
+            border-top-color: #48bb78;
+        }
+
+        .feature-card.rtw {
+            border-top-color: #f6ad55;
+        }
+
+        .feature-card.security {
+            border-top-color: #9f7aea;
+        }
+
+        .feature-card .icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            margin: 0 0 12px 0;
+            color: #2d3748;
+            font-size: 22px;
+        }
+
+        .feature-card p {
+            color: #718096;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0;
+        }
+
+        .feature-list li {
+            padding: 8px 0 8px 28px;
+            position: relative;
+            color: #2d3748;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .warning-box {
+            background: #fff5f5;
+            border-left: 4px solid #f56565;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .warning-box .title {
+            font-weight: 700;
+            color: #c53030;
+            margin-bottom: 8px;
+        }
+
+        .success-box {
+            background: #f0fff4;
+            border-left: 4px solid #48bb78;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .success-box .title {
+            font-weight: 700;
+            color: #22543d;
+            margin-bottom: 8px;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(66, 153, 225, 0.1), rgba(107, 70, 193, 0.1));
+            border-left: 4px solid #4299E1;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .info-box .title {
+            font-weight: 700;
+            color: #2c5282;
+            margin-bottom: 8px;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .principle-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .principle-card .icon {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .principle-card .label {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 15px;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 40px 0;
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 1.6;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .metric-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #4299E1;
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            color: #718096;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Enterprise Platform</p>
+                </div>
+            </div>
+            <div>
+                <a href="tela-01-entrada.html" style="color: #4299E1; text-decoration: none; font-weight: 600;">← Voltar ao sistema</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-section">
+        <div class="level-badge">🚀 NÍVEL 3 — ENTERPRISE</div>
+        <h1>Evolução da LIA</h1>
+        <p>De uma POC funcional para uma plataforma inteligente corporativa, integrada, segura e orientada a dados.</p>
+    </div>
+
+    <div class="container">
+        <div class="quote-box">
+            "A LIA evolui para uma plataforma enterprise, integrada via APIs, com analytics de risco e expansão para a jornada de retorno ao trabalho, sempre com foco em governança, segurança e experiência humana."
+        </div>
+
+        <!-- 1. APIs & INTEGRAÇÕES -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title" style="font-size: 32px;">📡 APIs & Integrações Reais</h2>
+                <p class="card-subtitle">Conectando a LIA ao ecossistema corporativo</p>
+            </div>
+
+            <div class="info-box">
+                <div class="title">🧠 Papel da LIA como Camada de Orquestração</div>
+                <p style="margin: 0; color: #2d3748;">A LIA vira uma camada inteligente que <strong>não armazena dados sensíveis</strong>, mas consome APIs com escopo limitado e responde apenas o necessário. Isso mostra maturidade de arquitetura.</p>
+            </div>
+
+            <h3 style="margin-top: 32px; margin-bottom: 20px; color: #2d3748;">Integrações Principais:</h3>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">🏢</div>
+                    <h3>PeopleSoft (RH)</h3>
+                    <ul class="feature-list">
+                        <li>Status do colaborador</li>
+                        <li>Datas de afastamento</li>
+                        <li>Cargo e gestor</li>
+                        <li>Histórico de licenças</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">🏛️</div>
+                    <h3>INSS / Gov APIs</h3>
+                    <ul class="feature-list">
+                        <li>Agendamento de perícia</li>
+                        <li>Status de concessão</li>
+                        <li>Indeferimento</li>
+                        <li>Prazos e protocolos</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">🏦</div>
+                    <h3>Sistemas Internos</h3>
+                    <ul class="feature-list">
+                        <li>Folha de pagamento</li>
+                        <li>Benefícios</li>
+                        <li>Compliance</li>
+                        <li>Auditoria interna</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ARQUITETURA -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title" style="font-size: 32px;">🏗️ Arquitetura Enterprise</h2>
+                <p class="card-subtitle">Simples, elegante e real</p>
+            </div>
+
+            <div class="architecture-diagram">
+                <div class="arch-layer">
+                    <div class="title">Front-end</div>
+                    <div class="description">Interface do usuário responsiva e acessível</div>
+                    <div class="components">
+                        <span class="component-tag">React / Vue.js</span>
+                        <span class="component-tag">Design System</span>
+                        <span class="component-tag">PWA</span>
+                    </div>
+                </div>
+
+                <div class="arrow-down">↓</div>
+
+                <div class="arch-layer" style="border-left-color: #6B46C1;">
+                    <div class="title">LIA - IA Orquestradora</div>
+                    <div class="description">Camada inteligente de processamento e decisão</div>
+                    <div class="components">
+                        <span class="component-tag">NLP Engine</span>
+                        <span class="component-tag">ML Models</span>
+                        <span class="component-tag">Business Logic</span>
+                        <span class="component-tag">Orchestration</span>
+                    </div>
+                </div>
+
+                <div class="arrow-down">↓</div>
+
+                <div class="arch-layer" style="border-left-color: #48bb78;">
+                    <div class="title">API Gateway</div>
+                    <div class="description">Roteamento, autenticação e segurança</div>
+                    <div class="components">
+                        <span class="component-tag">OAuth 2.0</span>
+                        <span class="component-tag">Rate Limiting</span>
+                        <span class="component-tag">Load Balancer</span>
+                    </div>
+                </div>
+
+                <div class="arrow-down">↓</div>
+
+                <div class="arch-layer" style="border-left-color: #f6ad55;">
+                    <div class="title">Microservices & APIs</div>
+                    <div class="description">Serviços especializados e fontes de dados</div>
+                    <div class="components">
+                        <span class="component-tag">PeopleSoft API</span>
+                        <span class="component-tag">INSS Gateway</span>
+                        <span class="component-tag">Analytics Engine</span>
+                        <span class="component-tag">Notification Service</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. ANALYTICS DE RISCO -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title" style="font-size: 32px;">📊 Analytics de Risco</h2>
+                <p class="card-subtitle">Inteligência preventiva com governança</p>
+            </div>
+
+            <div class="success-box">
+                <div class="title">💡 Aqui você brilha!</div>
+                <p style="margin: 0; color: #22543d;">Conectar IA + humano + ESG através de análise responsável de dados.</p>
+            </div>
+
+            <h3 style="margin-top: 32px; margin-bottom: 20px; color: #2d3748;">O que analisar:</h3>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">📈</div>
+                    <div class="metric-label">Reincidência de afastamentos</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">⏱️</div>
+                    <div class="metric-label">Tempo médio afastado</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">⚠️</div>
+                    <div class="metric-label">Risco de prolongamento</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">🗂️</div>
+                    <div class="metric-label">Padrões por área</div>
+                </div>
+            </div>
+
+            <div class="feature-card analytics" style="margin-top: 24px;">
+                <div class="icon">🔍</div>
+                <h3>Exemplos de Insights</h3>
+                <ul class="feature-list">
+                    <li>"Colaboradores com histórico X têm maior chance de afastamento prolongado"</li>
+                    <li>"Gestores Y precisam de orientação antecipada"</li>
+                    <li>"Área Z apresenta padrão sazonal de afastamentos"</li>
+                    <li>"Risco elevado de esgotamento em equipe W"</li>
+                </ul>
+            </div>
+
+            <div class="warning-box" style="margin-top: 24px;">
+                <div class="title">⚠️ Governança Obrigatória</div>
+                <ul class="feature-list" style="margin: 12px 0 0 0;">
+                    <li>Dados anonimizados (sem identificação individual)</li>
+                    <li>Análise estatística, não individual</li>
+                    <li>Foco em prevenção, não punição</li>
+                    <li>Auditoria de algoritmos e viés</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3. RETORNO AO TRABALHO -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title" style="font-size: 32px;">🧭 Retorno ao Trabalho (RTW)</h2>
+                <p class="card-subtitle">Acompanhamento pós-alta — esse ponto é ouro 🏆</p>
+            </div>
+
+            <div class="info-box">
+                <div class="title">✨ Nova Jornada</div>
+                <p style="margin: 0; color: #2d3748;">A LIA não termina no afastamento. Ela acompanha o retorno, orienta sobre readaptação e faz check-ins periódicos, alertando o gestor se houver risco de reincidência.</p>
+            </div>
+
+            <div class="feature-card rtw" style="margin-top: 24px;">
+                <div class="icon">🗨️</div>
+                <h3>Exemplo de Mensagem</h3>
+                <div style="background: #f7fafc; padding: 20px; border-radius: 12px; border-left: 4px solid #f6ad55; margin-top: 16px;">
+                    <p style="margin: 0; color: #2d3748; font-style: italic;">
+                        "Oi João! 👋 Vi que você voltou ao trabalho hoje. Como está se sentindo? Precisa de alguma adaptação no seu ambiente ou rotina? Posso te ajudar!"
+                    </p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 32px; margin-bottom: 20px; color: #2d3748;">Funcionalidades RTW:</h3>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">📅</div>
+                    <h3>Check-ins Periódicos</h3>
+                    <ul class="feature-list">
+                        <li>1º dia de retorno</li>
+                        <li>1 semana após retorno</li>
+                        <li>1 mês após retorno</li>
+                        <li>Alertas de risco</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">🔧</div>
+                    <h3>Adaptações</h3>
+                    <ul class="feature-list">
+                        <li>Sugestão de ergonomia</li>
+                        <li>Horário flexível</li>
+                        <li>Home office temporário</li>
+                        <li>Redução de jornada</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">🤝</div>
+                    <h3>Gestão Humanizada</h3>
+                    <ul class="feature-list">
+                        <li>Alerta ao gestor</li>
+                        <li>Orientação de acolhimento</li>
+                        <li>Monitoramento discreto</li>
+                        <li>Suporte contínuo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="success-box" style="margin-top: 24px;">
+                <div class="title">✔ Isso mostra:</div>
+                <div style="display: flex; gap: 20px; margin-top: 12px; flex-wrap: wrap;">
+                    <span style="background: white; padding: 12px 20px; border-radius: 8px; font-weight: 600; color: #22543d;">💚 Cuidado</span>
+                    <span style="background: white; padding: 12px 20px; border-radius: 8px; font-weight: 600; color: #22543d;">🤗 Humanização</span>
+                    <span style="background: white; padding: 12px 20px; border-radius: 8px; font-weight: 600; color: #22543d;">🤖 Uso Responsável de IA</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. IA PREDITIVA -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title" style="font-size: 32px;">🧠 IA Preditiva (Assistiva)</h2>
+                <p class="card-subtitle">Sem prometer milagres — com responsabilidade</p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card" style="border-top-color: #48bb78;">
+                    <div class="icon">✅</div>
+                    <h3>O que a LIA promete</h3>
+                    <ul class="feature-list">
+                        <li>Previsão de necessidade de nova perícia</li>
+                        <li>Sugestão de acompanhamento</li>
+                        <li>Alertas preventivos ao RH</li>
+                        <li>Identificação de padrões de risco</li>
+                        <li>Recomendações baseadas em dados</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" style="border-top-color: #f56565;">
+                    <div class="icon">❌</div>
+                    <h3>O que a LIA NÃO promete</h3>
+                    <ul class="feature-list">
+                        <li>Diagnóstico médico</li>
+                        <li>Decisões automáticas finais</li>
+                        <li>Substituição de humanos</li>
+                        <li>Certezas absolutas</li>
+                        <li>Julgamento de colaboradores</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-box" style="margin-top: 24px;">
+                <div class="title">💡 Frase-chave</div>
+                <p style="margin: 0; color: #2d3748; font-size: 18px; font-weight: 600;">
+                    "A LIA é <strong>explicável, auditável</strong> e sempre atua dentro de <strong>regras humanas</strong>."
+                </p>
+            </div>
+        </div>
+
+        <!-- 5. SEGURANÇA & GOVERNANÇA -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title" style="font-size: 32px;">🔐 Segurança & Governança</h2>
+                <p class="card-subtitle">LGPD by design — não negociável</p>
+            </div>
+
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="icon">🛡️</div>
+                    <div class="label">LGPD by Design</div>
+                </div>
+                <div class="principle-card">
+                    <div class="icon">🔑</div>
+                    <div class="label">IAM (Perfis Claros)</div>
+                </div>
+                <div class="principle-card">
+                    <div class="icon">📝</div>
+                    <div class="label">Auditoria de IA</div>
+                </div>
+                <div class="principle-card">
+                    <div class="icon">📊</div>
+                    <div class="label">Logs Explicáveis</div>
+                </div>
+                <div class="principle-card">
+                    <div class="icon">🔒</div>
+                    <div class="label">Criptografia E2E</div>
+                </div>
+                <div class="principle-card">
+                    <div class="icon">👥</div>
+                    <div class="label">Consentimento</div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 32px; margin-bottom: 20px; color: #2d3748;">Pilares de Segurança:</h3>
+
+            <div class="feature-card security">
+                <h3>Proteção de Dados Sensíveis</h3>
+                <ul class="feature-list">
+                    <li><strong>Dados de saúde:</strong> Criptografados em repouso e trânsito</li>
+                    <li><strong>Acesso controlado:</strong> RBAC (Role-Based Access Control)</li>
+                    <li><strong>Retenção limitada:</strong> Dados excluídos após período legal</li>
+                    <li><strong>Anonimização:</strong> Para analytics e machine learning</li>
+                    <li><strong>DPO dedicado:</strong> Data Protection Officer responsável</li>
+                </ul>
+            </div>
+
+            <div class="feature-card security" style="margin-top: 20px;">
+                <h3>Auditoria e Explicabilidade</h3>
+                <ul class="feature-list">
+                    <li><strong>Trilha de auditoria:</strong> Toda decisão da IA é logada</li>
+                    <li><strong>Explicabilidade:</strong> Por que a IA sugeriu X?</li>
+                    <li><strong>Revisão humana:</strong> Decisões críticas passam por humanos</li>
+                    <li><strong>Bias detection:</strong> Monitoramento de viés algorítmico</li>
+                    <li><strong>Compliance dashboard:</strong> Painel para auditores</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- IMPACTO -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title" style="font-size: 32px;">📈 Impacto Esperado</h2>
+                <p class="card-subtitle">Resultados mensuráveis e responsáveis</p>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">-40%</div>
+                    <div class="metric-label">Tempo de processamento</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">+85%</div>
+                    <div class="metric-label">Satisfação dos colaboradores</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">-30%</div>
+                    <div class="metric-label">Afastamentos prolongados</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">100%</div>
+                    <div class="metric-label">Compliance LGPD</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">95%</div>
+                    <div class="metric-label">Validação automática</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">24/7</div>
+                    <div class="metric-label">Disponibilidade</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PERFIL -->
+        <div class="card" style="background: linear-gradient(135deg, rgba(66, 153, 225, 0.05), rgba(107, 70, 193, 0.05));">
+            <div class="card-header">
+                <h2 class="card-title" style="font-size: 32px;">🎯 Você demonstrou:</h2>
+            </div>
+
+            <div class="feature-grid">
+                <div class="principle-card" style="background: white;">
+                    <div class="icon">🎨</div>
+                    <div class="label">Front-end Excellence</div>
+                </div>
+                <div class="principle-card" style="background: white;">
+                    <div class="icon">💡</div>
+                    <div class="label">UX Thinking</div>
+                </div>
+                <div class="principle-card" style="background: white;">
+                    <div class="icon">🤖</div>
+                    <div class="label">IA Aplicada</div>
+                </div>
+                <div class="principle-card" style="background: white;">
+                    <div class="icon">🛡️</div>
+                    <div class="label">Governança</div>
+                </div>
+                <div class="principle-card" style="background: white;">
+                    <div class="icon">📦</div>
+                    <div class="label">Visão de Produto</div>
+                </div>
+                <div class="principle-card" style="background: white;">
+                    <div class="icon">🚀</div>
+                    <div class="label">Escalabilidade</div>
+                </div>
+            </div>
+
+            <div class="quote-box" style="margin-top: 32px;">
+                Isso é perfil de <strong>AI Creative Technologist</strong> 🎯
+            </div>
+        </div>
+
+        <!-- PRÓXIMOS PASSOS -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title" style="font-size: 32px;">🚀 Demonstrações Práticas</h2>
+                <p class="card-subtitle">Explore as funcionalidades implementadas</p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">📊</div>
+                    <h3>Analytics de Risco</h3>
+                    <p>Dashboard completo com métricas, predições de IA e padrões por área com governança.</p>
+                    <a href="analytics-dashboard.html" class="btn btn-primary" style="margin-top: 12px; text-decoration: none; display: inline-block;">
+                        Ver Dashboard
+                    </a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">🧭</div>
+                    <h3>Retorno ao Trabalho</h3>
+                    <p>Sistema de check-ins periódicos, adaptações e acompanhamento humanizado pós-alta.</p>
+                    <a href="rtw-acompanhamento.html" class="btn btn-primary" style="margin-top: 12px; text-decoration: none; display: inline-block;">
+                        Ver RTW
+                    </a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">🔍</div>
+                    <h3>Auditoria de IA</h3>
+                    <p>Log completo e explicável de todas as decisões da IA. Transparência total.</p>
+                    <a href="auditoria-ia.html" class="btn btn-primary" style="margin-top: 12px; text-decoration: none; display: inline-block;">
+                        Ver Auditoria
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRÓXIMOS PASSOS -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title" style="font-size: 32px;">🔮 Próximos Passos</h2>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">🔌</div>
+                    <h3>Fase 1: Integração</h3>
+                    <ul class="feature-list">
+                        <li>Conectar APIs reais</li>
+                        <li>Implementar autenticação</li>
+                        <li>Testar com dados sandbox</li>
+                        <li>Validar segurança</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">🧪</div>
+                    <h3>Fase 2: Piloto</h3>
+                    <ul class="feature-list">
+                        <li>Selecionar grupo teste</li>
+                        <li>Monitorar métricas</li>
+                        <li>Coletar feedback</li>
+                        <li>Ajustar modelos de IA</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">📊</div>
+                    <h3>Fase 3: Escala</h3>
+                    <ul class="feature-list">
+                        <li>Rollout gradual</li>
+                        <li>Analytics em produção</li>
+                        <li>Expansão RTW</li>
+                        <li>Melhoria contínua</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 60px 0 40px 0;">
+            <a href="tela-01-entrada.html" class="btn btn-primary btn-large" style="font-size: 18px;">
+                ← Voltar para a aplicação
+            </a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>🔒 LIA Care - Plataforma Enterprise de Gestão Inteligente de Afastamentos</p>
+    </div>
+</body>
+</html>

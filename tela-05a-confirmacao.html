@@ -55,12 +55,130 @@
 
                 <div style="display: flex; align-items: center; gap: 12px;">
                     <span style="color: var(--success-color); font-size: 20px;">✓</span>
-                    <div>
+                    <div style="flex: 1;">
                         <div style="font-weight: 500;">DUT gerada</div>
                         <div style="font-size: 13px; color: var(--text-gray);">Declaração Única de Trabalho disponível</div>
                     </div>
+                    <a href="#" onclick="visualizarDUT(); return false;" class="btn btn-sm" style="background: linear-gradient(135deg, #4299E1, #6B46C1); color: white; padding: 8px 16px; font-size: 13px; text-decoration: none; border-radius: 8px; white-space: nowrap;">
+                        📄 Ver DUT
+                    </a>
                 </div>
             </div>
+
+            <div id="dutModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; padding: 16px;">
+                <div class="dut-modal-content" style="background: white; padding: 24px; border-radius: 16px; max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative;">
+                    <button onclick="fecharDUT()" style="position: absolute; top: 12px; right: 12px; background: #f7fafc; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 20px; color: #718096; z-index: 10;">✕</button>
+                    
+                    <div style="text-align: center; margin-bottom: 20px; padding-right: 40px;">
+                        <div style="font-size: 40px; margin-bottom: 8px;">📄</div>
+                        <h3 style="margin: 0 0 8px 0; color: #2d3748; font-size: 20px; line-height: 1.3;">Declaração Única de Trabalho</h3>
+                        <p style="color: #718096; font-size: 13px; margin: 0;">DUT - Protocolo #2025-12-27-001</p>
+                    </div>
+
+                    <div style="background: #f7fafc; padding: 16px; border-radius: 12px; margin-bottom: 16px; border: 2px solid #e2e8f0;">
+                        <div class="dut-grid" style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+                            <div>
+                                <div style="font-size: 11px; color: #718096; margin-bottom: 4px; font-weight: 600; letter-spacing: 0.5px;">COLABORADOR</div>
+                                <div style="font-weight: 600; color: #2d3748; font-size: 15px;">João Silva</div>
+                                <div style="font-size: 13px; color: #718096;">COL-12345</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 11px; color: #718096; margin-bottom: 4px; font-weight: 600; letter-spacing: 0.5px;">CARGO</div>
+                                <div style="font-weight: 600; color: #2d3748; font-size: 15px;">Desenvolvedor Frontend</div>
+                                <div style="font-size: 13px; color: #718096;">Tecnologia</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: white; border: 2px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+                        <h4 style="margin: 0 0 12px 0; font-size: 13px; color: #4299E1; font-weight: 700; letter-spacing: 0.5px;">DADOS DO AFASTAMENTO</h4>
+                        
+                        <div style="margin-bottom: 12px;">
+                            <div style="font-size: 11px; color: #718096; margin-bottom: 4px; font-weight: 600; letter-spacing: 0.5px;">DIAGNÓSTICO (CID-10)</div>
+                            <div style="font-weight: 600; color: #2d3748; font-size: 14px;">M54.5 - Lombalgia</div>
+                        </div>
+
+                        <div class="dut-date-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                            <div>
+                                <div style="font-size: 11px; color: #718096; margin-bottom: 4px; font-weight: 600; letter-spacing: 0.5px;">INÍCIO</div>
+                                <div style="font-weight: 600; color: #2d3748; font-size: 14px;" id="dutStartDate"></div>
+                            </div>
+                            <div>
+                                <div style="font-size: 11px; color: #718096; margin-bottom: 4px; font-weight: 600; letter-spacing: 0.5px;">FIM</div>
+                                <div style="font-weight: 600; color: #2d3748; font-size: 14px;" id="dutEndDate"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div style="font-size: 11px; color: #718096; margin-bottom: 4px; font-weight: 600; letter-spacing: 0.5px;">PERÍODO DE AFASTAMENTO</div>
+                            <div style="font-weight: 600; color: #2d3748; font-size: 14px;">15 dias corridos</div>
+                        </div>
+                    </div>
+
+                    <div style="background: white; border: 2px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+                        <h4 style="margin: 0 0 12px 0; font-size: 13px; color: #4299E1; font-weight: 700; letter-spacing: 0.5px;">PROFISSIONAL RESPONSÁVEL</h4>
+                        
+                        <div style="margin-bottom: 12px;">
+                            <div style="font-size: 11px; color: #718096; margin-bottom: 4px; font-weight: 600; letter-spacing: 0.5px;">MÉDICO</div>
+                            <div style="font-weight: 600; color: #2d3748; font-size: 14px;">Dr. Carlos Mendes</div>
+                        </div>
+
+                        <div>
+                            <div style="font-size: 11px; color: #718096; margin-bottom: 4px; font-weight: 600; letter-spacing: 0.5px;">CRM</div>
+                            <div style="font-weight: 600; color: #2d3748; font-size: 14px;">CRM 12345-SP</div>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, rgba(66, 153, 225, 0.1), rgba(107, 70, 193, 0.1)); padding: 14px; border-radius: 12px; border-left: 4px solid #4299E1; margin-bottom: 16px;">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                            <span style="font-size: 16px;">🤖</span>
+                            <strong style="color: #2d3748; font-size: 14px;">Validado por IA</strong>
+                        </div>
+                        <div style="font-size: 12px; color: #718096; line-height: 1.4;">
+                            Documento validado automaticamente em <strong id="dutGeneratedTime"></strong>
+                        </div>
+                    </div>
+
+                    <div class="dut-actions" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button onclick="downloadDUT()" class="btn btn-primary" style="flex: 1; min-width: 140px; font-size: 14px; padding: 12px 20px;">
+                            📥 Baixar PDF
+                        </button>
+                        <button onclick="imprimirDUT()" class="btn btn-secondary" style="flex: 1; min-width: 140px; font-size: 14px; padding: 12px 20px;">
+                            🖨️ Imprimir
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                @media (max-width: 480px) {
+                    .dut-modal-content {
+                        padding: 20px 16px !important;
+                        border-radius: 12px !important;
+                    }
+                    
+                    .dut-grid {
+                        grid-template-columns: 1fr !important;
+                    }
+                    
+                    .dut-date-grid {
+                        grid-template-columns: 1fr !important;
+                    }
+                    
+                    .dut-actions {
+                        flex-direction: column !important;
+                    }
+                    
+                    .dut-actions button {
+                        width: 100% !important;
+                        min-width: 100% !important;
+                    }
+                    
+                    #dutModal {
+                        padding: 12px !important;
+                    }
+                }
+            </style>
 
             <div class="ai-message mt-3">
                 <div class="ai-message-header">
@@ -105,14 +223,26 @@
     </div>
 
     <script>
-        // Cadastra a licença automaticamente ao carregar a página
-        window.addEventListener('DOMContentLoaded', () => {
-            // Verificar se já foi criada (evitar duplicatas ao recarregar)
-            const alreadyCreated = sessionStorage.getItem('license-created-joao-silva');
-            if (alreadyCreated) {
-                console.log('✅ Licença já foi cadastrada nesta sessão');
+        // Aguarda o liaSync estar pronto antes de criar a licença
+        function waitForLiaSync() {
+            if (!window.liaSync) {
+                console.log('⏳ Aguardando liaSync carregar...');
+                setTimeout(waitForLiaSync, 100);
                 return;
             }
+            
+            console.log('✅ liaSync carregado!');
+            createLicense();
+        }
+        
+        function createLicense() {
+            console.log('📝 Página de confirmação - criando licença');
+            console.log('📦 liaSync disponível:', !!window.liaSync);
+            
+            // Limpa o sessionStorage para permitir recriar
+            sessionStorage.removeItem('license-created-joao-silva');
+            
+            console.log('➕ Criando nova licença...');
             
             // Dados simulados do colaborador (em produção viriam do formulário anterior)
             const licenseData = {
@@ -130,6 +260,8 @@
                 doctorCRM: 'CRM 12345-SP'
             };
 
+            console.log('📋 Dados da licença:', licenseData);
+
             // Cadastra no sistema e notifica gestor
             const license = window.liaSync.createLicense(licenseData);
             sessionStorage.setItem('license-created-joao-silva', 'true');
@@ -137,11 +269,49 @@
             console.log('✅ Licença cadastrada:', license);
             console.log('📧 Gestor notificado automaticamente!');
             
-            // Mostra feedback visual
+            // Verifica se foi salvo
             setTimeout(() => {
-                const stats = window.liaSync.getStats();
-                console.log('📊 Estatísticas atualizadas:', stats);
+                const licenses = window.liaSync.getLicenses();
+                console.log('📊 Total de licenças após criar:', licenses.length);
+                console.log('📊 Licenças:', licenses);
             }, 500);
+        }
+        
+        // Inicia quando a página carregar
+        window.addEventListener('DOMContentLoaded', waitForLiaSync);
+        
+        function visualizarDUT() {
+            const modal = document.getElementById('dutModal');
+            modal.style.display = 'flex';
+            
+            // Preenche as datas
+            const startDate = new Date().toLocaleDateString('pt-BR');
+            const endDate = new Date(Date.now() + 15 * 24 * 60 * 60 * 1000).toLocaleDateString('pt-BR');
+            const generatedTime = new Date().toLocaleString('pt-BR');
+            
+            document.getElementById('dutStartDate').textContent = startDate;
+            document.getElementById('dutEndDate').textContent = endDate;
+            document.getElementById('dutGeneratedTime').textContent = generatedTime;
+        }
+
+        function fecharDUT() {
+            const modal = document.getElementById('dutModal');
+            modal.style.display = 'none';
+        }
+
+        function downloadDUT() {
+            alert('📥 Função de download do PDF da DUT será implementada em produção.\n\nO documento seria gerado com os dados oficiais e assinatura digital.');
+        }
+
+        function imprimirDUT() {
+            alert('🖨️ Função de impressão será implementada em produção.\n\nO documento seria formatado para impressão com layout oficial.');
+        }
+
+        // Fechar modal ao clicar fora
+        document.getElementById('dutModal')?.addEventListener('click', function(e) {
+            if (e.target === this) {
+                fecharDUT();
+            }
         });
     </script>
 </body>

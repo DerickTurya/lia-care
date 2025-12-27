@@ -138,6 +138,70 @@
             background: #f7fafc;
             transform: translateY(-2px);
         }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .chat-container {
+                max-height: 400px;
+                padding: 16px;
+            }
+            
+            .message-content {
+                max-width: 85%;
+                padding: 10px 14px;
+                font-size: 14px;
+            }
+            
+            .message-avatar {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+            
+            .quick-questions {
+                grid-template-columns: 1fr;
+            }
+            
+            .input-group {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .input-group input,
+            .input-group button {
+                width: 100%;
+                padding: 14px 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .chat-container {
+                max-height: 350px;
+                padding: 12px;
+            }
+            
+            .message {
+                gap: 8px;
+                margin-bottom: 12px;
+            }
+            
+            .message-content {
+                max-width: 90%;
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+            
+            .message-avatar {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+            
+            .quick-question-btn {
+                padding: 10px 14px;
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -232,7 +296,7 @@
             
             const avatar = document.createElement('div');
             avatar.className = 'message-avatar';
-            avatar.textContent = isUser ? '👤' : '🤖';
+            avatar.innerHTML = isUser ? '<span style="font-family: Arial, sans-serif;">👤</span>' : '<span style="font-family: Arial, sans-serif;">🤖</span>';
             
             const content = document.createElement('div');
             content.className = 'message-content';

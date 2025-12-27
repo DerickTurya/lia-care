@@ -3,26 +3,47 @@
  * Conecta colaboradores e gestores automaticamente
  */
 
+// Teste inicial do localStorage
+console.log('🔧 [LiaSync] Iniciando...');
+console.log('🔧 [LiaSync] localStorage disponível:', !!window.localStorage);
+try {
+    localStorage.setItem('test', 'test');
+    localStorage.removeItem('test');
+    console.log('🔧 [LiaSync] localStorage funcional: ✅');
+} catch (e) {
+    console.error('🔧 [LiaSync] localStorage com erro:', e);
+}
+
 class LiaSync {
     constructor() {
+        console.log('🔧 [LiaSync] Constructor chamado');
         this.storageKey = 'lia_care_licenses';
         this.notificationsKey = 'lia_care_notifications';
+        console.log('🔧 [LiaSync] Keys:', this.storageKey, this.notificationsKey);
         this.init();
     }
 
     init() {
+        console.log('🔧 [LiaSync] Init chamado');
         // Inicializa storage se não existir
         if (!localStorage.getItem(this.storageKey)) {
             localStorage.setItem(this.storageKey, JSON.stringify([]));
+            console.log('🔧 [LiaSync] Inicializado', this.storageKey);
         }
         if (!localStorage.getItem(this.notificationsKey)) {
             localStorage.setItem(this.notificationsKey, JSON.stringify([]));
+            console.log('🔧 [LiaSync] Inicializado', this.notificationsKey);
         }
+        console.log('🔧 [LiaSync] Init completo');
     }
 
     // Cadastra nova licença e notifica gestor
     createLicense(licenseData) {
+        console.log('🔧 [LiaSync] createLicense chamado');
+        console.log('🔧 [LiaSync] storageKey:', this.storageKey);
+        
         const licenses = this.getLicenses();
+        console.log('🔧 [LiaSync] Licenças existentes:', licenses.length);
         
         const newLicense = {
             id: Date.now(),
@@ -33,14 +54,20 @@ class LiaSync {
             createdAt: new Date().toLocaleString('pt-BR')
         };
 
+        console.log('🔧 [LiaSync] Nova licença criada:', newLicense);
+
         licenses.unshift(newLicense); // Adiciona no início
         localStorage.setItem(this.storageKey, JSON.stringify(licenses));
+        
+        console.log('🔧 [LiaSync] Licenças após adicionar:', licenses.length);
+        console.log('🔧 [LiaSync] Salvo no localStorage');
 
         // Cria notificação para gestor
         this.notifyManager(newLicense);
 
         // Dispara evento de atualização
         window.dispatchEvent(new CustomEvent('lia:dataUpdated'));
+        console.log('🔧 [LiaSync] Evento lia:dataUpdated disparado');
 
         return newLicense;
     }
@@ -71,7 +98,10 @@ class LiaSync {
 
     // Busca todas as licenças
     getLicenses() {
-        return JSON.parse(localStorage.getItem(this.storageKey) || '[]');
+        const stored = localStorage.getItem(this.storageKey) || '[]';
+        const licenses = JSON.parse(stored);
+        console.log('🔧 [LiaSync] getLicenses retornou:', licenses.length, 'licenças');
+        return licenses;
     }
 
     // Busca licenças não visualizadas pelo gestor
@@ -181,7 +211,9 @@ class LiaSync {
 }
 
 // Instância global
+console.log('🔧 [LiaSync] Criando instância global...');
 window.liaSync = new LiaSync();
+console.log('🔧 [LiaSync] Instância global criada:', !!window.liaSync);
 
 // Listener para atualizações em tempo real (simula quando outra aba/janela atualiza)
 window.addEventListener('storage', (e) => {
@@ -190,3 +222,5 @@ window.addEventListener('storage', (e) => {
         window.dispatchEvent(new CustomEvent('lia:dataUpdated'));
     }
 });
+
+console.log('🔧 [LiaSync] Pronto para uso! ✅');

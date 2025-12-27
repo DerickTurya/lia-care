@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditoria de IA - Lia Care</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .audit-header {
+            background: linear-gradient(135deg, #9f7aea, #6B46C1);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .audit-log {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .log-item {
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            transition: background 0.2s;
+        }
+
+        .log-item:hover {
+            background: #f7fafc;
+        }
+
+        .log-item:last-child {
+            border-bottom: none;
+        }
+
+        .log-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .log-timestamp {
+            font-size: 13px;
+            color: #718096;
+        }
+
+        .log-action {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .log-details {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #4299E1;
+            margin-top: 12px;
+        }
+
+        .log-details .detail-row {
+            display: flex;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .log-details .detail-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .log-details .label {
+            font-weight: 600;
+            color: #2d3748;
+            min-width: 140px;
+        }
+
+        .log-details .value {
+            color: #718096;
+        }
+
+        .confidence-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .confidence-high {
+            background: #e6f9f0;
+            color: #22543d;
+        }
+
+        .confidence-medium {
+            background: #fef5e7;
+            color: #744210;
+        }
+
+        .confidence-low {
+            background: #fee;
+            color: #742a2a;
+        }
+
+        .explanation-box {
+            background: linear-gradient(135deg, rgba(66, 153, 225, 0.1), rgba(107, 70, 193, 0.1));
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 12px;
+            border-left: 3px solid #6B46C1;
+        }
+
+        .explanation-box .title {
+            font-weight: 600;
+            color: #2c5282;
+            margin-bottom: 8px;
+        }
+
+        .explanation-box .text {
+            font-size: 13px;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        .decision-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 12px;
+        }
+
+        .decision-approved {
+            background: #e6f9f0;
+            color: #22543d;
+        }
+
+        .decision-flagged {
+            background: #fef5e7;
+            color: #744210;
+        }
+
+        .decision-human {
+            background: #e3f2fd;
+            color: #1e40af;
+        }
+
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4299E1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #718096;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Auditoria & Compliance</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <span>👨‍💼 Auditor</span>
+                <a href="tela-01-entrada.html" style="margin-left: 20px; color: #718096;">← Voltar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="audit-header">
+            <h2 style="margin: 0 0 8px 0;">🔍 Painel de Auditoria de IA</h2>
+            <p style="margin: 0; opacity: 0.9;">
+                Toda decisão da LIA é explicável, rastreável e auditável. Transparência total.
+            </p>
+        </div>
+
+        <!-- ESTATÍSTICAS -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">1,247</div>
+                <div class="stat-label">Total de Decisões (30 dias)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">94.2%</div>
+                <div class="stat-label">Aprovações Automáticas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">5.8%</div>
+                <div class="stat-label">Revisão Humana</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">0%</div>
+                <div class="stat-label">Erros Detectados</div>
+            </div>
+        </div>
+
+        <!-- FILTROS -->
+        <div class="filters">
+            <div class="filter-group">
+                <label>Tipo de Decisão</label>
+                <select>
+                    <option>Todas as decisões</option>
+                    <option>Validação de atestado</option>
+                    <option>Análise preditiva</option>
+                    <option>Recomendações RTW</option>
+                    <option>Alertas de risco</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Resultado</label>
+                <select>
+                    <option>Todos os resultados</option>
+                    <option>Aprovado automaticamente</option>
+                    <option>Sinalizado para revisão</option>
+                    <option>Revisão humana aplicada</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Período</label>
+                <select>
+                    <option>Últimos 7 dias</option>
+                    <option>Últimos 30 dias</option>
+                    <option>Últimos 90 dias</option>
+                    <option>Personalizado</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- LOG DE AUDITORIA -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">📋 Log de Decisões da IA</h3>
+                <p class="card-subtitle">Registro completo e explicável de todas as decisões</p>
+            </div>
+
+            <div class="audit-log">
+                <div class="log-item">
+                    <div class="log-header">
+                        <div>
+                            <div class="log-action">
+                                🤖 Validação de Atestado
+                                <span class="decision-badge decision-approved">✅ Aprovado Automaticamente</span>
+                            </div>
+                            <div class="log-timestamp">Hoje, 14:32 • ID: LIA-2025-12-27-001</div>
+                        </div>
+                        <span class="confidence-badge confidence-high">Confiança: 96%</span>
+                    </div>
+
+                    <div class="log-details">
+                        <div class="detail-row">
+                            <span class="label">Colaborador:</span>
+                            <span class="value">João Silva (COL-12345) - Anonimizado para análise</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Documento:</span>
+                            <span class="value">Atestado médico - Lombalgia (M54.5)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Período:</span>
+                            <span class="value">27/12/2025 a 05/01/2026 (10 dias)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Validações:</span>
+                            <span class="value">✅ CRM verificado • ✅ Assinatura validada • ✅ Data válida • ✅ CID coerente</span>
+                        </div>
+                    </div>
+
+                    <div class="explanation-box">
+                        <div class="title">💡 Por que a IA aprovou?</div>
+                        <div class="text">
+                            <strong>Razões:</strong><br>
+                            1. CRM do médico verificado na base do Conselho Regional (Dr. Carlos Mendes, CRM 12345-SP - ativo)<br>
+                            2. Assinatura digital validada através de certificação ICP-Brasil<br>
+                            3. Período de afastamento (10 dias) está dentro do limite sem necessidade de perícia INSS<br>
+                            4. CID M54.5 (Lombalgia) é coerente com histórico do colaborador e sintomas relatados<br>
+                            5. Data de emissão do atestado (26/12/2025) está dentro do prazo recomendado<br><br>
+                            <strong>Confiança: 96%</strong> - Todos os critérios atendidos sem exceções.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-header">
+                        <div>
+                            <div class="log-action">
+                                🔮 Análise Preditiva de Risco
+                                <span class="decision-badge decision-flagged">⚠️ Alerta Gerado</span>
+                            </div>
+                            <div class="log-timestamp">Hoje, 11:15 • ID: LIA-2025-12-27-002</div>
+                        </div>
+                        <span class="confidence-badge confidence-high">Confiança: 82%</span>
+                    </div>
+
+                    <div class="log-details">
+                        <div class="detail-row">
+                            <span class="label">Análise:</span>
+                            <span class="value">Risco elevado de afastamento prolongado - Equipe Tecnologia</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Dados analisados:</span>
+                            <span class="value">5 colaboradores com padrão recorrente (anonimizados)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Padrão detectado:</span>
+                            <span class="value">3+ afastamentos por lombalgia em 6 meses</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Ação recomendada:</span>
+                            <span class="value">Intervenção preventiva - Avaliação ergonômica</span>
+                        </div>
+                    </div>
+
+                    <div class="explanation-box">
+                        <div class="title">💡 Como a IA chegou a essa conclusão?</div>
+                        <div class="text">
+                            <strong>Modelo utilizado:</strong> Random Forest Classifier (Treina com dados históricos de 3 anos)<br><br>
+                            <strong>Variáveis analisadas:</strong><br>
+                            • Histórico de afastamentos (peso 35%)<br>
+                            • CID recorrente (peso 25%)<br>
+                            • Intervalo entre afastamentos (peso 20%)<br>
+                            • Cargo e condições de trabalho (peso 15%)<br>
+                            • Dados demográficos (peso 5%)<br><br>
+                            <strong>Resultado:</strong> 82% de probabilidade de novo afastamento prolongado nos próximos 60 dias.<br>
+                            <strong>Governança:</strong> Dados anonimizados agregados por equipe, não por indivíduo.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-header">
+                        <div>
+                            <div class="log-action">
+                                👔 Notificação Automática de Gestor
+                                <span class="decision-badge decision-approved">✅ Enviado</span>
+                            </div>
+                            <div class="log-timestamp">Hoje, 14:33 • ID: LIA-2025-12-27-003</div>
+                        </div>
+                        <span class="confidence-badge confidence-high">Confiança: 100%</span>
+                    </div>
+
+                    <div class="log-details">
+                        <div class="detail-row">
+                            <span class="label">Destinatário:</span>
+                            <span class="value">Maria Santos (Gestora - Tecnologia)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Assunto:</span>
+                            <span class="value">Afastamento médico - João Silva</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Informações enviadas:</span>
+                            <span class="value">Período, motivo, data de retorno, orientações</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Canal:</span>
+                            <span class="value">E-mail + Notificação no sistema</span>
+                        </div>
+                    </div>
+
+                    <div class="explanation-box">
+                        <div class="title">💡 Critérios para notificação:</div>
+                        <div class="text">
+                            <strong>Regra de negócio:</strong> Todo afastamento aprovado aciona notificação automática ao gestor imediato.<br><br>
+                            <strong>Dados incluídos na notificação:</strong><br>
+                            • Nome do colaborador<br>
+                            • Período de afastamento<br>
+                            • Data prevista de retorno<br>
+                            • Orientações para acolhimento<br><br>
+                            <strong>Dados NÃO incluídos (LGPD):</strong> Diagnóstico detalhado, CID, dados médicos sensíveis.<br>
+                            <strong>Consentimento:</strong> Colaborador autorizou compartilhamento com gestor no momento do cadastro.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-header">
+                        <div>
+                            <div class="log-action">
+                                🧠 Recomendação RTW (Retorno ao Trabalho)
+                                <span class="decision-badge decision-human">👤 Revisão Humana</span>
+                            </div>
+                            <div class="log-timestamp">Ontem, 16:45 • ID: LIA-2025-12-26-015</div>
+                        </div>
+                        <span class="confidence-badge confidence-medium">Confiança: 68%</span>
+                    </div>
+
+                    <div class="log-details">
+                        <div class="detail-row">
+                            <span class="label">Colaborador:</span>
+                            <span class="value">Ana Costa (COL-67890)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Situação:</span>
+                            <span class="value">Retorno após afastamento de 45 dias (burnout)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Recomendação IA:</span>
+                            <span class="value">Horário reduzido + acompanhamento psicológico</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Razão da revisão:</span>
+                            <span class="value">Confiança abaixo de 70% + caso sensível (saúde mental)</span>
+                        </div>
+                    </div>
+
+                    <div class="explanation-box">
+                        <div class="title">💡 Por que exigiu revisão humana?</div>
+                        <div class="text">
+                            <strong>Política de segurança:</strong> Casos de saúde mental com afastamento >30 dias sempre passam por revisão humana.<br><br>
+                            <strong>Razões específicas:</strong><br>
+                            • Confiança de 68% (abaixo do threshold de 70%)<br>
+                            • CID relacionado a saúde mental (F43 - Estresse pós-traumático)<br>
+                            • Afastamento prolongado (45 dias)<br>
+                            • Histórico de reincidência<br><br>
+                            <strong>Ação tomada:</strong> Caso encaminhado para psicóloga organizacional + gestor de RH.<br>
+                            <strong>Status atual:</strong> Plano de retorno personalizado aprovado por equipe multidisciplinar.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-header">
+                        <div>
+                            <div class="log-action">
+                                📊 Detecção de Viés Algorítmico
+                                <span class="decision-badge decision-flagged">🔍 Análise de Bias</span>
+                            </div>
+                            <div class="log-timestamp">25/12/2025, 03:00 • ID: BIAS-2025-12-25-AUTO</div>
+                        </div>
+                        <span class="confidence-badge confidence-high">Status: Normal</span>
+                    </div>
+
+                    <div class="log-details">
+                        <div class="detail-row">
+                            <span class="label">Tipo:</span>
+                            <span class="value">Análise automática mensal de viés</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Grupos analisados:</span>
+                            <span class="value">Gênero, faixa etária, departamento, cargo</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Resultado:</span>
+                            <span class="value">✅ Nenhum viés estatisticamente significativo detectado</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Próxima análise:</span>
+                            <span class="value">25/01/2026</span>
+                        </div>
+                    </div>
+
+                    <div class="explanation-box">
+                        <div class="title">💡 Monitoramento de Viés Algorítmico</div>
+                        <div class="text">
+                            <strong>Objetivo:</strong> Garantir que a IA não discrimina nenhum grupo protegido.<br><br>
+                            <strong>Métricas analisadas:</strong><br>
+                            • Taxa de aprovação por gênero (Δ: 2.1% - dentro do esperado)<br>
+                            • Taxa de aprovação por faixa etária (Δ: 3.5% - normal)<br>
+                            • Taxa de aprovação por departamento (Δ: 4.2% - justificado por tipo de trabalho)<br>
+                            • Taxa de sinalização para revisão por grupo (uniforme)<br><br>
+                            <strong>Threshold de alerta:</strong> Diferença >10% entre grupos ativa revisão manual do modelo.<br>
+                            <strong>Compliance:</strong> LGPD Art. 20 (Direito à revisão de decisões automatizadas)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GOVERNANÇA -->
+        <div class="card" style="background: linear-gradient(135deg, rgba(159, 122, 234, 0.1), rgba(107, 70, 193, 0.1)); margin-top: 30px;">
+            <div class="card-header">
+                <h3 class="card-title">🛡️ Princípios de Governança</h3>
+            </div>
+            <div style="display: grid; gap: 16px;">
+                <div style="background: white; padding: 20px; border-radius: 12px; border-left: 4px solid #9f7aea;">
+                    <div style="font-weight: 600; color: #2d3748; margin-bottom: 8px;">
+                        📝 Explicabilidade
+                    </div>
+                    <p style="font-size: 13px; color: #718096; margin: 0;">
+                        Toda decisão da IA pode ser explicada em linguagem humana. Não há "caixas-pretas".
+                    </p>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 12px; border-left: 4px solid #9f7aea;">
+                    <div style="font-weight: 600; color: #2d3748; margin-bottom: 8px;">
+                        🔍 Auditabilidade
+                    </div>
+                    <p style="font-size: 13px; color: #718096; margin: 0;">
+                        100% das decisões são registradas com timestamp, contexto e razões. Rastreamento completo.
+                    </p>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 12px; border-left: 4px solid #9f7aea;">
+                    <div style="font-weight: 600; color: #2d3748; margin-bottom: 8px;">
+                        👤 Supervisão Humana
+                    </div>
+                    <p style="font-size: 13px; color: #718096; margin: 0;">
+                        Casos sensíveis ou de baixa confiança são automaticamente escalados para revisão humana.
+                    </p>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 12px; border-left: 4px solid #9f7aea;">
+                    <div style="font-weight: 600; color: #2d3748; margin-bottom: 8px;">
+                        ⚖️ Detecção de Viés
+                    </div>
+                    <p style="font-size: 13px; color: #718096; margin: 0;">
+                        Monitoramento mensal automático para garantir que a IA não discrimina grupos protegidos.
+                    </p>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 12px; border-left: 4px solid #9f7aea;">
+                    <div style="font-weight: 600; color: #2d3748; margin-bottom: 8px;">
+                        🔒 LGPD Compliance
+                    </div>
+                    <p style="font-size: 13px; color: #718096; margin: 0;">
+                        Respeito total à privacidade. Dados sensíveis anonimizados em analytics. Direito à revisão garantido.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
