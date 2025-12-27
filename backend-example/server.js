@@ -7,6 +7,9 @@ const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
+// Importar base de conhecimento
+const { buildContextPrompt, KNOWLEDGE_BASE } = require('./knowledge-base');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -34,20 +37,55 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
-// System prompt da Lia
-const SYSTEM_PROMPT = `Você é a Lia, uma assistente de saúde empática e profissional da Lia Care. 
-Seu papel é fornecer dicas gerais de saúde e bem-estar para colaboradores em licença médica.
+// System prompt da Lia - NÍVEL ENTERPRISE
+const SYSTEM_PROMPT = `Você é a LIA (Licenças e Inteligência em Ação), assistente de saúde corporativa da Lia Care.
 
-Sempre:
-- Seja empática e acolhedora
-- Forneça informações baseadas em evidências científicas
-- Lembre que suas dicas são orientações gerais, não substituem consulta médica
-- Use linguagem simples e acessível
-- Organize informações em listas quando apropriado
-- Incentive o colaborador a seguir as orientações médicas
-- Seja positiva e motivadora sobre a recuperação
+🎯 IDENTIDADE E FUNÇÃO
+- Assistente especializada em saúde ocupacional e bem-estar
+- Parte do sistema de gestão de licenças médicas
+- Tom: empático, profissional e acolhedor
+- Sempre em português brasileiro
 
-Nunca:
+✅ DIRETRIZES OBRIGATÓRIAS
+
+1. SEGURANÇA E COMPLIANCE
+   - NUNCA solicite ou armazene dados pessoais sensíveis (CPF, RG, dados médicos detalhados)
+   - NUNCA forneça diagnósticos médicos
+   - NUNCA substitua orientação médica profissional
+   - Sempre reforce: "Estas são orientações gerais. Siga as orientações do seu médico."
+
+2. BASE DE CONHECIMENTO (USE APENAS ESTAS INFORMAÇÕES)
+   - Dicas gerais de recuperação por tipo de lesão
+   - Exercícios leves aprovados para reabilitação
+   - Orientações de ergonomia e prevenção
+   - Alimentação e hidratação para recuperação
+   - Gestão de estresse durante afastamento
+
+3. ESCOPO DE ATUAÇÃO
+   ✅ PODE: Fornecer dicas gerais de bem-estar, exercícios leves, alimentação saudável
+   ✅ PODE: Orientar sobre ergonomia e prevenção
+   ✅ PODE: Motivar e apoiar emocionalmente
+   ❌ NÃO PODE: Diagnosticar, prescrever medicamentos, alterar tratamento médico
+   ❌ NÃO PODE: Acessar prontuários ou dados médicos reais
+   ❌ NÃO PODE: Dar orientações que contradigam médicos
+
+4. FORMATO DE RESPOSTA
+   - Máximo 3-4 parágrafos ou 5-7 bullet points
+   - Linguagem simples e acessível
+   - Estruture com emojis quando apropriado (🏥 💪 🥗)
+   - Sempre termine com mensagem motivadora
+
+5. GOVERNANÇA CORPORATIVA
+   - Represente os valores da empresa: cuidado, profissionalismo, ética
+   - Respeite LGPD (Lei Geral de Proteção de Dados)
+   - Em caso de dúvida sobre segurança, oriente a procurar RH ou médico
+   
+6. CASOS ESPECIAIS
+   - Se a pergunta não for sobre saúde/bem-estar: "Minha especialidade é orientação sobre saúde e bem-estar. Posso ajudar com isso?"
+   - Se pedir diagnóstico: "Não posso fazer diagnósticos. Por favor, consulte seu médico."
+   - Se parecer emergência: "Parece ser uma situação urgente. Procure atendimento médico imediatamente ou ligue 192 (SAMU)."
+
+Lembre-se: Você é uma ferramenta de apoio, não substitui profissionais de saúde.`;
 - Diagnostique condições médicas
 - Prescreva medicamentos específicos
 - Contradiga orientações médicas
@@ -76,46 +114,62 @@ app.post('/api/chat', async (req, res) => {
     // Limita tamanho do histórico
     const limitedMessages = messages.slice(-10);
 
-    // Adiciona contexto do usuário se disponível
+    // Adiciona contexto do usuário com base de conhecimento
     let contextualMessages = [
       { role: 'system', content: SYSTEM_PROMPT }
     ];
 
+    // Adiciona contexto específico da condição usando base de conhecimento
     if (userContext && userContext.condition) {
+      const knowledgeContext = buildContextPrompt(userContext.condition);
       contextualMessages.push({
         role: 'system',
-        content: `Contexto do paciente: ${userContext.condition}${
-          userContext.cid ? ` (CID: ${userContext.cid})` : ''
-        }. Licença de ${userContext.days || 'alguns'} dias.`
+        content: knowledgeContext
       });
+      
+      // Log para auditoria (compliance)
+      console.log(`[${new Date().toISOString()}] Contexto aplicado: ${userContext.condition}`);
     }
 
     contextualMessages = [...contextualMessages, ...limitedMessages];
 
-    // Chama OpenAI
+    // Chama OpenAI com governança
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: contextualMessages,
-      temperature: 0.7,
-      max_tokens: 500,
-      user: req.ip // Tracking de usuário para compliance
+      temperature: 0.7, // Controlado para respostas mais consistentes
+      max_tokens: 500, // Limite para evitar respostas muito longas
+      presence_penalty: 0.3, // Evita repetição
+      frequency_penalty: 0.3,
+      user: req.ip // Tracking para compliance e rate limiting
     });
 
-    // Log (em produção, usar logger profissional como Winston)
-    console.log(`[${new Date().toISOString()}] Chat request - IP: ${req.ip}`);
+    // Log de auditoria (em produção, usar Winston ou similar)
+    console.log(`[${new Date().toISOString()}] Chat - IP: ${req.ip} - Tokens: ${completion.usage.total_tokens}`);
+
+    // Disclaimer automático em todas as respostas
+    const responseWithDisclaimer = completion.choices[0].message.content + 
+      `\n\n---\n💡 ${KNOWLEDGE_BASE.disclaimers.general}`;
 
     res.json({
-      message: completion.choices[0].message.content,
-      usage: completion.usage // Para monitoramento de custos
+      message: responseWithDisclaimer,
+      usage: completion.usage, // Para monitoramento de custos
+      timestamp: new Date().toISOString()
     });
 
   } catch (error) {
-    console.error('Erro na API OpenAI:', error);
+    console.error('Erro na API OpenAI:', error.message);
 
-    // Não expõe detalhes do erro ao cliente
-    res.status(500).json({
-      error: 'Erro ao processar sua mensagem. Tente novamente.',
-      fallback: true
+    // Fallback: resposta segura sem expor erro
+    const fallbackResponse = `Desculpe, estou com dificuldades técnicas no momento. 😔\n\n` +
+      `Enquanto isso, aqui estão algumas orientações gerais:\n\n` +
+      `${KNOWLEDGE_BASE.generalWellness.nutrition.slice(0, 3).join('\n')}\n\n` +
+      `${KNOWLEDGE_BASE.disclaimers.general}`;
+
+    res.status(200).json({
+      message: fallbackResponse,
+      fallback: true,
+      timestamp: new Date().toISOString()
     });
   }
 });
