@@ -28,6 +28,7 @@ class LiaSync {
             id: Date.now(),
             timestamp: new Date().toISOString(),
             status: 'Aguardando INSS',
+            managerViewed: false, // Marca como não visualizada
             ...licenseData,
             createdAt: new Date().toLocaleString('pt-BR')
         };
@@ -37,6 +38,9 @@ class LiaSync {
 
         // Cria notificação para gestor
         this.notifyManager(newLicense);
+
+        // Dispara evento de atualização
+        window.dispatchEvent(new CustomEvent('lia:dataUpdated'));
 
         return newLicense;
     }
@@ -70,7 +74,7 @@ class LiaSync {
         return JSON.parse(localStorage.getItem(this.storageKey) || '[]');
     }
 
-    // Busca licenças não lidas
+    // Busca licenças não visualizadas pelo gestor
     getUnreadLicenses() {
         return this.getLicenses().filter(l => !l.managerViewed);
     }
@@ -83,6 +87,9 @@ class LiaSync {
             licenses[index].managerViewed = true;
             licenses[index].viewedAt = new Date().toLocaleString('pt-BR');
             localStorage.setItem(this.storageKey, JSON.stringify(licenses));
+            
+            // Dispara evento para atualizar UI
+            window.dispatchEvent(new CustomEvent('lia:dataUpdated'));
         }
     }
 

@@ -202,7 +202,7 @@
             });
             
             uniqueLicenses.forEach(license => {
-                const badge = !license.viewedByManager ? '<span class="badge badge-new">NOVA</span>' : '';
+                const badge = !license.managerViewed ? '<span class="badge badge-new">NOVA</span>' : '';
                 const statusColor = license.status === 'Aguardando INSS' ? 'var(--warning-color)' : 'var(--success-color)';
                 const employeeName = license.employeeName || license.employee || 'Colaborador';
                 const condition = license.condition || license.injury || 'Não especificada';
