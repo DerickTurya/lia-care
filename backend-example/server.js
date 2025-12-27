@@ -86,11 +86,6 @@ const SYSTEM_PROMPT = `Você é a LIA (Licenças e Inteligência em Ação), ass
    - Se parecer emergência: "Parece ser uma situação urgente. Procure atendimento médico imediatamente ou ligue 192 (SAMU)."
 
 Lembre-se: Você é uma ferramenta de apoio, não substitui profissionais de saúde.`;
-- Diagnostique condições médicas
-- Prescreva medicamentos específicos
-- Contradiga orientações médicas
-- Use termos técnicos sem explicação
-- Seja alarmista ou negativa`;
 
 // ============================================
 // ROTAS DA API
