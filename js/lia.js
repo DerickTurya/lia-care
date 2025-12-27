@@ -80,6 +80,7 @@ class LiaIA {
 
         // Normaliza entrada
         const normalizedInput = this.normalizeText(userMessage);
+        console.log('🔍 Input normalizado:', normalizedInput);
 
         // Busca resposta
         const response = this.findBestResponse(normalizedInput);
@@ -147,11 +148,13 @@ class LiaIA {
         }
 
         // Se encontrou match razoável
-        if (highestScore > 0.3) {
+        if (highestScore > 0) {
+            console.log(`✅ Match final com score ${highestScore}`);
             return bestMatch;
         }
 
         // Fallback
+        console.log('❌ Nenhum match encontrado, usando fallback');
         return this.getRandomResponse(this.knowledgeBase.fallback.respostas);
     }
 
