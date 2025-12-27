@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo IA Enterprise - Lia Care</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 16px 16px 0 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .status.online {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status.offline {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .main {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 0;
+        }
+
+        .sidebar {
+            background: #f9fafb;
+            padding: 30px;
+            border-right: 1px solid #e5e7eb;
+        }
+
+        .info-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-box h3 {
+            color: #1f2937;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .info-box p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-box li {
+            padding: 8px 0;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        .info-box li::before {
+            content: "✓ ";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .chat-area {
+            background: white;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid #e5e7eb;
+            background: #f9fafb;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+            max-height: 500px;
+            min-height: 400px;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 16px 20px;
+            border-radius: 16px;
+            line-height: 1.6;
+        }
+
+        .message.assistant .message-content {
+            background: #f3f4f6;
+            color: #1f2937;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.user .message-content {
+            background: #667eea;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .message.assistant .message-avatar {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .message.user .message-avatar {
+            background: #e5e7eb;
+        }
+
+        .chat-input {
+            padding: 20px 30px;
+            border-top: 1px solid #e5e7eb;
+            background: #f9fafb;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 14px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .input-group button {
+            padding: 14px 32px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .input-group button:hover:not(:disabled) {
+            background: #5568d3;
+            transform: translateY(-1px);
+        }
+
+        .input-group button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .suggestion-btn {
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .suggestion-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+            background: #f3f4f6;
+        }
+
+        .loading {
+            display: none;
+            padding: 12px;
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .error-banner {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error-banner.active {
+            display: block;
+        }
+
+        .disclaimer {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .main {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                border-right: none;
+                border-bottom: 1px solid #e5e7eb;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Demo IA Enterprise - Lia Care</h1>
+            <p style="color: #6b7280; margin: 10px 0;">Sistema de IA com governança corporativa e base de conhecimento</p>
+            <div id="statusIndicator" class="status offline">⚠️ Servidor Offline</div>
+        </div>
+
+        <div class="main">
+            <div class="sidebar">
+                <div class="info-box">
+                    <h3>🔐 Segurança</h3>
+                    <ul>
+                        <li>API Key no backend</li>
+                        <li>Rate limiting ativo</li>
+                        <li>CORS controlado</li>
+                        <li>Logs de auditoria</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3>🧠 Governança</h3>
+                    <ul>
+                        <li>System prompt rígido</li>
+                        <li>Base de conhecimento</li>
+                        <li>Disclaimers automáticos</li>
+                        <li>Detecção emergências</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3>📊 Economia</h3>
+                    <p><strong>Modelo:</strong> GPT-4o-mini</p>
+                    <p><strong>Custo estimado:</strong> $0.01/conversa</p>
+                    <p><strong>Limite:</strong> 500 tokens/resposta</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>⚙️ Status do Backend</h3>
+                    <p id="backendStatus">Verificando...</p>
+                    <button onclick="checkHealth()" style="margin-top: 10px; padding: 8px 16px; background: #667eea; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                        🔄 Verificar
+                    </button>
+                </div>
+            </div>
+
+            <div class="chat-area">
+                <div class="chat-header">
+                    <h2 style="color: #1f2937; font-size: 18px;">💬 Conversa com a LIA</h2>
+                    <p style="color: #6b7280; font-size: 14px; margin-top: 4px;">Assistente de saúde com IA real</p>
+                </div>
+
+                <div id="errorBanner" class="error-banner">
+                    <strong>⚠️ Erro:</strong> <span id="errorMessage"></span>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message assistant">
+                        <div class="message-avatar">🤖</div>
+                        <div class="message-content">
+                            Olá! Sou a LIA, sua assistente de saúde. 👋<br><br>
+                            Posso ajudar com dicas gerais de recuperação, exercícios leves, alimentação saudável e bem-estar durante sua licença médica.<br><br>
+                            <strong>Lembre-se:</strong> Minhas orientações são gerais e não substituem seu médico. Sempre siga as orientações profissionais!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="loading" id="loading">
+                    <span>⏳ LIA está pensando...</span>
+                </div>
+
+                <div class="chat-input">
+                    <div class="suggestions">
+                        <button class="suggestion-btn" onclick="sendSuggestion('Quais exercícios posso fazer para lombalgia?')">💪 Exercícios para lombalgia</button>
+                        <button class="suggestion-btn" onclick="sendSuggestion('Alimentação recomendada para recuperação')">🥗 Alimentação</button>
+                        <button class="suggestion-btn" onclick="sendSuggestion('Como melhorar meu sono?')">😴 Qualidade do sono</button>
+                        <button class="suggestion-btn" onclick="sendSuggestion('Dicas para reduzir estresse')">🧘 Reduzir estresse</button>
+                    </div>
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            id="userInput" 
+                            placeholder="Digite sua pergunta..." 
+                            onkeypress="if(event.key==='Enter') sendMessage()"
+                        >
+                        <button onclick="sendMessage()" id="sendBtn">Enviar</button>
+                    </div>
+                </div>
+
+                <div class="disclaimer">
+                    <strong>⚠️ Importante:</strong> Esta demonstração usa IA real (OpenAI GPT-4o-mini) com governança corporativa. Todas as respostas incluem disclaimers legais e seguem diretrizes de segurança. Não armazena dados sensíveis e respeita LGPD.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000/api';
+        let conversationHistory = [];
+
+        // Verificar saúde do backend
+        async function checkHealth() {
+            try {
+                const response = await fetch(`${API_URL}/health`);
+                const data = await response.json();
+                
+                if (data.status === 'ok') {
+                    document.getElementById('statusIndicator').className = 'status online';
+                    document.getElementById('statusIndicator').innerHTML = '✅ Servidor Online';
+                    document.getElementById('backendStatus').innerHTML = `
+                        ✅ Backend funcionando<br>
+                        <small style="color: #6b7280;">Último check: ${new Date(data.timestamp).toLocaleTimeString()}</small>
+                    `;
+                }
+            } catch (error) {
+                document.getElementById('statusIndicator').className = 'status offline';
+                document.getElementById('statusIndicator').innerHTML = '⚠️ Servidor Offline';
+                document.getElementById('backendStatus').innerHTML = `
+                    ❌ Backend não respondeu<br>
+                    <small style="color: #6b7280;">Execute: TESTAR-IA.bat</small>
+                `;
+            }
+        }
+
+        // Enviar sugestão
+        function sendSuggestion(text) {
+            document.getElementById('userInput').value = text;
+            sendMessage();
+        }
+
+        // Enviar mensagem
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            // Adicionar mensagem do usuário
+            addMessage(message, 'user');
+            input.value = '';
+
+            // Adicionar ao histórico
+            conversationHistory.push({ role: 'user', content: message });
+
+            // Mostrar loading
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('sendBtn').disabled = true;
+
+            try {
+                const response = await fetch(`${API_URL}/chat`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        messages: conversationHistory,
+                        userContext: {
+                            condition: 'Lombalgia', // Exemplo
+                            days: 15
+                        }
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.fallback) {
+                    showError('API indisponível. Usando resposta de fallback.');
+                }
+
+                addMessage(data.message, 'assistant');
+                conversationHistory.push({ role: 'assistant', content: data.message });
+
+                // Log de uso (apenas para demo)
+                if (data.usage) {
+                    console.log(`💰 Custo estimado: $${(data.usage.total_tokens * 0.0000003).toFixed(4)}`);
+                }
+
+            } catch (error) {
+                showError('Não foi possível conectar ao servidor. Execute TESTAR-IA.bat');
+                addMessage(
+                    'Desculpe, não consegui processar sua mensagem. Verifique se o servidor está rodando! 🔧',
+                    'assistant'
+                );
+            } finally {
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('sendBtn').disabled = false;
+            }
+        }
+
+        // Adicionar mensagem na UI
+        function addMessage(text, sender) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const avatar = sender === 'user' ? '👤' : '🤖';
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${avatar}</div>
+                <div class="message-content">${text.replace(/\n/g, '<br>')}</div>
+            `;
+            
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        // Mostrar erro
+        function showError(message) {
+            const banner = document.getElementById('errorBanner');
+            document.getElementById('errorMessage').textContent = message;
+            banner.classList.add('active');
+            setTimeout(() => banner.classList.remove('active'), 5000);
+        }
+
+        // Verificar saúde ao carregar
+        checkHealth();
+        setInterval(checkHealth, 30000); // Verifica a cada 30s
+    </script>
+</body>
+</html>
