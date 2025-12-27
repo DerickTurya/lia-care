@@ -39,13 +39,15 @@ class LiaIA {
             
             // Mescla todas as bases em uma única
             this.knowledgeBase = {};
-            results.forEach(base => {
+            results.forEach((base, index) => {
+                console.log(`📦 Base ${index + 1}:`, Object.keys(base));
                 this.knowledgeBase = { ...this.knowledgeBase, ...base };
             });
 
             const totalTopics = Object.keys(this.knowledgeBase).length;
             console.log(`✅ ${bases.length} bases carregadas com ${totalTopics} tópicos!`);
             console.log('📚 Categorias:', Object.keys(this.knowledgeBase));
+            console.log('🔍 Exemplo de tópico:', this.knowledgeBase[Object.keys(this.knowledgeBase)[0]]);
             
         } catch (error) {
             console.error('❌ Erro ao carregar bases de conhecimento:', error);
@@ -65,7 +67,8 @@ class LiaIA {
     // Processa mensagem do usuário
     async processMessage(userMessage) {
         if (!this.knowledgeBase) {
-            await this.loadKnowledgeBase();
+            console.log('⏳ Aguardando bases de conhecimento...');
+            await this.loadAllKnowledgeBases();
         }
 
         // Adiciona ao histórico
@@ -107,12 +110,16 @@ class LiaIA {
 
         // Verifica saudações primeiro
         if (this.isSaudacao(normalizedInput)) {
-            return this.getRandomResponse(this.knowledgeBase.saudacao.respostas);
+            if (this.knowledgeBase.saudacao && this.knowledgeBase.saudacao.respostas) {
+                return this.getRandomResponse(this.knowledgeBase.saudacao.respostas);
+            }
         }
 
         // Verifica emergência
         if (this.checkEmergency(normalizedInput)) {
-            return this.knowledgeBase.emergencia.resposta;
+            if (this.knowledgeBase.emergencia) {
+                return this.knowledgeBase.emergencia.resposta;
+            }
         }
 
         // Verifica contextos especiais (agradecimento, etc)
