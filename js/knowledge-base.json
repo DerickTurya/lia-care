@@ -1,0 +1,102 @@
+{
+  "saudacao": {
+    "respostas": [
+      "Olá! Sou a LIA, sua assistente de saúde e bem-estar. 😊 Como posso ajudar você hoje?",
+      "Oi! Estou aqui para te orientar sobre sua licença médica. O que você gostaria de saber?",
+      "Bem-vindo! Sou a LIA e vou te ajudar com informações sobre seu afastamento. Em que posso ajudar?"
+    ]
+  },
+
+  "regras_gerais": {
+    "licenca_ate_15_dias": {
+      "keywords": ["15 dias", "curta", "até 15", "menos de 15", "15"],
+      "resposta": "📋 **Licenças até 15 dias:**\n\n✓ São gerenciadas internamente pela empresa\n✓ Não precisa acionar o INSS\n✓ Você receberá normalmente da empresa\n✓ Apresente o atestado médico ao RH\n✓ Seu gestor será notificado automaticamente\n\n💡 Dica: Mantenha contato com seu gestor durante o afastamento!"
+    },
+    "licenca_acima_15_dias": {
+      "keywords": ["acima de 15", "mais de 15", "16 dias", "longa", "inss"],
+      "resposta": "🏥 **Licenças acima de 15 dias:**\n\n📌 Exigem acionamento do INSS\n📌 Você deve fazer a perícia médica\n📌 Os primeiros 15 dias são pagos pela empresa\n📌 A partir do 16º dia, o INSS assume\n\n🔍 A LIA acompanha sua perícia e te avisa sobre o resultado!\n\n⏰ Lembre-se: Agende a perícia o quanto antes para não perder prazos."
+    }
+  },
+
+  "processos": {
+    "pericia": {
+      "keywords": ["perícia", "pericia", "exame", "médico do inss", "avaliação"],
+      "resposta": "🏥 **Sobre a Perícia Médica do INSS:**\n\n✅ O que levar:\n• RG e CPF\n• Atestado médico original\n• Exames que comprovem sua condição\n• Número do protocolo (se já agendou)\n\n📍 Chegue 30 minutos antes\n📍 Vista-se confortavelmente\n📍 Seja honesto sobre suas limitações\n\n💡 A LIA te notifica sobre o resultado da perícia automaticamente!"
+    },
+    "agendamento": {
+      "keywords": ["agendar", "marcar", "quando", "data", "horário"],
+      "resposta": "📅 **Como agendar sua perícia:**\n\n1️⃣ Ligue para 135 (INSS)\n2️⃣ Ou acesse: meu.inss.gov.br\n3️⃣ Escolha data e local\n4️⃣ Guarde o número do protocolo\n\n⚡ Agende o mais rápido possível para não perder prazos!\n\n🔔 A LIA te avisa quando o resultado sair!"
+    },
+    "documentos": {
+      "keywords": ["documento", "papel", "atestado", "exame", "levar"],
+      "resposta": "📄 **Documentos necessários:**\n\n✅ Obrigatórios:\n• RG ou CNH\n• CPF\n• Atestado médico ORIGINAL\n• Número de agendamento (protocolo)\n\n✅ Recomendados:\n• Exames médicos (raio-x, ressonância, etc)\n• Receitas médicas\n• Relatório médico detalhado\n\n💡 Quanto mais documentação, melhor para comprovar sua condição!"
+    },
+    "resultado": {
+      "keywords": ["resultado", "resposta", "deferido", "indeferido", "aprovado", "negado"],
+      "resposta": "📊 **Resultado da Perícia:**\n\n✅ **Deferido:** Benefício aprovado! Você receberá do INSS.\n❌ **Indeferido:** Benefício negado. Você pode recorrer.\n\n🔔 A LIA te notifica automaticamente quando o resultado sair!\n\n📱 Você também pode consultar em:\n• Aplicativo Meu INSS\n• Site meu.inss.gov.br\n• Telefone 135"
+    },
+    "recurso": {
+      "keywords": ["recurso", "contestar", "recorrer", "discordar", "injusto"],
+      "resposta": "⚖️ **Como recorrer de decisão indeferida:**\n\n1️⃣ Você tem 30 dias para recorrer\n2️⃣ Apresente novos documentos/exames\n3️⃣ Peça relatório médico mais detalhado\n4️⃣ Protocole pelo Meu INSS ou presencialmente\n\n💡 A LIA te ajuda a organizar a documentação!\n\n📞 Em caso de dúvida, procure o RH da empresa."
+    }
+  },
+
+  "saude_bem_estar": {
+    "recuperacao": {
+      "keywords": ["recuperar", "melhorar", "cuidar", "tratamento", "saúde"],
+      "resposta": "💪 **Dicas para sua recuperação:**\n\n🏥 Siga rigorosamente o tratamento médico\n💊 Tome os medicamentos nos horários corretos\n🛌 Respeite o repouso recomendado\n🥗 Mantenha alimentação saudável\n💧 Hidrate-se bem (2L de água por dia)\n😴 Durma 7-8 horas por noite\n\n⚠️ Não se automedique!\n⚠️ Evite esforço físico sem liberação médica\n\n🔔 Sua saúde vem primeiro! Foque na recuperação."
+    },
+    "ansiedade": {
+      "keywords": ["ansiedade", "ansioso", "preocupado", "estresse", "nervoso"],
+      "resposta": "🧘 **Lidando com ansiedade durante o afastamento:**\n\n✅ É normal se sentir ansioso!\n\n💡 Dicas práticas:\n• 🌳 Caminhe ao ar livre 20min/dia\n• 🧘 Pratique respiração profunda\n• 📚 Leia algo que goste\n• 🎵 Ouça música relaxante\n• 👥 Converse com familiares/amigos\n• 📱 Limite tempo em redes sociais\n\n⚠️ Se a ansiedade persistir, procure apoio psicológico!\n\n💬 Lembre-se: Seu gestor e RH estão aqui para apoiar você."
+    },
+    "retorno": {
+      "keywords": ["voltar", "retornar", "trabalho", "quando volto", "alta"],
+      "resposta": "🔙 **Retorno ao trabalho:**\n\n📋 **Processo:**\n1️⃣ Aguarde alta médica oficial\n2️⃣ Apresente atestado de alta ao RH\n3️⃣ Comunique seu gestor\n4️⃣ Pode haver readaptação gradual\n\n💡 **Dicas:**\n• Não retorne antes da alta médica\n• Comunique qualquer dificuldade\n• Respeite seus limites inicialmente\n\n🤝 Sua equipe está esperando você de volta!"
+    }
+  },
+
+  "duvidas_frequentes": {
+    "salario": {
+      "keywords": ["salário", "salario", "pagamento", "receber", "quanto", "dinheiro"],
+      "resposta": "💰 **Sobre pagamento durante afastamento:**\n\n📌 **Até 15 dias:**\n• Empresa paga 100% do salário\n• Pagamento normal na folha\n\n📌 **Acima de 15 dias:**\n• Empresa paga os primeiros 15 dias\n• INSS paga a partir do 16º dia\n• Valor: 91% do salário de benefício\n\n📞 Dúvidas? Fale com o RH!"
+    },
+    "prazo": {
+      "keywords": ["prazo", "demora", "quanto tempo", "quando", "dias"],
+      "resposta": "⏰ **Prazos importantes:**\n\n📌 **Agendamento da perícia:**\n• Agende em até 15 dias após afastamento\n\n📌 **Resultado da perícia:**\n• Geralmente sai em 24-48h\n• Casos complexos: até 10 dias\n\n📌 **Primeiro pagamento INSS:**\n• 30-45 dias após deferimento\n\n🔔 A LIA te mantém informado sobre cada etapa!"
+    },
+    "gestor": {
+      "keywords": ["gestor", "chefe", "gerente", "líder", "notificar"],
+      "resposta": "👔 **Comunicação com seu gestor:**\n\n✅ **A LIA faz isso automaticamente!**\n\n📧 Seu gestor recebe notificação sobre:\n• Cadastro da licença\n• Período de afastamento\n• Previsão de retorno\n• Resultados de perícia\n\n💡 Mas é bom manter contato pessoal também!\n\n🤝 Relacionamento transparente ajuda no retorno."
+    }
+  },
+
+  "emergencia": {
+    "keywords": ["urgente", "emergência", "emergencia", "grave", "dor forte", "piora"],
+    "resposta": "🚨 **ATENÇÃO - Situação de emergência!**\n\n⚠️ Se você está com:\n• Dor intensa que não passa\n• Dificuldade para respirar\n• Febre muito alta\n• Sangramento\n• Qualquer sintoma grave\n\n📞 **PROCURE ATENDIMENTO MÉDICO IMEDIATAMENTE:**\n• Ligue 192 (SAMU)\n• Vá ao pronto-socorro mais próximo\n• Não espere!\n\n💡 A LIA é para orientações gerais, não substitui atendimento médico!"
+  },
+
+  "fallback": {
+    "respostas": [
+      "Hmm, não tenho certeza sobre isso. 🤔 Você pode reformular sua pergunta ou escolher uma das opções abaixo:\n\n• Informações sobre perícia\n• Dicas de recuperação\n• Prazos e documentos\n• Falar com RH",
+      "Desculpe, não entendi bem. 😅 Posso ajudar com:\n\n📋 Regras de licenças (até 15 dias / acima de 15)\n🏥 Processo de perícia do INSS\n💰 Pagamentos e prazos\n💪 Dicas de saúde\n\nO que você gostaria de saber?",
+      "Não tenho essa informação específica. 🤷‍♀️ Mas posso te ajudar com:\n\n• Como agendar perícia\n• O que fazer se for indeferido\n• Documentos necessários\n• Contato com RH\n\nQual desses temas te interessa?"
+    ]
+  },
+
+  "contextos_especiais": {
+    "positivo": {
+      "keywords": ["obrigado", "obrigada", "valeu", "ajudou", "muito bom"],
+      "resposta": "😊 Por nada! Fico feliz em ajudar!\n\nLembre-se: Estou aqui 24/7 para te orientar. Sua recuperação é nossa prioridade!\n\n💙 Cuide-se e melhoras!"
+    },
+    "negativo": {
+      "keywords": ["não ajudou", "não entendi", "confuso", "complicado"],
+      "resposta": "Desculpe se não fui clara! 😔\n\nVou tentar de outro jeito. Qual sua dúvida principal?\n\nOu você prefere falar direto com o RH? Posso te passar o contato!"
+    }
+  },
+
+  "contatos_uteis": {
+    "keywords": ["contato", "telefone", "falar", "ligar", "rh", "ajuda"],
+    "resposta": "📞 **Contatos Úteis:**\n\n🏢 **RH da Empresa:**\n• rh@empresa.com\n• (11) 1234-5678\n• Horário: 8h-18h\n\n🏥 **INSS:**\n• Telefone: 135\n• Site: meu.inss.gov.br\n• App: Meu INSS\n\n🚨 **Emergências:**\n• SAMU: 192\n• Bombeiros: 193\n\n💬 **Estou aqui 24/7 para te ajudar também!**"
+  }
+}

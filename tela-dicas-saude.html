@@ -450,16 +450,13 @@
         </div>
     </div>
 
+    <script src="js/lia.js"></script>
     <script>
-        // Histórico da conversa
-        let conversationHistory = [];
-        
-        // Contexto do usuário (pode ser preenchido dinamicamente)
-        const userContext = {
-            condition: null,
-            cid: null,
-            days: null
-        };
+        // Aguarda LIA carregar
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Mensagem inicial
+            addMessage(await askLia('oi'), false);
+        });
 
         // Função para adicionar mensagem ao chat
         function addMessage(text, isUser = false) {
@@ -473,10 +470,14 @@
             
             const content = document.createElement('div');
             content.className = 'message-content';
+            
+            // Formata resposta com quebras de linha
+            const formattedText = text.replace(/\n/g, '<br>');
+            
             if (!isUser) {
-                content.innerHTML = '<strong>Lia Care:</strong> ' + text;
+                content.innerHTML = '<strong>Lia:</strong> ' + formattedText;
             } else {
-                content.textContent = text;
+                content.innerHTML = formattedText;
             }
             
             messageDiv.appendChild(avatar);
@@ -504,29 +505,26 @@
             }
         }
 
-        // Função para processar mensagens (apenas frontend)
-        async function callOpenAI(userMessage) {
-            // Adiciona ao histórico
-            conversationHistory.push({
-                role: "user",
-                content: userMessage
-            });
+        // Função para enviar mensagem
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
             
-            // Gera resposta inteligente
-            const response = getFallbackResponse(userMessage);
+            if (!message) return;
             
-            conversationHistory.push({
-                role: "assistant",
-                content: response
-            });
+            // Adiciona mensagem do usuário
+            addMessage(message, true);
+            input.value = '';
             
-            return response;
-        }
-
-        // Função de fallback (resposta simulada)
-        function getFallbackResponse(question) {
-            const responses = {
-                'exercicio': `🏃‍♂️ Exercícios Seguros para Recuperação
+            // Mostra indicador de digitação
+            setTyping(true);
+            
+            // Simula delay de digitação
+            await new Promise(resolve => setTimeout(resolve, 800));
+            
+            // Processa com LIA IA
+            const response = await askLia(message);
+             `🏃‍♂️ Exercícios Seguros para Recuperação
 
 Durante a recuperação inicial (primeiros dias):
 • Repouso adequado é fundamental
@@ -1186,11 +1184,11 @@ Cuidados importantes:
             // Mostra indicador de digitação
             setTyping(true);
             
-            // Simula delay da API
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            // Simula delay de digitação
+            await new Promise(resolve => setTimeout(resolve, 800));
             
-            // Chama a API
-            const response = await callOpenAI(message);
+            // Processa com LIA IA
+            const response = await askLia(message);
             
             // Esconde indicador e mostra resposta
             setTyping(false);
@@ -1204,20 +1202,18 @@ Cuidados importantes:
         }
 
         // Função para limpar chat
-        function clearChat() {
+        async function clearChat() {
             const chatContainer = document.getElementById('chatContainer');
-            chatContainer.innerHTML = `
-                <div class="message">
-                    <div class="message-avatar">🤖</div>
-                    <div class="message-content">
-                        <strong>Lia Care:</strong> Olá! Me conte qual é sua condição médica ou lesão, e eu vou te fornecer dicas personalizadas de recuperação. 😊
-                    </div>
-                </div>
-            `;
+            chatContainer.innerHTML = '';
             
-            // Reseta histórico
-            conversationHistory = [];
+            // Reseta histórico da LIA
+            window.liaIA.clearHistory();
+            
+            // Mensagem inicial
+            addMessage(await askLia('oi'), false);
         }
+        }
+
 
         // Função para Enter enviar mensagem
         function handleKeyPress(event) {
@@ -1225,21 +1221,6 @@ Cuidados importantes:
                 sendMessage();
             }
         }
-
-        // Carrega informações do usuário ao iniciar
-        window.addEventListener('DOMContentLoaded', () => {
-            // Mostra info do usuário se disponível
-            if (userContext.condition) {
-                document.getElementById('userHealthInfo').style.display = 'block';
-                document.getElementById('userConditionText').textContent = 
-                    `${userContext.condition}${userContext.cid ? ' (CID: ' + userContext.cid + ')' : ''} - Licença de ${userContext.days || 'alguns'} dias`;
-                
-                // Mensagem personalizada
-                setTimeout(() => {
-                    addMessage(`Vi que você está em licença por ${userContext.condition}. Como posso te ajudar hoje? Posso dar dicas sobre exercícios, alimentação, sono ou outros aspectos da sua recuperação! 😊`);
-                }, 1000);
-            }
-        });
     </script>
 </body>
 </html>
