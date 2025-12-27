@@ -1,0 +1,34 @@
+{
+  "pagamento_empresa": {
+    "keywords": ["salário", "salario", "pagamento", "receber", "quanto", "dinheiro", "empresa paga"],
+    "resposta": "💰 **Pagamento durante afastamento:**\n\n📌 **Até 15 dias:**\n• Empresa paga 100% do salário\n• Pagamento normal na folha\n• Desconta dia trabalhado se houver\n\n📌 **Acima de 15 dias:**\n• Empresa paga os primeiros 15 dias\n• INSS paga a partir do 16º dia\n• Valor: 91% do salário de benefício\n\n📞 Dúvidas? Fale com o RH!"
+  },
+  "calculo_beneficio": {
+    "keywords": ["calcular", "valor", "quanto vou receber", "91%", "salário de benefício"],
+    "resposta": "🧮 **Como é calculado o benefício:**\n\n📊 **Salário de Benefício:**\n• Média dos 80% maiores salários desde 07/1994\n• Corrigidos monetariamente\n\n💰 **Auxílio-Doença:**\n• 91% do salário de benefício\n• Exemplo: Se SB = R$ 3.000, você recebe R$ 2.730\n\n⚠️ **Importante:**\n• Tem teto (máximo do INSS)\n• Não pode ser inferior ao salário mínimo\n\n📱 Simule no app Meu INSS ou ligue 135!"
+  },
+  "data_pagamento": {
+    "keywords": ["quando recebo", "data de pagamento", "dia do pagamento", "calendário"],
+    "resposta": "📅 **Datas de Pagamento:**\n\n💼 **Pela Empresa (primeiros 15 dias):**\n• Mesma data do seu salário normal\n• Consulte RH/Financeiro\n\n🏛️ **Pelo INSS (após 16º dia):**\n• Final do benefício determina a data\n• Calendário disponível em: meu.inss.gov.br\n\n📌 **Exemplo:**\n• Benefício final 1: pagamento dia 25\n• Benefício final 2: pagamento dia 26\n• E assim por diante...\n\n💡 Primeiro pagamento pode demorar 30-45 dias!"
+  },
+  "13_salario": {
+    "keywords": ["13º", "13o", "décimo terceiro", "decimo terceiro", "gratificação"],
+    "resposta": "🎁 **13º Salário durante afastamento:**\n\n✅ **Você tem direito!**\n\n📌 **Até 15 dias:**\n• Empresa paga o 13º integral\n\n📌 **Acima de 15 dias:**\n• Empresa paga proporcional aos dias trabalhados\n• INSS paga proporcional ao período afastado\n• Você recebe os dois no final do ano\n\n💡 Não perde o benefício do 13º!\n\n📞 Dúvidas? Consulte RH ou INSS (135)"
+  },
+  "ferias": {
+    "keywords": ["férias", "ferias", "descanso anual"],
+    "resposta": "🏖️ **Férias durante afastamento:**\n\n✅ **Seus direitos:**\n• Tempo de afastamento conta para férias\n• Você não perde o direito acumulado\n• Pode tirar férias após retorno\n\n⚠️ **Atenção:**\n• Não pode tirar férias durante licença médica\n• Mas o período conta como tempo de serviço\n• Remuneração mantida normalmente\n\n💡 Ao retornar, converse com RH sobre férias acumuladas!\n\n📞 Dúvidas? Fale com o RH"
+  },
+  "fgts": {
+    "keywords": ["fgts", "fundo de garantia", "saque fgts"],
+    "resposta": "🏦 **FGTS durante afastamento:**\n\n✅ **Depósitos:**\n• Empresa continua depositando normalmente\n• Mesmo durante afastamento pelo INSS\n• 8% sobre a remuneração\n\n✅ **Saque:**\n• Não pode sacar apenas por estar afastado\n• Pode sacar se for demitido\n• Ou nas outras hipóteses legais (casa, doença grave, etc)\n\n💡 Seus direitos ao FGTS são mantidos!\n\n📱 Consulte saldo: app FGTS"
+  },
+  "vale_transporte": {
+    "keywords": ["vale transporte", "vale-transporte", "vt", "transporte"],
+    "resposta": "🚌 **Vale-Transporte durante afastamento:**\n\n📌 **Regra geral:**\n• Suspenso durante afastamento\n• Você não está indo trabalhar\n• Não há desconto do VT\n\n✅ **Exceções:**\n• Se precisar ir a consultas/perícias\n• Empresa pode fornecer para essas ocasiões\n\n💡 Ao retornar, VT é restabelecido automaticamente!\n\n📞 Dúvidas? Consulte o RH"
+  },
+  "imposto_renda": {
+    "keywords": ["imposto de renda", "ir", "irpf", "declaração"],
+    "resposta": "📋 **Imposto de Renda durante afastamento:**\n\n✅ **Tributação:**\n• Pagamento da empresa: tributável normalmente\n• Auxílio-doença (INSS): ISENTO de IR\n\n💡 **Na Declaração:**\n• Informe rendimentos da empresa (tributáveis)\n• Informe benefício INSS como isento\n• Empresa e INSS fornecem informes\n\n📅 **Atenção:**\n• Guarde todos os informes de rendimentos\n• Declare corretamente para evitar malha fina\n\n📱 Consulte contador ou use app IRPF"
+  }
+}

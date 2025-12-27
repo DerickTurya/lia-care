@@ -8,17 +8,45 @@ class LiaIA {
     constructor() {
         this.knowledgeBase = null;
         this.conversationHistory = [];
-        this.loadKnowledgeBase();
+        this.loadAllKnowledgeBases();
     }
 
-    // Carrega base de conhecimento
-    async loadKnowledgeBase() {
+    // Carrega TODAS as bases de conhecimento modulares
+    async loadAllKnowledgeBases() {
         try {
-            const response = await fetch('js/knowledge-base.json');
-            this.knowledgeBase = await response.json();
-            console.log('✅ Base de conhecimento carregada!');
+            const bases = [
+                'js/knowledge-base-geral.json',
+                'js/knowledge-base-licencas.json',
+                'js/knowledge-base-processos.json',
+                'js/knowledge-base-saude.json',
+                'js/knowledge-base-financeiro.json'
+            ];
+
+            console.log('🔄 Carregando bases de conhecimento...');
+            
+            const promises = bases.map(url => 
+                fetch(url)
+                    .then(res => res.json())
+                    .catch(err => {
+                        console.warn(`⚠️ Erro ao carregar ${url}:`, err);
+                        return {};
+                    })
+            );
+
+            const results = await Promise.all(promises);
+            
+            // Mescla todas as bases em uma única
+            this.knowledgeBase = {};
+            results.forEach(base => {
+                this.knowledgeBase = { ...this.knowledgeBase, ...base };
+            });
+
+            const totalTopics = Object.keys(this.knowledgeBase).length;
+            console.log(`✅ ${bases.length} bases carregadas com ${totalTopics} tópicos!`);
+            console.log('📚 Categorias:', Object.keys(this.knowledgeBase));
+            
         } catch (error) {
-            console.error('❌ Erro ao carregar base de conhecimento:', error);
+            console.error('❌ Erro ao carregar bases de conhecimento:', error);
             this.knowledgeBase = this.getFallbackKnowledge();
         }
     }

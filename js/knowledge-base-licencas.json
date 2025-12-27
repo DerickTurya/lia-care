@@ -1,0 +1,22 @@
+{
+  "licenca_ate_15_dias": {
+    "keywords": ["15 dias", "curta", "até 15", "menos de 15", "15"],
+    "resposta": "📋 **Licenças até 15 dias:**\n\n✓ São gerenciadas internamente pela empresa\n✓ Não precisa acionar o INSS\n✓ Você receberá normalmente da empresa\n✓ Apresente o atestado médico ao RH\n✓ Seu gestor será notificado automaticamente\n\n💡 Dica: Mantenha contato com seu gestor durante o afastamento!"
+  },
+  "licenca_acima_15_dias": {
+    "keywords": ["acima de 15", "mais de 15", "16 dias", "longa", "inss"],
+    "resposta": "🏥 **Licenças acima de 15 dias:**\n\n📌 Exigem acionamento do INSS\n📌 Você deve fazer a perícia médica\n📌 Os primeiros 15 dias são pagos pela empresa\n📌 A partir do 16º dia, o INSS assume\n\n🔍 A LIA acompanha sua perícia e te avisa sobre o resultado!\n\n⏰ Lembre-se: Agende a perícia o quanto antes para não perder prazos."
+  },
+  "tipos_afastamento": {
+    "keywords": ["tipos", "modalidades", "categorias", "qual tipo"],
+    "resposta": "🏥 **Tipos de Afastamento:**\n\n1️⃣ **Auxílio-Doença Comum (B31)**\n• Doenças e acidentes fora do trabalho\n• Mais de 15 dias consecutivos\n\n2️⃣ **Auxílio-Doença Acidentário (B91)**\n• Acidente de trabalho\n• Doença ocupacional\n• Maior estabilidade após retorno\n\n3️⃣ **Licença Maternidade**\n• 120 dias (empresas) ou 180 dias (empresas cidadãs)\n\n4️⃣ **Licença Paternidade**\n• 5 dias (CLT) ou 20 dias (empresas cidadãs)\n\n💡 A LIA identifica automaticamente o tipo correto!"
+  },
+  "direitos_trabalhista": {
+    "keywords": ["direitos", "garantias", "estabilidade", "demissão"],
+    "resposta": "⚖️ **Seus Direitos Durante o Afastamento:**\n\n✅ **Garantias:**\n• 🔒 Não pode ser demitido durante afastamento\n• 💰 Manutenção do salário (empresa ou INSS)\n• 🏥 Plano de saúde mantido\n• ⏰ Tempo de afastamento conta como tempo de serviço\n\n✅ **Estabilidade (B91 - Acidentário):**\n• 12 meses após retorno ao trabalho\n• Proteção contra demissão sem justa causa\n\n✅ **FGTS:**\n• Empresa continua depositando normalmente\n\n💡 Conhecer seus direitos é fundamental!"
+  },
+  "prorrogacao": {
+    "keywords": ["prorrogar", "estender", "mais tempo", "continuar afastado"],
+    "resposta": "📅 **Prorrogação de Licença:**\n\n✅ **Como prorrogar:**\n1️⃣ Obtenha novo atestado médico\n2️⃣ Agende nova perícia no INSS (se já passou de 15 dias)\n3️⃣ Apresente documentação atualizada\n4️⃣ Aguarde nova avaliação\n\n⚠️ **Importante:**\n• Não deixe vencer o prazo anterior\n• Agende com antecedência\n• Mantenha RH informado\n\n🔔 A LIA te avisa quando está próximo do fim do período!\n\n💡 Prorrogações sucessivas podem indicar necessidade de reabilitação profissional."
+  }
+}

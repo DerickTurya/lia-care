@@ -1,0 +1,30 @@
+{
+  "pericia_medica": {
+    "keywords": ["perícia", "pericia", "exame", "médico do inss", "avaliação"],
+    "resposta": "🏥 **Sobre a Perícia Médica do INSS:**\n\n✅ O que levar:\n• RG e CPF\n• Atestado médico original\n• Exames que comprovem sua condição\n• Número do protocolo (se já agendou)\n\n📍 Chegue 30 minutos antes\n📍 Vista-se confortavelmente\n📍 Seja honesto sobre suas limitações\n\n💡 A LIA te notifica sobre o resultado da perícia automaticamente!"
+  },
+  "agendamento_pericia": {
+    "keywords": ["agendar", "marcar", "quando", "data", "horário"],
+    "resposta": "📅 **Como agendar sua perícia:**\n\n1️⃣ Ligue para 135 (INSS)\n2️⃣ Ou acesse: meu.inss.gov.br\n3️⃣ Escolha data e local\n4️⃣ Guarde o número do protocolo\n\n⚡ Agende o mais rápido possível para não perder prazos!\n\n🔔 A LIA te avisa quando o resultado sair!"
+  },
+  "documentos_necessarios": {
+    "keywords": ["documento", "papel", "atestado", "exame", "levar"],
+    "resposta": "📄 **Documentos necessários:**\n\n✅ Obrigatórios:\n• RG ou CNH\n• CPF\n• Atestado médico ORIGINAL\n• Número de agendamento (protocolo)\n\n✅ Recomendados:\n• Exames médicos (raio-x, ressonância, etc)\n• Receitas médicas\n• Relatório médico detalhado\n\n💡 Quanto mais documentação, melhor para comprovar sua condição!"
+  },
+  "resultado_pericia": {
+    "keywords": ["resultado", "resposta", "deferido", "indeferido", "aprovado", "negado"],
+    "resposta": "📊 **Resultado da Perícia:**\n\n✅ **Deferido:** Benefício aprovado! Você receberá do INSS.\n❌ **Indeferido:** Benefício negado. Você pode recorrer.\n\n🔔 A LIA te notifica automaticamente quando o resultado sair!\n\n📱 Você também pode consultar em:\n• Aplicativo Meu INSS\n• Site meu.inss.gov.br\n• Telefone 135"
+  },
+  "recurso_inss": {
+    "keywords": ["recurso", "contestar", "recorrer", "discordar", "injusto"],
+    "resposta": "⚖️ **Como recorrer de decisão indeferida:**\n\n1️⃣ Você tem 30 dias para recorrer\n2️⃣ Apresente novos documentos/exames\n3️⃣ Peça relatório médico mais detalhado\n4️⃣ Protocole pelo Meu INSS ou presencialmente\n\n💡 A LIA te ajuda a organizar a documentação!\n\n📞 Em caso de dúvida, procure o RH da empresa."
+  },
+  "prazos_importantes": {
+    "keywords": ["prazo", "demora", "quanto tempo", "quando", "dias"],
+    "resposta": "⏰ **Prazos importantes:**\n\n📌 **Agendamento da perícia:**\n• Agende em até 15 dias após afastamento\n\n📌 **Resultado da perícia:**\n• Geralmente sai em 24-48h\n• Casos complexos: até 10 dias\n\n📌 **Primeiro pagamento INSS:**\n• 30-45 dias após deferimento\n\n🔔 A LIA te mantém informado sobre cada etapa!"
+  },
+  "reabilitacao_profissional": {
+    "keywords": ["reabilitação", "reabilitacao", "readaptação", "readaptacao", "mudar função"],
+    "resposta": "♿ **Reabilitação Profissional:**\n\n✅ **O que é:**\n• Programa do INSS para quem não pode retornar à função anterior\n• Treina para nova atividade compatível\n• Gratuito e obrigatório quando indicado\n\n✅ **Como funciona:**\n1️⃣ Perito indica durante perícia\n2️⃣ Você é encaminhado ao programa\n3️⃣ Recebe cursos e treinamentos\n4️⃣ Retorna em função compatível\n\n💡 A empresa deve colaborar com a readaptação!\n\n🔔 Seus direitos são mantidos durante todo processo."
+  }
+}
