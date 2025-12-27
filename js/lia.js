@@ -19,7 +19,8 @@ class LiaIA {
                 'js/knowledge-base-licencas.json',
                 'js/knowledge-base-processos.json',
                 'js/knowledge-base-saude.json',
-                'js/knowledge-base-financeiro.json'
+                'js/knowledge-base-financeiro.json',
+                'js/knowledge-base-ia-gestao.json'
             ];
 
             // Cache busting - força recarregar sempre
