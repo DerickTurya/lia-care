@@ -8,9 +8,7 @@ Sistema corporativo inteligente para gestão de licenças médicas com IA integr
 
 ---
 
-## 🌐 **[ACESSE O SITE ONLINE](https://SEU-USUARIO.github.io/lia-care)**
-
-> Substitua SEU-USUARIO pelo seu nome de usuário do GitHub após fazer o deploy
+## 🌐 **[ACESSE O SITE ONLINE](https://DerickTurya.github.io/lia-care)**
 
 ---
 
