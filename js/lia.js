@@ -67,9 +67,17 @@ class LiaIA {
 
     // Processa mensagem do usuário
     async processMessage(userMessage) {
-        if (!this.knowledgeBase) {
+        // Espera bases carregarem se necessário
+        let tentativas = 0;
+        while (!this.knowledgeBase && tentativas < 10) {
             console.log('⏳ Aguardando bases de conhecimento...');
-            await this.loadAllKnowledgeBases();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            tentativas++;
+        }
+        
+        if (!this.knowledgeBase || Object.keys(this.knowledgeBase).length === 0) {
+            console.error('❌ Bases não carregadas!');
+            return 'Desculpe, estou com dificuldades para carregar minha base de conhecimento. Tente recarregar a página (F5).';
         }
 
         // Adiciona ao histórico

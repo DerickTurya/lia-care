@@ -274,6 +274,8 @@
             const input = document.getElementById('userInput');
             const mensagem = input.value.trim();
             
+            console.log('📤 Enviando mensagem:', mensagem);
+            
             if (!mensagem) return;
             
             // Adiciona mensagem do usuário
@@ -287,7 +289,9 @@
             await new Promise(resolve => setTimeout(resolve, 600));
             
             // Processa com LIA
+            console.log('🤖 Processando com LIA...');
             const resposta = await askLia(mensagem);
+            console.log('✅ Resposta recebida:', resposta);
             
             // Esconde digitando e mostra resposta
             setDigitando(false);
