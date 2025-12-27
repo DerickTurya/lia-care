@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Atestado - Lia Care</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .upload-area {
+            border: 3px dashed #cbd5e0;
+            border-radius: 12px;
+            padding: 60px 20px;
+            text-align: center;
+            background: #f7fafc;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 30px;
+        }
+
+        .upload-area.drag-over {
+            border-color: #4299E1;
+            background: #e3f2fd;
+        }
+
+        .upload-area .icon {
+            font-size: 64px;
+            margin-bottom: 15px;
+        }
+
+        .upload-area h3 {
+            margin: 0 0 10px 0;
+            color: #2d3748;
+        }
+
+        .upload-area p {
+            color: #718096;
+            margin: 0;
+        }
+
+        .file-preview {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .file-preview.active {
+            display: block;
+        }
+
+        .file-preview img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .ai-analysis {
+            background: linear-gradient(135deg, rgba(66, 153, 225, 0.1), rgba(107, 70, 193, 0.1));
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #4299E1;
+            margin: 20px 0;
+        }
+
+        .ai-analysis .title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+
+        .extracted-data {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .data-field {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .data-field label {
+            display: block;
+            font-size: 12px;
+            color: #718096;
+            margin-bottom: 5px;
+        }
+
+        .data-field .value {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .progress-bar {
+            background: #e2e8f0;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4299E1, #6B46C1);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .step::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: #e2e8f0;
+            z-index: -1;
+        }
+
+        .step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            color: #718096;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .step.active .step-number {
+            background: linear-gradient(135deg, #4299E1, #6B46C1);
+            color: white;
+        }
+
+        .step.completed .step-number {
+            background: #48bb78;
+            color: white;
+        }
+
+        .step-label {
+            font-size: 13px;
+            color: #718096;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Enviar Atestado Médico</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <span>👤</span>
+                <span>João Silva</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <a href="dashboard-colaborador.html" class="btn btn-secondary">← Voltar</a>
+                <h2 class="card-title">📄 Novo Atestado Médico</h2>
+            </div>
+
+            <div class="step-indicator">
+                <div class="step active">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Upload</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Análise IA</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Confirmação</div>
+                </div>
+            </div>
+
+            <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                <div class="icon">📤</div>
+                <h3>Arraste seu atestado aqui</h3>
+                <p>ou clique para selecionar um arquivo</p>
+                <p style="margin-top: 10px; font-size: 13px;">Formatos aceitos: PDF, JPG, PNG (máx. 10MB)</p>
+                <input type="file" id="fileInput" accept="image/*,.pdf" style="display: none;" onchange="handleFile(event)">
+            </div>
+
+            <div class="file-preview" id="filePreview">
+                <h3>📄 Documento Enviado</h3>
+                <img id="previewImage" src="" alt="Preview do atestado">
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <p id="progressText" style="text-align: center; color: #718096; font-size: 14px;">Processando...</p>
+
+                <div class="ai-analysis" id="aiAnalysis" style="display: none;">
+                    <div class="title">
+                        <span>🤖</span>
+                        <span>Dados Extraídos Automaticamente pela IA</span>
+                    </div>
+
+                    <div class="extracted-data">
+                        <div class="data-field">
+                            <label>CRM do Médico</label>
+                            <div class="value">12345-SP</div>
+                        </div>
+                        <div class="data-field">
+                            <label>Nome do Médico</label>
+                            <div class="value">Dr. Carlos Silva</div>
+                        </div>
+                        <div class="data-field">
+                            <label>CID-10</label>
+                            <div class="value">M54.5 (Lombalgia)</div>
+                        </div>
+                        <div class="data-field">
+                            <label>Data de Início</label>
+                            <div class="value">27/12/2025</div>
+                        </div>
+                        <div class="data-field">
+                            <label>Data de Término</label>
+                            <div class="value">05/01/2026</div>
+                        </div>
+                        <div class="data-field">
+                            <label>Dias de Afastamento</label>
+                            <div class="value">10 dias</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 15px; background: rgba(72, 187, 120, 0.1); border-radius: 8px; border-left: 4px solid #48bb78;">
+                        <strong style="color: #48bb78;">✅ Validação Automática</strong>
+                        <p style="margin: 8px 0 0 0; font-size: 14px; color: #2d3748;">
+                            Todos os dados foram validados com sucesso! CRM ativo, assinatura digital verificada.
+                        </p>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label>Observações Adicionais (Opcional)</label>
+                        <textarea rows="3" placeholder="Adicione informações que julgar relevantes..." style="width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px;"></textarea>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="enviarAtestado()" style="width: 100%; margin-top: 20px; font-size: 18px;">
+                        🚀 Enviar para Análise do RH
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const filePreview = document.getElementById('filePreview');
+        const previewImage = document.getElementById('previewImage');
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('progressText');
+        const aiAnalysis = document.getElementById('aiAnalysis');
+
+        // Drag and drop
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('drag-over');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('drag-over');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+            const file = e.dataTransfer.files[0];
+            processFile(file);
+        });
+
+        function handleFile(event) {
+            const file = event.target.files[0];
+            processFile(file);
+        }
+
+        function processFile(file) {
+            if (!file) return;
+
+            // Mostra preview
+            uploadArea.style.display = 'none';
+            filePreview.classList.add('active');
+
+            // Simula preview de imagem
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                previewImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+
+            // Atualiza steps
+            document.querySelectorAll('.step')[0].classList.add('completed');
+            document.querySelectorAll('.step')[1].classList.add('active');
+
+            // Simula progresso de análise da IA
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                progressBar.style.width = progress + '%';
+
+                if (progress === 30) {
+                    progressText.textContent = '🔍 Extraindo texto do documento...';
+                } else if (progress === 60) {
+                    progressText.textContent = '🤖 Validando CRM e assinatura...';
+                } else if (progress === 90) {
+                    progressText.textContent = '✅ Finalizando análise...';
+                }
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    progressText.textContent = '✅ Análise concluída!';
+                    
+                    // Mostra dados extraídos
+                    setTimeout(() => {
+                        aiAnalysis.style.display = 'block';
+                        document.querySelectorAll('.step')[1].classList.add('completed');
+                        document.querySelectorAll('.step')[2].classList.add('active');
+                    }, 500);
+                }
+            }, 300);
+        }
+
+        function enviarAtestado() {
+            alert('✅ Atestado enviado com sucesso!\n\nSua solicitação foi registrada e está sob análise do RH.\nVocê receberá uma notificação em breve.');
+            window.location.href = 'dashboard-colaborador.html';
+        }
+    </script>
+</body>
+</html>
