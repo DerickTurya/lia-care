@@ -22,10 +22,12 @@ class LiaIA {
                 'js/knowledge-base-financeiro.json'
             ];
 
-            console.log('🔄 Carregando bases de conhecimento...');
+            // Cache busting - força recarregar sempre
+            const timestamp = new Date().getTime();
+            console.log('🔄 Carregando bases de conhecimento... (v' + timestamp + ')');
             
             const promises = bases.map(url => 
-                fetch(url)
+                fetch(url + '?v=' + timestamp)
                     .then(res => res.json())
                     .catch(err => {
                         console.warn(`⚠️ Erro ao carregar ${url}:`, err);
