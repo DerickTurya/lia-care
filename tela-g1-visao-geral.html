@@ -213,7 +213,8 @@
                 html += `
                     <div class="list-item" onclick="viewLicense('${license.id}')" style="cursor: pointer; border-left: 4px solid ${statusColor};">
                         <div class="list-item-content">
-                            <h3>${employeeName} ${badge}</h3>
+                            <h3>${employeeName}</h3>
+                            ${badge}
                             <p><strong>Lesão:</strong> ${condition}</p>
                             <p><strong>Período:</strong> ${startDate} até ${endDate}</p>
                             <p><strong>Status:</strong> ${status}</p>
