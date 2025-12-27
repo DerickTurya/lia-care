@@ -42,6 +42,18 @@
   },
 
   "saude_bem_estar": {
+    "lombalgia": {
+      "keywords": ["lombalgia", "lombar", "dor nas costas", "dor na coluna", "costas", "coluna"],
+      "resposta": "💪 **Dicas para Lombalgia (Dor na Coluna Lombar):**\n\n✅ **Cuidados Imediatos:**\n• 🧊 Compressa fria nas primeiras 48h (20min, 3x/dia)\n• 🔥 Depois use compressa quente para relaxar\n• 💊 Tome analgésicos conforme prescrição médica\n• 🛌 Deite de lado com travesseiro entre as pernas\n\n✅ **Alongamentos Suaves:**\n• Joelhos ao peito (10 repetições)\n• Rotação do tronco deitado\n• Gato-Vaca (yoga) para mobilidade\n\n✅ **Evite:**\n• ❌ Ficar muito tempo na mesma posição\n• ❌ Carregar peso\n• ❌ Movimentos bruscos\n• ❌ Dormir de barriga para baixo\n\n💡 **Longo prazo:**\n• Fortaleça o core (abdômen)\n• Mantenha peso saudável\n• Ergonomia no trabalho\n• Fisioterapia se recomendado\n\n⚠️ Procure médico se a dor irradiar para as pernas!"
+    },
+    "sono": {
+      "keywords": ["sono", "dormir", "insônia", "qualidade do sono", "cansaço", "durmo mal"],
+      "resposta": "😴 **Melhorando a Qualidade do Sono:**\n\n✅ **Higiene do Sono:**\n• ⏰ Durma e acorde no mesmo horário\n• 🌙 Quarto escuro, silencioso e fresco (18-22°C)\n• 📱 Desligue telas 1h antes de dormir\n• ☕ Evite cafeína após 15h\n• 🍷 Evite álcool antes de dormir\n\n✅ **Ritual de Relaxamento:**\n• 📖 Leitura leve\n• 🧘 Meditação ou respiração profunda\n• 🛁 Banho morno\n• 🎵 Música suave ou sons relaxantes\n\n✅ **Alimentação:**\n• 🥛 Leite morno com mel\n• 🍌 Banana (rica em triptofano)\n• 🌰 Castanhas (magnésio)\n• ❌ Evite refeições pesadas à noite\n\n💡 **Exercícios:**\n• Caminhada leve durante o dia\n• Evite exercícios intensos 3h antes de dormir\n\n⚠️ Insônia persistente? Consulte um médico!"
+    },
+    "estresse": {
+      "keywords": ["estresse", "estressado", "tensão", "pressão", "sobrecarga"],
+      "resposta": "🧘 **Gerenciando o Estresse:**\n\n✅ **Técnicas Rápidas (5-10 min):**\n• 🫁 Respiração 4-7-8 (inspira 4s, segura 7s, expira 8s)\n• 🚶 Caminhada curta\n• 🎵 Música que você ama\n• 💧 Beba água gelada\n• 🌳 Olhe para natureza/plantas\n\n✅ **Práticas Diárias:**\n• 📝 Journaling (escreva seus sentimentos)\n• 🧘 Meditação guiada (apps: Calm, Headspace)\n• 💪 Exercício físico regular\n• 😂 Assista algo engraçado\n• 👥 Converse com alguém de confiança\n\n✅ **Organize-se:**\n• 📋 Liste tarefas por prioridade\n• ✂️ Divida grandes tarefas em pequenas\n• 🚫 Aprenda a dizer \"não\"\n• ⏰ Faça pausas regulares\n\n💡 **Autocuidado:**\n• Durma 7-8h por noite\n• Alimentação balanceada\n• Hobbies e lazer\n• Limite notícias negativas\n\n⚠️ Estresse crônico? Procure apoio psicológico!"
+    },
     "recuperacao": {
       "keywords": ["recuperar", "melhorar", "cuidar", "tratamento", "saúde"],
       "resposta": "💪 **Dicas para sua recuperação:**\n\n🏥 Siga rigorosamente o tratamento médico\n💊 Tome os medicamentos nos horários corretos\n🛌 Respeite o repouso recomendado\n🥗 Mantenha alimentação saudável\n💧 Hidrate-se bem (2L de água por dia)\n😴 Durma 7-8 horas por noite\n\n⚠️ Não se automedique!\n⚠️ Evite esforço físico sem liberação médica\n\n🔔 Sua saúde vem primeiro! Foque na recuperação."
@@ -49,6 +61,14 @@
     "ansiedade": {
       "keywords": ["ansiedade", "ansioso", "preocupado", "estresse", "nervoso"],
       "resposta": "🧘 **Lidando com ansiedade durante o afastamento:**\n\n✅ É normal se sentir ansioso!\n\n💡 Dicas práticas:\n• 🌳 Caminhe ao ar livre 20min/dia\n• 🧘 Pratique respiração profunda\n• 📚 Leia algo que goste\n• 🎵 Ouça música relaxante\n• 👥 Converse com familiares/amigos\n• 📱 Limite tempo em redes sociais\n\n⚠️ Se a ansiedade persistir, procure apoio psicológico!\n\n💬 Lembre-se: Seu gestor e RH estão aqui para apoiar você."
+    },
+    "alimentacao": {
+      "keywords": ["alimentação", "alimentacao", "comer", "dieta", "nutrição", "comida"],
+      "resposta": "🥗 **Alimentação para Recuperação:**\n\n✅ **Alimentos Anti-inflamatórios:**\n• 🐟 Peixes (salmão, sardinha)\n• 🥑 Abacate\n• 🌰 Castanhas e nozes\n• 🫐 Frutas vermelhas\n• 🥦 Vegetais verde-escuros\n• 🧄 Alho e gengibre\n\n✅ **Hidratação:**\n• 💧 2-3L de água por dia\n• 🍵 Chás naturais (camomila, hortelã)\n• 🥤 Água de coco\n\n✅ **Proteínas (recuperação muscular):**\n• 🍗 Frango\n• 🥚 Ovos\n• 🫘 Leguminosas\n• 🥛 Laticínios\n\n❌ **Evite:**\n• Açúcar em excesso\n• Alimentos ultraprocessados\n• Frituras\n• Refrigerantes\n• Álcool\n\n💡 Coma de 3 em 3 horas em pequenas porções!"
+    },
+    "postura": {
+      "keywords": ["postura", "ergonomia", "sentar", "cadeira", "mesa"],
+      "resposta": "🪑 **Ergonomia e Postura Correta:**\n\n✅ **Ao Sentar:**\n• 👁️ Tela na altura dos olhos\n• 💺 Pés apoiados no chão\n• 🔄 Costas apoiadas no encosto\n• 📐 Cotovelos a 90°\n• 📏 Distância de 50-70cm da tela\n\n✅ **Pausas Ativas:**\n• ⏰ Levante a cada 50 minutos\n• 🚶 Caminhe 5 minutos\n• 🙆 Alongue pescoço e ombros\n• 👀 Descanse os olhos (regra 20-20-20)\n\n✅ **Ao Pegar Objetos:**\n• Dobre os joelhos, não a coluna\n• Mantenha objeto próximo ao corpo\n• Evite torcer o tronco\n\n💡 **Exercícios de Mesa:**\n• Rotação de ombros\n• Alongamento de pescoço\n• Flexão de punhos\n• Respiração profunda\n\n⚠️ Postura correta previne dores crônicas!"
     },
     "retorno": {
       "keywords": ["voltar", "retornar", "trabalho", "quando volto", "alta"],
