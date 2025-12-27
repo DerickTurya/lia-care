@@ -161,12 +161,24 @@ class LiaIA {
         const normalizedKeywords = keywords.map(k => this.normalizeText(k));
 
         for (const keyword of normalizedKeywords) {
+            // Match exato
             if (input.includes(keyword)) {
-                matches++;
+                matches += 1;
+            } 
+            // Match parcial (pelo menos 50% das palavras)
+            else {
+                const keywordWords = keyword.split(' ');
+                const matchedWords = keywordWords.filter(word => 
+                    word.length > 2 && input.includes(word)
+                );
+                if (matchedWords.length >= keywordWords.length * 0.5) {
+                    matches += 0.5;
+                }
             }
         }
 
-        return matches / keywords.length;
+        const score = matches / keywords.length;
+        return score;
     }
 
     // Verifica se é saudação
