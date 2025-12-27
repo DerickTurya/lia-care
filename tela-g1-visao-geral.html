@@ -188,17 +188,34 @@
             }
             
             let html = '';
+            
+            // Remover duplicatas baseado no ID
+            const uniqueLicenses = [];
+            const seenIds = new Set();
+            
             licenses.forEach(license => {
+                if (!seenIds.has(license.id)) {
+                    seenIds.add(license.id);
+                    uniqueLicenses.push(license);
+                }
+            });
+            
+            uniqueLicenses.forEach(license => {
                 const badge = !license.viewedByManager ? '<span class="badge badge-new">NOVA</span>' : '';
-                const statusColor = license.status === 'active' ? 'var(--success-color)' : 'var(--warning-color)';
+                const statusColor = license.status === 'Aguardando INSS' ? 'var(--warning-color)' : 'var(--success-color)';
+                const employeeName = license.employeeName || license.employee || 'Colaborador';
+                const condition = license.condition || license.injury || 'Não especificada';
+                const startDate = license.startDate || 'Data não informada';
+                const endDate = license.endDate || 'Data não informada';
+                const status = license.status || 'Pendente';
                 
                 html += `
                     <div class="list-item" onclick="viewLicense('${license.id}')" style="cursor: pointer; border-left: 4px solid ${statusColor};">
                         <div class="list-item-content">
-                            <h3>${license.employee || 'João Silva'} ${badge}</h3>
-                            <p><strong>Lesão:</strong> ${license.injury}</p>
-                            <p><strong>Período:</strong> ${license.startDate} até ${license.endDate}</p>
-                            <p><strong>Status:</strong> ${getStatusText(license.status)}</p>
+                            <h3>${employeeName} ${badge}</h3>
+                            <p><strong>Lesão:</strong> ${condition}</p>
+                            <p><strong>Período:</strong> ${startDate} até ${endDate}</p>
+                            <p><strong>Status:</strong> ${status}</p>
                         </div>
                         <div class="list-item-action">Ver detalhes →</div>
                     </div>
