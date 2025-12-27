@@ -126,35 +126,23 @@ class LiaIA {
         const specialContext = this.checkSpecialContext(normalizedInput);
         if (specialContext) return specialContext;
 
-        // Busca em todas as categorias
-        const categories = [
-            this.knowledgeBase.regras_gerais,
-            this.knowledgeBase.processos,
-            this.knowledgeBase.saude_bem_estar,
-            this.knowledgeBase.duvidas_frequentes
-        ];
-
-        for (const category of categories) {
-            for (const key in category) {
-                const item = category[key];
-                if (item.keywords && item.resposta) {
-                    const score = this.calculateMatchScore(normalizedInput, item.keywords);
-                    if (score > highestScore) {
-                        highestScore = score;
-                        bestMatch = item.resposta;
-                    }
-                }
+        // Busca em TODOS os tópicos da base de conhecimento
+        for (const topicKey in this.knowledgeBase) {
+            const topic = this.knowledgeBase[topicKey];
+            
+            // Pula tópicos especiais
+            if (['saudacao', 'fallback', 'emergencia', 'agradecimento'].includes(topicKey)) {
+                continue;
             }
-        }
-
-        // Verifica contatos úteis
-        if (this.knowledgeBase.contatos_uteis.keywords) {
-            const score = this.calculateMatchScore(
-                normalizedInput, 
-                this.knowledgeBase.contatos_uteis.keywords
-            );
-            if (score > highestScore) {
-                return this.knowledgeBase.contatos_uteis.resposta;
+            
+            // Se tem keywords e resposta
+            if (topic.keywords && topic.resposta) {
+                const score = this.calculateMatchScore(normalizedInput, topic.keywords);
+                if (score > highestScore) {
+                    highestScore = score;
+                    bestMatch = topic.resposta;
+                    console.log(`🎯 Match encontrado: ${topicKey} (score: ${score})`);
+                }
             }
         }
 
@@ -198,14 +186,11 @@ class LiaIA {
 
     // Verifica contextos especiais
     checkSpecialContext(input) {
-        const contexts = this.knowledgeBase.contextos_especiais;
-        
-        for (const contextKey in contexts) {
-            const context = contexts[contextKey];
-            const normalized = context.keywords.map(k => this.normalizeText(k));
-            
+        // Verifica agradecimento
+        if (this.knowledgeBase.agradecimento && this.knowledgeBase.agradecimento.keywords) {
+            const normalized = this.knowledgeBase.agradecimento.keywords.map(k => this.normalizeText(k));
             if (normalized.some(k => input.includes(k))) {
-                return context.resposta;
+                return this.knowledgeBase.agradecimento.resposta;
             }
         }
         
