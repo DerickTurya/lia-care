@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload de Documentos - Lia Care</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Licenças e Afastamentos</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <span>Colaborador</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card" style="max-width: 700px; margin: 40px auto;">
+            <div class="card-header">
+                <h2 class="card-title">Upload de Documentos</h2>
+                <p class="card-subtitle">Envie seu atestado médico para registrarmos sua licença</p>
+            </div>
+
+            <div class="ai-message">
+                <div class="ai-message-header">
+                    <span>🤖</span>
+                    <span>LIA - Assistente Inteligente</span>
+                </div>
+                <div class="ai-message-content">
+                    <p style="margin-bottom: 12px;"><strong>Verifiquei no sistema: você não possui perícia médica agendada.</strong></p>
+                    <p style="margin-bottom: 12px;">Como seu atestado é de 15 dias ou mais, você tem <strong>5 dias a partir de hoje</strong> para agendar sua perícia no INSS.</p>
+                    <p style="margin-bottom: 12px;">Antes de continuar, preciso saber:</p>
+                    <div style="background-color: rgba(37, 99, 235, 0.1); padding: 16px; border-radius: 8px; margin-top: 12px;">
+                        <p style="font-weight: 600; color: var(--primary-color); margin-bottom: 8px;">Você já agendou a perícia médica ou efetuou o requerimento da análise documental?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 24px;">
+                <div class="options-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="option-card" onclick="window.location.href='tela-04a-1-ja-agendou.html'" style="cursor: pointer;">
+                        <div class="option-card-icon">✅</div>
+                        <div class="option-card-title">Sim, já agendei</div>
+                        <p class="option-card-desc">Tenho protocolo</p>
+                    </div>
+                    <div class="option-card" onclick="window.location.href='tela-04a-2-nao-agendou.html'" style="cursor: pointer;">
+                        <div class="option-card-icon">❌</div>
+                        <div class="option-card-title">Ainda não agendei</div>
+                        <p class="option-card-desc">Preciso de orientação</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px;">📄 Envie seu atestado médico</h3>
+            <p style="font-size: 14px; color: var(--text-gray); margin-bottom: 16px;">Independente da perícia, preciso do seu atestado para registrar a licença.</p>
+
+            <div class="form-group">
+                <label class="form-label">Atestado Médico</label>
+                <div class="upload-area">
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-text">Clique para selecionar ou arraste o arquivo</div>
+                    <div class="upload-hint">Formatos aceitos: PDF, JPG, PNG (máx. 10MB)</div>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>ℹ️ Geração automática:</strong> A DUT (Declaração Única de Trabalho) será gerada automaticamente após o upload.
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="form-group">
+                <label class="form-label">Informações Adicionais (opcional)</label>
+                <textarea class="form-input" rows="4" placeholder="Adicione observações se necessário..."></textarea>
+            </div>
+
+            <div style="margin-top: 32px;">
+                <a href="tela-05a-confirmacao.html" class="btn btn-primary btn-block btn-large">
+                    Enviar documentos
+                </a>
+                
+                <div class="mt-2 text-center">
+                    <a href="tela-03-diagnostico.html" style="color: var(--text-gray); font-size: 14px; text-decoration: none;">
+                        ← Voltar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

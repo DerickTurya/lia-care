@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolo INSS - Lia Care</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Licenças e Afastamentos</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <span>Colaborador</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card" style="max-width: 700px; margin: 40px auto;">
+            <div class="card-header">
+                <h2 class="card-title">Processo INSS Iniciado</h2>
+                <p class="card-subtitle">Informe o tipo de processo e envie o protocolo</p>
+            </div>
+
+            <div class="ai-message">
+                <div class="ai-message-header">
+                    <span>🤖</span>
+                    <span>LIA - Assistente Inteligente</span>
+                </div>
+                <div class="ai-message-content">
+                    <p style="margin-bottom: 12px;"><strong>⚠️ Verifiquei no sistema People:</strong></p>
+                    <p style="margin-bottom: 12px;">Você possui perícia médica agendada para <strong>04/11/2025</strong> que se encontra <strong style="color: var(--danger-color);">vencida</strong>.</p>
+                    <p style="margin-bottom: 12px;">Isso significa que a perícia já aconteceu. Preciso saber o resultado para atualizar corretamente sua situação no sistema.</p>
+                    <div style="background-color: rgba(37, 99, 235, 0.1); padding: 16px; border-radius: 8px; margin-top: 12px;">
+                        <p style="font-weight: 600; color: var(--primary-color); margin-bottom: 8px;">Qual foi o resultado da perícia?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 24px;">
+                <div class="options-grid">
+                    <div class="option-card" onclick="window.location.href='tela-04b-1-deferido.html'" style="cursor: pointer; border-color: var(--success-color); background-color: #d1fae5;">
+                        <div class="option-card-icon" style="font-size: 40px;">✅</div>
+                        <div class="option-card-title" style="color: var(--success-color);">Benefício Deferido</div>
+                        <p class="option-card-desc">Perícia aprovada pelo INSS</p>
+                    </div>
+                    <div class="option-card" onclick="window.location.href='tela-04b-2-indeferido.html'" style="cursor: pointer; border-color: var(--danger-color); background-color: #fee2e2;">
+                        <div class="option-card-icon" style="font-size: 40px;">❌</div>
+                        <div class="option-card-title" style="color: var(--danger-color);">Benefício Indeferido</div>
+                        <p class="option-card-desc">Perícia negada pelo INSS</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-info" style="margin-top: 24px;">
+                <strong>📄 Documentos necessários:</strong> Você precisará anexar os documentos oficiais que recebeu do INSS informando a decisão da perícia.
+            </div>
+
+            <div class="divider"></div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px;">📋 Atestado Médico</h3>
+            <p style="font-size: 14px; color: var(--text-gray); margin-bottom: 16px;">Também preciso do seu atestado para registrar a licença.</p>
+
+            <div class="form-group">
+                <label class="form-label">Qual processo você iniciou no INSS?</label>
+                <div class="options-grid">
+                    <div class="option-card" style="border-color: var(--primary-color); background-color: #eff6ff;">
+                        <div class="option-card-icon">📋</div>
+                        <div class="option-card-title">Análise documental</div>
+                        <p class="option-card-desc">Processo 100% digital</p>
+                    </div>
+                    <div class="option-card">
+                        <div class="option-card-icon">🏥</div>
+                        <div class="option-card-title">Perícia presencial</div>
+                        <p class="option-card-desc">Agendamento presencial</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="form-group">
+                <label class="form-label">Atestado Médico</label>
+                <div class="upload-area">
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-text">Clique para selecionar ou arraste o arquivo</div>
+                    <div class="upload-hint">Formatos aceitos: PDF, JPG, PNG (máx. 10MB)</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Protocolo do INSS</label>
+                <input type="text" class="form-input" placeholder="Ex: 123.456.789-0">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Comprovante do Protocolo (opcional)</label>
+                <div class="upload-area" style="padding: 24px;">
+                    <div class="upload-icon" style="font-size: 32px;">📎</div>
+                    <div class="upload-text" style="font-size: 14px;">Anexar comprovante</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 32px;">
+                <a href="tela-05b-acompanhamento-inss.html" class="btn btn-primary btn-block btn-large">
+                    Registrar e acompanhar
+                </a>
+                
+                <div class="mt-2 text-center">
+                    <a href="tela-03-diagnostico.html" style="color: var(--text-gray); font-size: 14px; text-decoration: none;">
+                        ← Voltar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

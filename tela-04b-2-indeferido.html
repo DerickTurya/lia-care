@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benefício Indeferido - Lia Care</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Licenças e Afastamentos</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <span>Colaborador</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card" style="max-width: 700px; margin: 40px auto; border: 2px solid var(--danger-color);">
+            <div style="text-align: center; margin-bottom: 24px;">
+                <div style="font-size: 72px; margin-bottom: 16px;">⚠️</div>
+                <h2 class="card-title" style="color: var(--danger-color);">Benefício Indeferido</h2>
+                <p class="card-subtitle">O INSS não aprovou o benefício neste momento</p>
+            </div>
+
+            <div class="alert alert-warning" style="border-left: 4px solid var(--danger-color);">
+                <strong>⚠️ Decisão negada:</strong> O INSS indeferiu seu pedido de benefício. Vou processar essa informação e ajustar sua licença no sistema conforme as regras.
+            </div>
+
+            <div class="ai-message">
+                <div class="ai-message-header">
+                    <span>🤖</span>
+                    <span>LIA - Assistente Inteligente</span>
+                </div>
+                <div class="ai-message-content">
+                    <p style="margin-bottom: 12px;"><strong>Vou processar o indeferimento e ajustar sua licença.</strong></p>
+                    <p style="margin-bottom: 12px;">Baseado no Comunicado de Decisão do INSS, vou executar automaticamente:</p>
+                    
+                    <div style="background-color: var(--bg-light); padding: 16px; border-radius: 8px; margin: 12px 0;">
+                        <p style="font-weight: 600; margin-bottom: 8px;">📋 Etapa 1: Extrair dados do documento</p>
+                        <ul style="padding-left: 20px; line-height: 1.8; font-size: 14px;">
+                            <li>Espécie do benefício</li>
+                            <li>Número do benefício</li>
+                        </ul>
+                    </div>
+
+                    <div style="background-color: var(--bg-light); padding: 16px; border-radius: 8px; margin: 12px 0;">
+                        <p style="font-weight: 600; margin-bottom: 8px;">⚙️ Etapa 2: Atualizar sistema People</p>
+                        <ul style="padding-left: 20px; line-height: 1.8; font-size: 14px;">
+                            <li>✅ Marcar opção <strong>"Indeferimento"</strong></li>
+                            <li>✅ Preencher Espécie e Número do benefício</li>
+                            <li>✅ Salvar alterações</li>
+                        </ul>
+                    </div>
+
+                    <div style="background-color: var(--bg-light); padding: 16px; border-radius: 8px; margin: 12px 0;">
+                        <p style="font-weight: 600; margin-bottom: 8px;">📅 Etapa 3: Ajustar datas e motivos</p>
+                        <ul style="padding-left: 20px; line-height: 1.8; font-size: 14px;">
+                            <li>📆 Alterar data final para <strong>15º dia de afastamento</strong></li>
+                            <li>🔖 Alterar motivo da ausência para <strong>"003"</strong></li>
+                            <li>✅ Efetivar a licença</li>
+                        </ul>
+                    </div>
+
+                    <div style="background-color: #fee2e2; padding: 16px; border-radius: 8px; margin: 12px 0; border-left: 4px solid var(--danger-color);">
+                        <p style="font-weight: 600; margin-bottom: 8px; color: var(--danger-color);">🆕 Etapa 4: Criar nova licença automática</p>
+                        <ul style="padding-left: 20px; line-height: 1.8; font-size: 14px; color: var(--text-dark);">
+                            <li><strong>Utilização de Ausência:</strong> LIC VENC INSS</li>
+                            <li><strong>Motivo:</strong> 014</li>
+                            <li><strong>Início:</strong> 16º dia de afastamento</li>
+                            <li><strong>Data final:</strong> 31/12/2035</li>
+                        </ul>
+                    </div>
+
+                    <p style="margin-top: 12px;"><strong>Tudo será feito automaticamente.</strong> Você só precisa anexar o documento! 💙</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="form-group">
+                <label class="form-label">📄 Comunicado de Decisão (INSS)</label>
+                <p style="font-size: 13px; color: var(--text-gray); margin-bottom: 8px;">Documento oficial do INSS informando o indeferimento</p>
+                <div class="upload-area">
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-text">Clique para anexar o Comunicado de Decisão</div>
+                    <div class="upload-hint">PDF, JPG, PNG (máx. 10MB)</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">🏥 Atestado Médico</label>
+                <div class="upload-area">
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-text">Clique para anexar o atestado</div>
+                    <div class="upload-hint">PDF, JPG, PNG (máx. 10MB)</div>
+                </div>
+            </div>
+
+            <div class="alert alert-info" style="margin-top: 20px;">
+                <strong>ℹ️ O que acontecerá:</strong> Como o INSS indeferiu, a empresa cobrirá os primeiros 15 dias. Do 16º dia em diante, será criada uma licença especial (LIC VENC INSS) até 31/12/2035 ou até recurso/nova decisão.
+            </div>
+
+            <div class="alert alert-warning" style="margin-top: 12px;">
+                <strong>⚖️ Você tem direitos:</strong> É possível entrar com recurso administrativo ou buscar orientação jurídica. O RH pode te indicar advogados especializados em direito previdenciário.
+            </div>
+
+            <div style="margin-top: 32px;">
+                <button class="btn btn-primary btn-block btn-large" onclick="window.location.href='tela-04b-processando-indeferido.html'">
+                    Processar indeferimento
+                </button>
+                
+                <div class="mt-2 text-center">
+                    <a href="tela-04b-protocolo.html" style="color: var(--text-gray); font-size: 14px; text-decoration: none;">
+                        ← Voltar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

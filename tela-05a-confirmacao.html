@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Licença Cadastrada - Lia Care</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/lia-sync.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Licenças e Afastamentos</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <span>Colaborador</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card text-center" style="max-width: 600px; margin: 40px auto;">
+            <div style="font-size: 64px; margin-bottom: 24px;">✅</div>
+            
+            <div class="card-header">
+                <h2 class="card-title">Licença cadastrada com sucesso!</h2>
+                <p class="card-subtitle">Seus documentos foram recebidos e processados</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div style="text-align: left;">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px;">Status do processo:</h3>
+                
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <span style="color: var(--success-color); font-size: 20px;">✓</span>
+                    <div>
+                        <div style="font-weight: 500;">Licença cadastrada</div>
+                        <div style="font-size: 13px; color: var(--text-gray);">Documentos validados</div>
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <span style="color: var(--success-color); font-size: 20px;">✓</span>
+                    <div>
+                        <div style="font-weight: 500;">Gestor notificado</div>
+                        <div style="font-size: 13px; color: var(--text-gray);">Notificação enviada automaticamente</div>
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="color: var(--success-color); font-size: 20px;">✓</span>
+                    <div>
+                        <div style="font-weight: 500;">DUT gerada</div>
+                        <div style="font-size: 13px; color: var(--text-gray);">Declaração Única de Trabalho disponível</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-message mt-3">
+                <div class="ai-message-header">
+                    <span>🤖</span>
+                    <span>LIA - Assistente Inteligente</span>
+                </div>
+                <div class="ai-message-content">
+                    <p style="margin-bottom: 12px;"><strong>Tudo pronto! Seu processo está em andamento.</strong></p>
+                    <p style="margin-bottom: 12px;">Acabei de processar seu atestado e notificar seu gestor. Aqui está o que aconteceu:</p>
+                    <ul style="margin: 12px 0; padding-left: 20px; line-height: 1.8;">
+                        <li>✅ Atestado validado (verifiquei período, CID e assinatura médica)</li>
+                        <li>✅ DUT gerada automaticamente com os dados corretos</li>
+                        <li>✅ Gestor recebeu notificação por e-mail e sistema</li>
+                        <li>✅ RH foi informado para processar o afastamento</li>
+                    </ul>
+                    <p style="margin-top: 12px;"><strong>⏱️ Prazo de processamento:</strong> A licença aparecerá no sistema e no ponto eletrônico em até <strong>6 dias úteis</strong>, especialmente em períodos de fechamento de folha.</p>
+                    <p style="margin-top: 12px;"><strong>Agora é só focar na sua recuperação!</strong> Vou monitorar tudo e te avisar se precisar de alguma ação. Fique tranquilo(a)! 😊💙</p>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); padding: 20px; border-radius: 12px; margin-top: 24px; color: white; text-align: center;">
+                <div style="font-size: 36px; margin-bottom: 12px;">🏥</div>
+                <h3 style="margin: 0 0 8px 0; font-size: 18px;">Quer dicas para sua recuperação?</h3>
+                <p style="margin: 0 0 16px 0; opacity: 0.9; font-size: 14px;">
+                    Nossa IA pode te orientar sobre exercícios, alimentação e cuidados personalizados
+                </p>
+                <a href="tela-dicas-saude.html" class="btn" style="background-color: white; color: #059669; border: none;">
+                    🤖 Receber Dicas com IA
+                </a>
+            </div>
+
+            <div style="margin-top: 32px;">
+                <a href="tela-06a-acompanhamento.html" class="btn btn-primary btn-block">
+                    Acompanhar minha licença
+                </a>
+                
+                <a href="tela-01-entrada.html" class="btn btn-secondary btn-block">
+                    Voltar ao início
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cadastra a licença automaticamente ao carregar a página
+        window.addEventListener('DOMContentLoaded', () => {
+            // Dados simulados do colaborador (em produção viriam do formulário anterior)
+            const licenseData = {
+                employeeName: 'João Silva',
+                employeeId: 'COL-12345',
+                position: 'Desenvolvedor Frontend',
+                department: 'Tecnologia',
+                manager: 'Maria Santos',
+                cid: 'M54.5',
+                condition: 'Lombalgia',
+                days: 15,
+                startDate: new Date().toLocaleDateString('pt-BR'),
+                endDate: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000).toLocaleDateString('pt-BR'),
+                doctorName: 'Dr. Carlos Mendes',
+                doctorCRM: 'CRM 12345-SP'
+            };
+
+            // Cadastra no sistema e notifica gestor
+            const license = window.liaSync.createLicense(licenseData);
+            
+            console.log('✅ Licença cadastrada:', license);
+            console.log('📧 Gestor notificado automaticamente!');
+            
+            // Mostra feedback visual
+            setTimeout(() => {
+                const stats = window.liaSync.getStats();
+                console.log('📊 Estatísticas atualizadas:', stats);
+            }, 500);
+        });
+    </script>
+</body>
+</html>

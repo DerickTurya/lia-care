@@ -1,0 +1,26 @@
+# Node modules (backend de exemplo)
+node_modules/
+backend-example/node_modules/
+
+# Variáveis de ambiente
+.env
+backend-example/.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-*
+
+# Temporários
+*.tmp
+*.temp
+~$*

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benefício Deferido - Lia Care</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Licenças e Afastamentos</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <span>Colaborador</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card" style="max-width: 700px; margin: 40px auto;">
+            <div style="text-align: center; margin-bottom: 24px;">
+                <div style="font-size: 72px; margin-bottom: 16px;">🎉</div>
+                <h2 class="card-title" style="color: var(--success-color);">Benefício Deferido!</h2>
+                <p class="card-subtitle">Parabéns! Seu benefício foi aprovado pelo INSS</p>
+            </div>
+
+            <div class="ai-message" style="background: linear-gradient(135deg, #d1fae5, #a7f3d0); border-left-color: var(--success-color);">
+                <div class="ai-message-header" style="color: var(--success-color);">
+                    <span>🤖</span>
+                    <span>LIA - Assistente Inteligente</span>
+                </div>
+                <div class="ai-message-content" style="color: var(--text-dark);">
+                    <p style="margin-bottom: 12px;"><strong>Excelente notícia! Vou processar sua aprovação.</strong></p>
+                    <p style="margin-bottom: 12px;">Ao anexar os documentos do INSS, vou automaticamente extrair e preencher no sistema People:</p>
+                    <ul style="margin: 12px 0; padding-left: 20px; line-height: 1.8;">
+                        <li>📋 <strong>Espécie do benefício</strong></li>
+                        <li>🔢 <strong>Número do benefício</strong></li>
+                        <li>📅 <strong>Data inicial do benefício</strong></li>
+                        <li>📅 <strong>Data fim do benefício</strong></li>
+                        <li>💰 <strong>Renda do benefício</strong></li>
+                        <li>✅ Marcar opção <strong>"Deferimento"</strong></li>
+                        <li>📆 Preencher <strong>"Benefício concedido até"</strong> com data de cessação</li>
+                        <li>💾 Salvar e efetivar automaticamente</li>
+                    </ul>
+                    <p style="margin-top: 12px;">Basta anexar os documentos. Eu leio tudo e preencho! 💙</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="form-group">
+                <label class="form-label">📄 Comunicado de Decisão (INSS)</label>
+                <p style="font-size: 13px; color: var(--text-gray); margin-bottom: 8px;">Documento oficial informando a aprovação do benefício</p>
+                <div class="upload-area">
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-text">Clique para anexar o Comunicado de Decisão</div>
+                    <div class="upload-hint">PDF, JPG, PNG (máx. 10MB)</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">📋 Carta de Concessão (INSS)</label>
+                <p style="font-size: 13px; color: var(--text-gray); margin-bottom: 8px;">Carta com detalhes do benefício concedido</p>
+                <div class="upload-area">
+                    <div class="upload-icon">📋</div>
+                    <div class="upload-text">Clique para anexar a Carta de Concessão</div>
+                    <div class="upload-hint">PDF, JPG, PNG (máx. 10MB)</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">🏥 Atestado Médico</label>
+                <div class="upload-area">
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-text">Clique para anexar o atestado</div>
+                    <div class="upload-hint">PDF, JPG, PNG (máx. 10MB)</div>
+                </div>
+            </div>
+
+            <div class="alert alert-success" style="margin-top: 20px;">
+                <strong>🤖 Processamento inteligente em ação:</strong><br>
+                Vou ler os documentos e extrair automaticamente:<br><br>
+                <strong>Do Comunicado de Decisão + Carta de Concessão:</strong><br>
+                • Espécie: [extraído automaticamente]<br>
+                • Número do benefício: [extraído automaticamente]<br>
+                • Data inicial: [extraído automaticamente]<br>
+                • Data fim: [extraído automaticamente]<br>
+                • Renda do benefício: [extraído automaticamente]<br>
+                • Data de cessação: [extraído automaticamente]<br><br>
+                <strong>Sistema People será atualizado:</strong><br>
+                ✅ Opção "Deferimento" marcada<br>
+                ✅ Campo "Benefício concedido até" preenchido<br>
+                ✅ Salvar → Dados Gerais → Efetivar
+            </div>
+
+            <div style="margin-top: 32px;">
+                <button class="btn btn-primary btn-block btn-large" onclick="window.location.href='tela-04b-processando-deferido.html'">
+                    Processar documentos
+                </button>
+                
+                <div class="mt-2 text-center">
+                    <a href="tela-04b-protocolo.html" style="color: var(--text-gray); font-size: 14px; text-decoration: none;">
+                        ← Voltar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

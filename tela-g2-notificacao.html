@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Notificação - Lia Care</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Licenças e Afastamentos</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <span>👔</span>
+                <span>Maria Santos - Gestora</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card" style="max-width: 700px; margin: 40px auto;">
+            <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px;">
+                <div style="font-size: 48px;">🔔</div>
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                        <h2 class="card-title" style="margin: 0; font-size: 20px;">Nova licença registrada</h2>
+                        <span class="status-badge status-info">Novo</span>
+                    </div>
+                    <p class="text-gray" style="font-size: 13px;">26/12/2025 às 14:30</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="ai-message">
+                <div class="ai-message-header">
+                    <span>🤖</span>
+                    <span>LIA - Assistente Inteligente</span>
+                </div>
+                <div class="ai-message-content">
+                    <p style="margin-bottom: 12px;"><strong>Nova licença detectada e processada!</strong></p>
+                    <p style="margin-bottom: 12px;">João Silva acabou de registrar uma licença médica. Já processei tudo automaticamente:</p>
+                    <ul style="margin: 12px 0; padding-left: 20px; line-height: 1.8;">
+                        <li>✅ Validei o atestado médico e documentação</li>
+                        <li>✅ Registrei no sistema e gerei a DUT</li>
+                        <li>✅ Identifiquei que precisa de processo no INSS (15+ dias)</li>
+                        <li>✅ Orientei o colaborador sobre próximos passos</li>
+                    </ul>
+                    <p style="margin-top: 12px;"><strong>Você não precisa fazer nada agora.</strong> O colaborador está sendo guiado por mim. Vou te atualizar sobre mudanças importantes! 💙</p>
+                </div>
+            </div>
+
+            <div style="background-color: var(--bg-light); padding: 24px; border-radius: 8px; margin: 20px 0;">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px;">Informações da licença</h3>
+                
+                <div style="display: grid; gap: 12px;">
+                    <div>
+                        <div style="font-size: 13px; color: var(--text-gray); margin-bottom: 4px;">Colaborador</div>
+                        <div style="font-weight: 500;">João Silva</div>
+                    </div>
+
+                    <div>
+                        <div style="font-size: 13px; color: var(--text-gray); margin-bottom: 4px;">Cargo</div>
+                        <div style="font-weight: 500;">Desenvolvedor Frontend</div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div>
+                            <div style="font-size: 13px; color: var(--text-gray); margin-bottom: 4px;">Tipo</div>
+                            <div style="font-weight: 500;">Licença médica</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 13px; color: var(--text-gray); margin-bottom: 4px;">Período</div>
+                            <div style="font-weight: 500;">15 dias</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style="font-size: 13px; color: var(--text-gray); margin-bottom: 4px;">Data de início</div>
+                        <div style="font-weight: 500;">26/12/2025</div>
+                    </div>
+
+                    <div>
+                        <div style="font-size: 13px; color: var(--text-gray); margin-bottom: 4px;">Retorno previsto</div>
+                        <div style="font-weight: 500;">10/01/2026</div>
+                    </div>
+
+                    <div>
+                        <div style="font-size: 13px; color: var(--text-gray); margin-bottom: 4px;">Status</div>
+                        <span class="status-badge status-pending">Aguardando INSS</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>ℹ️ Processo automático:</strong> O colaborador está sendo orientado pela LIA sobre os próximos passos. Você receberá atualizações sobre qualquer mudança de status.
+            </div>
+
+            <div style="margin-top: 32px;">
+                <a href="tela-g3-detalhe.html" class="btn btn-primary btn-block btn-large">
+                    Ver detalhes completos
+                </a>
+                
+                <a href="tela-g1-visao-geral.html" class="btn btn-secondary btn-block">
+                    Voltar à visão geral
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

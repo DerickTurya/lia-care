@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indeferimento Processado - Lia Care</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Licenças e Afastamentos</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <span>João Silva</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card" style="max-width: 800px; margin: 40px auto;">
+            <div style="text-align: center; margin-bottom: 24px;">
+                <div style="font-size: 64px; margin-bottom: 16px;">✅</div>
+                <h2 class="card-title">Processamento Concluído</h2>
+                <p class="card-subtitle">Suas licenças foram ajustadas automaticamente</p>
+            </div>
+
+            <div class="ai-message">
+                <div class="ai-message-header">
+                    <span>🤖</span>
+                    <span>LIA - Assistente Inteligente</span>
+                </div>
+                <div class="ai-message-content">
+                    <p style="margin-bottom: 12px;"><strong>Tudo pronto! Processei o indeferimento do INSS.</strong></p>
+                    <p>Como o benefício foi negado, executei automaticamente todos os ajustes necessários no sistema People. Veja o resumo:</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">📋 Resumo das ações executadas</h3>
+
+            <div style="display: grid; gap: 16px; margin-bottom: 24px;">
+                <div style="background-color: var(--bg-light); padding: 20px; border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                    <h4 style="font-weight: 600; margin-bottom: 12px; color: var(--primary-color);">1️⃣ Licença Original (Primeiros 15 dias)</h4>
+                    <div style="font-size: 14px; color: var(--text-gray); line-height: 1.8;">
+                        ✅ Data final ajustada para <strong>15º dia de afastamento</strong><br>
+                        ✅ Motivo alterado para <strong>"003"</strong><br>
+                        ✅ Status: <span class="status-badge status-success">Efetivada</span><br>
+                        ✅ Gestor notificado
+                    </div>
+                </div>
+
+                <div style="background-color: #fee2e2; padding: 20px; border-radius: 8px; border-left: 4px solid var(--danger-color);">
+                    <h4 style="font-weight: 600; margin-bottom: 12px; color: var(--danger-color);">2️⃣ Nova Licença Criada (Do 16º dia em diante)</h4>
+                    <div style="font-size: 14px; color: var(--text-dark); line-height: 1.8;">
+                        <strong>Tipo:</strong> LIC VENC INSS<br>
+                        <strong>Motivo:</strong> 014<br>
+                        <strong>Início:</strong> 16º dia de afastamento<br>
+                        <strong>Data final:</strong> 31/12/2035<br>
+                        <strong>Status:</strong> <span class="status-badge status-warning">Ativa</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>ℹ️ Como funciona:</strong> A empresa cobre os primeiros 15 dias. Do 16º dia em diante, a licença especial "LIC VENC INSS" fica ativa até 31/12/2035 ou até que você consiga reverter a decisão do INSS através de recurso ou nova perícia.
+            </div>
+
+            <div class="divider"></div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px;">⚖️ Seus direitos e próximos passos</h3>
+
+            <div style="background-color: var(--bg-light); padding: 20px; border-radius: 8px;">
+                <p style="margin-bottom: 12px;"><strong>Você pode recorrer da decisão:</strong></p>
+                <ul style="margin: 12px 0; padding-left: 20px; line-height: 1.8;">
+                    <li>📋 <strong>Recurso administrativo</strong> em até 30 dias</li>
+                    <li>🏥 <strong>Solicitar nova perícia</strong> com documentação complementar</li>
+                    <li>⚖️ <strong>Buscar orientação jurídica</strong> especializada</li>
+                    <li>💬 <strong>Conversar com o RH</strong> sobre opções e suporte</li>
+                </ul>
+            </div>
+
+            <div class="ai-message" style="background: linear-gradient(135deg, #fef3c7, #fde68a); border-left-color: var(--warning-color); margin-top: 24px;">
+                <div class="ai-message-header" style="color: var(--warning-color);">
+                    <span>💙</span>
+                    <span>Estamos aqui para você</span>
+                </div>
+                <div class="ai-message-content" style="color: var(--text-dark);">
+                    <p><strong>Não desista!</strong> Muitos casos de indeferimento são revertidos com recurso ou nova análise. O RH pode te orientar sobre os melhores caminhos. Continue focando na sua recuperação. 💙</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 32px;">
+                <button class="btn btn-primary btn-block" onclick="alert('Contato com RH será aberto')">
+                    Solicitar orientação do RH
+                </button>
+                
+                <a href="tela-01-entrada.html" class="btn btn-secondary btn-block">
+                    Voltar ao início
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

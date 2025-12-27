@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perícia Presencial - Lia Care</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Licenças e Afastamentos</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <span>Colaborador</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card" style="max-width: 700px; margin: 40px auto;">
+            <div class="card-header">
+                <h2 class="card-title">Perícia Médica Presencial - INSS</h2>
+                <p class="card-subtitle">Agendamento com data e local</p>
+            </div>
+
+            <div class="ai-message">
+                <div class="ai-message-header">
+                    <span>🤖</span>
+                    <span>LIA - Assistente Inteligente</span>
+                </div>
+                <div class="ai-message-content">
+                    <p style="margin-bottom: 12px;"><strong>Perfeito! Vou extrair todas as informações da sua perícia.</strong></p>
+                    <p style="margin-bottom: 12px;">Baseado no documento do agendamento, vou automaticamente preencher:</p>
+                    <ul style="margin: 12px 0; padding-left: 20px; line-height: 1.8;">
+                        <li>📋 <strong>Número de Agendamento Perícia</strong> (número do requerimento)</li>
+                        <li>📅 <strong>Data da perícia</strong></li>
+                        <li>⏰ <strong>Horário da perícia</strong></li>
+                        <li>📍 <strong>Local da perícia</strong></li>
+                        <li>💾 Salvar tudo no sistema People</li>
+                        <li>✅ Efetivar sua licença</li>
+                        <li>📧 Notificar seu gestor</li>
+                    </ul>
+                    <p style="margin-top: 12px;">Basta anexar o comprovante. Eu extraio todas as informações! 💙</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="form-group">
+                <label class="form-label">📎 Comprovante de Agendamento (INSS)</label>
+                <div class="upload-area">
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-text">Clique para anexar o comprovante</div>
+                    <div class="upload-hint">Documento com data, hora e local da perícia • PDF, JPG, PNG (máx. 10MB)</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">📋 Atestado Médico</label>
+                <div class="upload-area">
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-text">Clique para anexar o atestado</div>
+                    <div class="upload-hint">PDF, JPG, PNG (máx. 10MB)</div>
+                </div>
+            </div>
+
+            <div class="alert alert-success" style="margin-top: 20px;">
+                <strong>🤖 Processamento inteligente:</strong> Vou ler o comprovante e preencher automaticamente:<br>
+                • <strong>Número de Agendamento Perícia:</strong> [extraído do documento]<br>
+                • <strong>Data de perícia:</strong> [extraído do documento]<br>
+                • <strong>Horário da Perícia:</strong> [extraído do documento]<br>
+                • <strong>Local da Perícia:</strong> [extraído do documento]
+            </div>
+
+            <div class="alert alert-info" style="margin-top: 16px;">
+                <strong>📅 Lembrete:</strong> Não esqueça de comparecer na data e horário agendados. Vou te enviar lembretes próximo à data da perícia.
+            </div>
+
+            <div style="margin-top: 32px;">
+                <button class="btn btn-primary btn-block btn-large" onclick="window.location.href='tela-04a-processando.html'">
+                    Processar documentos
+                </button>
+                
+                <div class="mt-2 text-center">
+                    <a href="tela-04a-1-ja-agendou.html" style="color: var(--text-gray); font-size: 14px; text-decoration: none;">
+                        ← Voltar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Licenças - Lia Care</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/lia-sync.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Licenças e Afastamentos</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <span>👔</span>
+                <span>Maria Santos - Gestora</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Gestão de Licenças da Equipe</h2>
+                <p class="card-subtitle">Acompanhe o status das licenças médicas da sua equipe</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Colaboradores afastados</div>
+                    <div class="stat-value" id="statActive">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Licenças cadastradas</div>
+                    <div class="stat-value" id="statTotal">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Novas (não visualizadas)</div>
+                    <div class="stat-value" style="color: var(--warning-color);" id="statPending">0</div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Notificações em tempo real -->
+            <div id="notificationBanner" style="display: none; background: linear-gradient(135deg, #4299E1 0%, #6B46C1 100%); color: white; padding: 16px 20px; border-radius: 12px; margin-bottom: 24px; animation: slideDown 0.4s ease-out;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="font-size: 24px;">🔔</span>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 700; margin-bottom: 4px;" id="notifTitle">Nova licença cadastrada!</div>
+                        <div style="font-size: 14px; opacity: 0.95;" id="notifMessage">Um colaborador acabou de cadastrar uma licença</div>
+                    </div>
+                    <button onclick="dismissNotification()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                        Ver
+                    </button>
+                </div>
+            </div>
+
+            <style>
+                @keyframes slideDown {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+                @keyframes pulse {
+                    0%, 100% { transform: scale(1); }
+                    50% { transform: scale(1.05); }
+                }
+                .pulse {
+                    animation: pulse 2s infinite;
+                }
+            </style>
+
+            <div class="ai-message">
+                <div class="ai-message-header">
+                    <span>🤖</span>
+                    <span>LIA - Assistente Inteligente</span>
+                </div>
+                <div class="ai-message-content">
+                    <p style="margin-bottom: 12px;"><strong>Olá, Maria! Bem-vinda ao painel de gestão.</strong></p>
+                    <p style="margin-bottom: 12px;">Estou monitorando as licenças da sua equipe em tempo real. Veja o que faço por você:</p>
+                    <ul style="margin: 12px 0; padding-left: 20px; line-height: 1.8;">
+                        <li>📊 Consolido todas as informações de licenças em um só lugar</li>
+                        <li>🔔 Te notifico sobre novos afastamentos automaticamente</li>
+                        <li>⚠️ Destaco pendências que precisam de atenção</li>
+                        <li>📈 Acompanho prazos e processos do INSS</li>
+                        <li>✅ Mantenho você informada sem precisar cobrar colaboradores</li>
+                    </ul>
+                    <p style="margin-top: 12px;">Relaxe e foque na gestão estratégica. Eu cuido da parte operacional! 💙</p>
+                </div>
+            </div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin: 24px 0 16px;">Licenças recentes</h3>
+
+            <div id="licensesList">
+                <div style="text-align: center; padding: 40px; color: var(--text-gray);">
+                    <div style="font-size: 48px; margin-bottom: 16px;">📋</div>
+                    <p>Nenhuma licença cadastrada ainda</p>
+                    <p style="font-size: 14px; margin-top: 8px;">Quando um colaborador cadastrar uma licença, ela aparecerá aqui automaticamente!</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin: 24px 0 16px;">Ações pendentes</h3>
+
+            <div class="list-item" style="border-left: 4px solid var(--warning-color);">
+                <div class="list-item-content">
+                    <h3>Revisar documentação</h3>
+                    <p>Pedro Santos aguarda validação de documentos complementares</p>
+                </div>
+                <div class="list-item-action" style="color: var(--warning-color);">Revisar →</div>
+            </div>
+
+            <div class="list-item" style="border-left: 4px solid var(--warning-color);">
+                <div class="list-item-content">
+                    <h3>Atualização necessária</h3>
+                    <p>Juliana Lima - Retorno previsto foi alterado</p>
+                </div>
+                <div class="list-item-action" style="color: var(--warning-color);">Revisar →</div>
+            </div>
+
+            <div class="alert alert-info mt-3">
+                <strong>📊 Relatórios:</strong> Acesse relatórios detalhados de absenteísmo e tendências da equipe através do menu principal.
+            </div>
+
+            <div style="margin-top: 32px;">
+                <a href="tela-05a-confirmacao.html" class="btn btn-primary btn-block">
+                    🧪 Simular cadastro de licença (Teste)
+                </a>
+                
+                <button onclick="clearAllData()" class="btn btn-secondary btn-block">
+                    🗑️ Limpar todos os dados (Reset)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let notificationTimeout;
+
+        // Limpa todos os dados
+        function clearAllData() {
+            if (confirm('Tem certeza? Isso apagará todas as licenças e notificações cadastradas.')) {
+                window.liaSync.clearAll();
+                updateStats();
+                renderLicenses();
+                alert('✅ Todos os dados foram limpos!');
+            }
+        }
+
+        // Atualiza estatísticas
+        function updateStats() {
+            const stats = window.liaSync.getStats();
+            document.getElementById('statTotal').textContent = stats.total;
+            document.getElementById('statActive').textContent = stats.active;
+            document.getElementById('statPending').textContent = stats.pending;
+
+            // Adiciona efeito de pulso se houver pendências
+            const pendingElement = document.getElementById('statPending');
+            if (stats.pending > 0) {
+                pendingElement.classList.add('pulse');
+            } else {
+                pendingElement.classList.remove('pulse');
+            }
+        }
+
+        // Renderiza lista de licenças
+        function renderLicenses() {
+            const licenses = window.liaSync.getLicenses();
+            const container = document.getElementById('licensesList');
+
+            if (licenses.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: var(--text-gray);">
+                        <div style="font-size: 48px; margin-bottom: 16px;">📋</div>
+                        <p>Nenhuma licença cadastrada ainda</p>
+                        <p style="font-size: 14px; margin-top: 8px;">Quando um colaborador cadastrar uma licença, ela aparecerá aqui automaticamente!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = licenses.map(license => {
+                const isNew = !license.managerViewed;
+                const badgeClass = license.status.includes('Aguardando') ? 'status-pending' : 'status-info';
+                
+                return `
+                    <div class="list-item" onclick="viewLicense(${license.id})" style="cursor: pointer; ${isNew ? 'border-left: 4px solid var(--aiia-blue); background: linear-gradient(135deg, rgba(66, 153, 225, 0.05) 0%, rgba(107, 70, 193, 0.05) 100%);' : ''}">
+                        <div class="list-item-content">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <h3>${license.employeeName}</h3>
+                                ${isNew ? '<span style="background: var(--aiia-gradient); color: white; font-size: 11px; padding: 4px 10px; border-radius: 12px; font-weight: 600;">NOVA</span>' : ''}
+                            </div>
+                            <p>${license.position} • ${license.days} dias • Cadastrada em ${license.createdAt}</p>
+                            <div style="margin-top: 8px;">
+                                <span class="status-badge ${badgeClass}">${license.status}</span>
+                            </div>
+                        </div>
+                        <div class="list-item-action">Ver detalhes →</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Visualiza licença
+        function viewLicense(licenseId) {
+            window.liaSync.markAsViewed(licenseId);
+            updateStats();
+            renderLicenses();
+            // Em produção, redirecionaria para página de detalhes
+            alert('Em produção, abriria a página de detalhes da licença.');
+        }
+
+        // Mostra notificação
+        function showNotification(notification) {
+            const banner = document.getElementById('notificationBanner');
+            document.getElementById('notifTitle').textContent = notification.title;
+            document.getElementById('notifMessage').textContent = notification.message;
+            
+            banner.style.display = 'block';
+            
+            // Auto-esconder após 10 segundos
+            clearTimeout(notificationTimeout);
+            notificationTimeout = setTimeout(() => {
+                dismissNotification();
+            }, 10000);
+
+            // Som de notificação (opcional)
+            try {
+                new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIGWe76+OSRQ0PU6vm7q1gHAU+ldfyw3QmBSh+zO/ekkEMFl60rt2vjxwGPpXX8bZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0OAmaz6eOxVxwFPpXX8rZiHAU+ldfy2YkyBhtmtuzfjzsKHGC37N6VPQ4CZrPp67NcHAU+ldfyw3QmBSh+zO/elT0O').play();
+            } catch(e) {}
+        }
+
+        // Esconde notificação
+        function dismissNotification() {
+            document.getElementById('notificationBanner').style.display = 'none';
+        }
+
+        // Listener para novas licenças
+        window.addEventListener('lia:newNotification', (e) => {
+            console.log('🔔 Nova notificação recebida:', e.detail);
+            showNotification(e.detail);
+            updateStats();
+            renderLicenses();
+        });
+
+        // Listener para atualizações (outras abas/janelas)
+        window.addEventListener('lia:dataUpdated', () => {
+            console.log('🔄 Dados atualizados de outra fonte');
+            updateStats();
+            renderLicenses();
+        });
+
+        // Carrega dados ao iniciar
+        window.addEventListener('DOMContentLoaded', () => {
+            updateStats();
+            renderLicenses();
+
+            // Verifica novas notificações
+            const unread = window.liaSync.getUnreadNotifications();
+            if (unread.length > 0) {
+                showNotification(unread[0]);
+            }
+        });
+
+        // Auto-refresh a cada 5 segundos (simula polling em produção seria WebSocket)
+        setInterval(() => {
+            const currentStats = window.liaSync.getStats();
+            const displayedTotal = parseInt(document.getElementById('statTotal').textContent);
+            
+            // Se houver mudança, atualiza
+            if (currentStats.total !== displayedTotal) {
+                updateStats();
+                renderLicenses();
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

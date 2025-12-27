@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento Realizado - Lia Care</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Licenças e Afastamentos</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <span>Colaborador</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card" style="max-width: 700px; margin: 40px auto;">
+            <div class="card-header">
+                <h2 class="card-title">Qual tipo de processo você realizou?</h2>
+                <p class="card-subtitle">Informe como foi feito o requerimento no INSS</p>
+            </div>
+
+            <div class="ai-message">
+                <div class="ai-message-header">
+                    <span>🤖</span>
+                    <span>LIA - Assistente Inteligente</span>
+                </div>
+                <div class="ai-message-content">
+                    <p style="margin-bottom: 12px;"><strong>Ótimo! Você já agendou.</strong></p>
+                    <p>Agora preciso saber qual tipo de processo você escolheu para registrar corretamente os dados da sua perícia no sistema.</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="options-grid">
+                    <div class="option-card" onclick="window.location.href='tela-04a-1a-analise-documental.html'" style="cursor: pointer;">
+                        <div class="option-card-icon">📋</div>
+                        <div class="option-card-title">Análise Documental</div>
+                        <p class="option-card-desc">Processo 100% digital, sem perícia presencial</p>
+                    </div>
+                    <div class="option-card" onclick="window.location.href='tela-04a-1b-pericia-presencial.html'" style="cursor: pointer;">
+                        <div class="option-card-icon">🏥</div>
+                        <div class="option-card-title">Perícia Médica Presencial</div>
+                        <p class="option-card-desc">Agendamento com data, hora e local</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>💡 Como saber?</strong> Verifique o comprovante que você recebeu do INSS. Se tem data e hora de comparecimento, é perícia presencial. Se apenas tem número de protocolo, é análise documental.
+            </div>
+
+            <div class="mt-3 text-center">
+                <a href="tela-04a-upload.html" style="color: var(--text-gray); font-size: 14px; text-decoration: none;">
+                    ← Voltar
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

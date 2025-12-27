@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processando Deferimento - Lia Care</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Licenças e Afastamentos</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <span>Colaborador</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card text-center" style="max-width: 700px; margin: 80px auto;">
+            <div style="font-size: 72px; margin-bottom: 24px;">🎉</div>
+            
+            <h2 class="card-title" style="font-size: 24px; margin-bottom: 16px; color: var(--success-color);">Processando aprovação do benefício...</h2>
+            
+            <div style="max-width: 400px; margin: 32px auto;">
+                <div style="background-color: var(--bg-light); height: 8px; border-radius: 4px; overflow: hidden;">
+                    <div style="background: linear-gradient(90deg, var(--success-color), #10b981); height: 100%; width: 85%; animation: loading 2s ease-in-out infinite;"></div>
+                </div>
+            </div>
+
+            <div class="ai-message" style="text-align: left; margin: 32px 0; background: linear-gradient(135deg, #d1fae5, #a7f3d0); border-left-color: var(--success-color);">
+                <div class="ai-message-header" style="color: var(--success-color);">
+                    <span>🤖</span>
+                    <span>LIA - Processamento Inteligente</span>
+                </div>
+                <div class="ai-message-content" style="color: var(--text-dark);">
+                    <p style="margin-bottom: 12px;"><strong>Analisando documentos do INSS...</strong></p>
+                    <ul style="margin: 12px 0; padding-left: 20px; line-height: 2;">
+                        <li>✅ Lendo Comunicado de Decisão</li>
+                        <li>✅ Lendo Carta de Concessão</li>
+                        <li>✅ Extraindo dados do benefício:
+                            <ul style="margin-left: 20px; margin-top: 8px; font-size: 14px;">
+                                <li>• Espécie identificada</li>
+                                <li>• Número do benefício capturado</li>
+                                <li>• Data inicial registrada</li>
+                                <li>• Data fim identificada</li>
+                                <li>• Renda do benefício extraída</li>
+                                <li>• Data de cessação obtida</li>
+                            </ul>
+                        </li>
+                        <li>✅ Preenchendo sistema People:
+                            <ul style="margin-left: 20px; margin-top: 8px; font-size: 14px;">
+                                <li>• Marcando "Deferimento"</li>
+                                <li>• Preenchendo "Benefício concedido até"</li>
+                            </ul>
+                        </li>
+                        <li>✅ Salvando informações</li>
+                        <li>⏳ Retornando para Dados Gerais...</li>
+                        <li>⏳ Efetivando licença...</li>
+                        <li>⏳ Notificando gestor...</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p style="color: var(--text-gray); font-size: 14px; margin-top: 24px;">
+                Processamento concluído em alguns segundos...
+            </p>
+
+            <div style="margin-top: 40px;">
+                <button class="btn btn-primary btn-large" onclick="window.location.href='tela-05a-confirmacao.html'" style="animation: pulse 2s ease-in-out infinite; background-color: var(--success-color);">
+                    Continuar →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes loading {
+            0% { width: 0%; }
+            50% { width: 85%; }
+            100% { width: 100%; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(0.98); }
+        }
+    </style>
+</body>
+</html>

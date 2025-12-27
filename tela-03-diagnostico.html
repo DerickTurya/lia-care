@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico - Lia Care</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Licenças e Afastamentos</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <span>Colaborador</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card" style="max-width: 700px; margin: 40px auto;">
+            <div class="ai-message">
+                <div class="ai-message-header">
+                    <span>🤖</span>
+                    <span>LIA - Assistente Inteligente</span>
+                </div>
+                <div class="ai-message-content">
+                    <p style="margin-bottom: 12px;"><strong>Perfeito! Agora preciso entender melhor sua situação.</strong></p>
+                    <p style="margin-bottom: 12px;">Vou fazer algumas perguntas para te orientar corretamente. Cada caso de licença médica tem regras específicas:</p>
+                    <ul style="margin: 12px 0; padding-left: 20px; line-height: 1.8;">
+                        <li><strong>Até 15 dias:</strong> A empresa gerencia tudo internamente</li>
+                        <li><strong>15 dias ou mais:</strong> É necessário acionar o INSS a partir do 16º dia</li>
+                    </ul>
+                    <p style="margin-top: 12px;"><strong>⚠️ Atenção:</strong> Se você teve afastamentos pelo <strong>mesmo motivo</strong> (ou motivos correlacionados) que somam mais de 15 dias nos <strong>últimos 60 dias</strong>, também será necessário seguir o fluxo do INSS.</p>
+                    <p style="margin-top: 12px;">Vamos lá?</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Seu atestado é de quantos dias?</label>
+                <div class="options-grid">
+                    <a href="tela-04c-curta-duracao.html" class="option-card" style="text-decoration: none;">
+                        <div class="option-card-title">Menos de 15 dias</div>
+                        <p class="option-card-desc">Gestão interna</p>
+                    </a>
+                    <div class="option-card" style="border-color: var(--primary-color); background-color: #eff6ff;">
+                        <div class="option-card-title">15 dias ou mais</div>
+                        <p class="option-card-desc">Requer INSS</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="form-group">
+                <label class="form-label">Você já iniciou o processo no INSS?</label>
+                <div class="options-grid" style="grid-template-columns: 1fr 1fr;">
+                    <a href="tela-04a-upload.html" class="option-card" style="text-decoration: none; padding: 20px 16px;">
+                        <div class="option-card-title" style="font-size: 15px;">Ainda não iniciei</div>
+                        <p class="option-card-desc" style="font-size: 12px;">Vou te orientar</p>
+                    </a>
+                    <a href="tela-04b-protocolo.html" class="option-card" style="text-decoration: none; padding: 20px 16px;">
+                        <div class="option-card-title" style="font-size: 15px;">Já iniciei</div>
+                        <p class="option-card-desc" style="font-size: 12px;">Perícia ou análise</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="ai-message" style="background: linear-gradient(135deg, #fef3c7, #fde68a); border-left-color: var(--warning-color); margin-top: 24px;">
+                <div class="ai-message-header" style="color: var(--warning-color);">
+                    <span>💡</span>
+                    <span>Análise da LIA</span>
+                </div>
+                <div class="ai-message-content" style="color: var(--text-dark);">
+                    <p style="margin-bottom: 8px;"><strong>Entendi sua situação!</strong></p>
+                    <p>Com base nas suas respostas, vou te orientar sobre os próximos passos e garantir que todos os documentos sejam processados corretamente. Escolha uma das opções acima para continuar.</p>
+                </div>
+            </div>
+
+            <div class="mt-3 text-center">
+                <a href="tela-02-identificacao.html" style="color: var(--text-gray); font-size: 14px; text-decoration: none;">
+                    ← Voltar
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

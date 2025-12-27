@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decisão INSS - Lia Care</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Licenças e Afastamentos</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <span>João Silva</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- CENÁRIO 1: DEFERIDO -->
+        <div class="card" style="max-width: 700px; margin: 40px auto;">
+            <div style="text-align: center; font-size: 64px; margin-bottom: 24px;">✅</div>
+            
+            <div class="card-header text-center">
+                <h2 class="card-title">Benefício Deferido!</h2>
+                <p class="card-subtitle">Seu benefício foi aprovado pelo INSS</p>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>🎉 Parabéns!</strong> Seu benefício por incapacidade temporária foi concedido pelo INSS.
+            </div>
+
+            <div class="divider"></div>
+
+            <div style="background-color: var(--bg-light); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px;">Detalhes do benefício</h3>
+                <div style="display: grid; gap: 8px;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: var(--text-gray);">Protocolo:</span>
+                        <strong>123.456.789-0</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: var(--text-gray);">Período:</span>
+                        <strong>26/12/2025 a 09/01/2026</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: var(--text-gray);">Decisão:</span>
+                        <strong style="color: var(--success-color);">Deferido</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Carta de Concessão do INSS</label>
+                <div class="upload-area">
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-text">Anexar carta de concessão</div>
+                    <div class="upload-hint">Documento emitido pelo INSS</div>
+                </div>
+            </div>
+
+            <div class="ai-message">
+                <div class="ai-message-header">
+                    <span>🤖</span>
+                    <span>LIA - Assistente Inteligente</span>
+                </div>
+                <div class="ai-message-content">
+                    <p style="margin-bottom: 12px;"><strong>🎉 Parabéns! Recebi a notícia do INSS!</strong></p>
+                    <p style="margin-bottom: 12px;">Seu benefício foi aprovado. Vou processar isso automaticamente:</p>
+                    <ul style="margin: 12px 0; padding-left: 20px; line-height: 1.8;">
+                        <li>✅ Registro da carta de concessão no sistema</li>
+                        <li>✅ Atualização do período de licença confirmado</li>
+                        <li>✅ Notificação ao RH para processamento da folha</li>
+                        <li>✅ Comunicação automática ao seu gestor</li>
+                    </ul>
+                    <p style="margin-top: 12px;"><strong>⚠️ Importante:</strong> Se houver novo afastamento pelo <strong>mesmo motivo em até 60 dias</strong> após a cessação deste benefício, será necessário apresentar <strong>novo requerimento ao INSS</strong>, passando por todo o processo novamente.</p>
+                    <p style="margin-top: 12px;">Você pode anexar a carta de concessão acima. Agora é só aguardar o retorno programado. Estou aqui para qualquer dúvida! 😊💙</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 32px;">
+                <a href="tela-06a-acompanhamento.html" class="btn btn-primary btn-block">
+                    Confirmar e finalizar
+                </a>
+            </div>
+        </div>
+
+        <!-- CENÁRIO 2: INDEFERIDO -->
+        <div class="card" style="max-width: 700px; margin: 40px auto; border: 2px solid var(--warning-color);">
+            <div style="text-align: center; font-size: 64px; margin-bottom: 24px;">⚠️</div>
+            
+            <div class="card-header text-center">
+                <h2 class="card-title">Benefício Indeferido</h2>
+                <p class="card-subtitle">O INSS não aprovou seu pedido neste momento</p>
+            </div>
+
+            <div class="alert alert-warning">
+                <strong>ℹ️ Importante:</strong> Você tem direito a recorrer desta decisão. Veja as orientações abaixo.
+            </div>
+
+            <div class="divider"></div>
+
+            <div style="background-color: var(--bg-light); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px;">Próximos passos</h3>
+                
+                <div style="margin-bottom: 16px;">
+                    <div style="font-weight: 500; margin-bottom: 4px;">1. Recurso administrativo</div>
+                    <div style="font-size: 14px; color: var(--text-gray);">
+                        Você pode apresentar recurso em até 30 dias após a decisão
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 16px;">
+                    <div style="font-weight: 500; margin-bottom: 4px;">2. Nova perícia médica</div>
+                    <div style="font-size: 14px; color: var(--text-gray);">
+                        Agendar nova avaliação com documentação complementar
+                    </div>
+                </div>
+
+            <div class="ai-message">
+                <div class="ai-message-header">
+                    <span>🤖</span>
+                    <span>LIA - Assistente Inteligente</span>
+                </div>
+                <div class="ai-message-content">
+                    <p style="margin-bottom: 12px;"><strong>Recebi a decisão do INSS sobre seu pedido.</strong></p>
+                    <p style="margin-bottom: 12px;">Sei que não é a notícia que você esperava, mas existem caminhos a seguir. Vou te ajudar a entender suas opções:</p>
+                    <ul style="margin: 12px 0; padding-left: 20px; line-height: 1.8;">
+                        <li>📋 <strong>Recurso administrativo:</strong> Você tem 30 dias para recorrer com documentação adicional</li>
+                        <li>🏥 <strong>Nova perícia:</strong> Pode solicitar reavaliação com laudos complementares</li>
+                        <li>⚖️ <strong>Assessoria jurídica:</strong> O RH pode indicar advogados especializados</li>
+                        <li>💬 <strong>Suporte do RH:</strong> Nossa equipe pode te orientar pessoalmente</li>
+                    </ul>
+                    <p style="margin-top: 12px;"><strong>Não desista!</strong> Estou aqui para te apoiar. Clique no botão abaixo para falar com o RH e entender melhor seus direitos. 💙</p>
+                </div>
+            </div>lass="ai-message">
+                <div class="ai-message-header">
+                    <span>🤖</span>
+                    <span>LIA</span>
+                </div>
+                <div class="ai-message-content">
+                    Sei que não é a notícia que esperava, mas estou aqui para te ajudar. Entre em contato com o RH para orientações sobre os próximos passos.
+                </div>
+            </div>
+
+            <div style="margin-top: 32px;">
+                <a href="#" class="btn btn-primary btn-block">
+                    Solicitar orientação do RH
+                </a>
+                <a href="tela-01-entrada.html" class="btn btn-secondary btn-block">
+                    Voltar ao início
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
