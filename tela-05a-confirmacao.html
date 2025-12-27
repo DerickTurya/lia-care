@@ -107,6 +107,13 @@
     <script>
         // Cadastra a licença automaticamente ao carregar a página
         window.addEventListener('DOMContentLoaded', () => {
+            // Verificar se já foi criada (evitar duplicatas ao recarregar)
+            const alreadyCreated = sessionStorage.getItem('license-created-joao-silva');
+            if (alreadyCreated) {
+                console.log('✅ Licença já foi cadastrada nesta sessão');
+                return;
+            }
+            
             // Dados simulados do colaborador (em produção viriam do formulário anterior)
             const licenseData = {
                 employeeName: 'João Silva',
@@ -125,6 +132,7 @@
 
             // Cadastra no sistema e notifica gestor
             const license = window.liaSync.createLicense(licenseData);
+            sessionStorage.setItem('license-created-joao-silva', 'true');
             
             console.log('✅ Licença cadastrada:', license);
             console.log('📧 Gestor notificado automaticamente!');

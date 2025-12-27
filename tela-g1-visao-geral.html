@@ -189,13 +189,14 @@
             
             let html = '';
             
-            // Remover duplicatas baseado no ID
+            // Remover duplicatas baseado no nome do colaborador e data de início
             const uniqueLicenses = [];
-            const seenIds = new Set();
+            const seenKeys = new Set();
             
             licenses.forEach(license => {
-                if (!seenIds.has(license.id)) {
-                    seenIds.add(license.id);
+                const key = `${license.employeeName}-${license.startDate}`;
+                if (!seenKeys.has(key)) {
+                    seenKeys.add(key);
                     uniqueLicenses.push(license);
                 }
             });
@@ -281,8 +282,8 @@
             if (confirm('Tem certeza que deseja limpar todos os dados de teste?')) {
                 localStorage.removeItem('lia-licenses');
                 localStorage.removeItem('lia-notifications');
-                updateDashboard();
                 alert('✅ Dados limpos com sucesso!');
+                location.reload();
             }
         }
 
