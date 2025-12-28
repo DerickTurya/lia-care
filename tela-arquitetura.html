@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquitetura - Lia Care</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .arch-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .arch-diagram {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            margin: 24px 0;
+        }
+        
+        .arch-layer {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 16px 0;
+            position: relative;
+        }
+        
+        .arch-layer-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .arch-components {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        
+        .arch-component {
+            background: white;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a5568;
+            transition: all 0.2s;
+        }
+        
+        .arch-component:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.2);
+            border-color: #4299E1;
+        }
+        
+        .arch-arrow {
+            text-align: center;
+            font-size: 32px;
+            color: #4299E1;
+            margin: 8px 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(4px); }
+        }
+        
+        .tech-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #4299E1, #6B46C1);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 4px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-color: #4299E1;
+        }
+        
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+        
+        .feature-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+        
+        .feature-desc {
+            font-size: 14px;
+            color: #718096;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .arch-diagram {
+                padding: 20px;
+            }
+            
+            .arch-components {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">LIA</div>
+                <div class="logo-text">
+                    <h1>Lia Care</h1>
+                    <p>Arquitetura do Sistema</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <span>🏗️</span>
+                <span>Arquitetura</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container arch-container">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">🏗️ Arquitetura da Solução</h2>
+                <p class="card-subtitle">Sistema modular e escalável para gestão inteligente de licenças médicas</p>
+            </div>
+
+            <div class="arch-diagram">
+                <!-- Camada 1: Interface do Usuário -->
+                <div class="arch-layer" style="border-color: #4299E1;">
+                    <div class="arch-layer-title">
+                        <span>👥</span>
+                        <span>Camada de Apresentação</span>
+                    </div>
+                    <div class="arch-components">
+                        <div class="arch-component">🖥️ Portal Colaborador</div>
+                        <div class="arch-component">📊 Dashboard Gestor</div>
+                        <div class="arch-component">💬 Chat LIA (IA)</div>
+                        <div class="arch-component">📱 Interface Mobile</div>
+                    </div>
+                    <div style="margin-top: 12px;">
+                        <span class="tech-badge">HTML5</span>
+                        <span class="tech-badge">CSS3</span>
+                        <span class="tech-badge">JavaScript</span>
+                        <span class="tech-badge">Responsive</span>
+                    </div>
+                </div>
+
+                <div class="arch-arrow">⬇️</div>
+
+                <!-- Camada 2: Lógica de Negócio -->
+                <div class="arch-layer" style="border-color: #6B46C1;">
+                    <div class="arch-layer-title">
+                        <span>⚙️</span>
+                        <span>Camada de Negócio</span>
+                    </div>
+                    <div class="arch-components">
+                        <div class="arch-component">🤖 Motor IA LIA</div>
+                        <div class="arch-component">📋 Gestão de Processos</div>
+                        <div class="arch-component">🔔 Sistema de Notificações</div>
+                        <div class="arch-component">📊 Analytics & BI</div>
+                    </div>
+                    <div style="margin-top: 12px;">
+                        <span class="tech-badge">Node.js</span>
+                        <span class="tech-badge">REST API</span>
+                        <span class="tech-badge">Business Rules</span>
+                        <span class="tech-badge">AI/ML</span>
+                    </div>
+                </div>
+
+                <div class="arch-arrow">⬇️</div>
+
+                <!-- Camada 3: Integrações -->
+                <div class="arch-layer" style="border-color: #48BB78;">
+                    <div class="arch-layer-title">
+                        <span>🔌</span>
+                        <span>Camada de Integração</span>
+                    </div>
+                    <div class="arch-components">
+                        <div class="arch-component">🏥 API INSS</div>
+                        <div class="arch-component">👔 Sistema RH</div>
+                        <div class="arch-component">📧 Email/SMS</div>
+                        <div class="arch-component">☁️ Cloud Storage</div>
+                    </div>
+                    <div style="margin-top: 12px;">
+                        <span class="tech-badge">Webhooks</span>
+                        <span class="tech-badge">SOAP/REST</span>
+                        <span class="tech-badge">OAuth 2.0</span>
+                        <span class="tech-badge">API Gateway</span>
+                    </div>
+                </div>
+
+                <div class="arch-arrow">⬇️</div>
+
+                <!-- Camada 4: Dados -->
+                <div class="arch-layer" style="border-color: #ED8936;">
+                    <div class="arch-layer-title">
+                        <span>💾</span>
+                        <span>Camada de Dados</span>
+                    </div>
+                    <div class="arch-components">
+                        <div class="arch-component">📁 Banco Relacional</div>
+                        <div class="arch-component">🗄️ NoSQL (Logs)</div>
+                        <div class="arch-component">📦 File Storage</div>
+                        <div class="arch-component">🔐 Vault (Secrets)</div>
+                    </div>
+                    <div style="margin-top: 12px;">
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">MongoDB</span>
+                        <span class="tech-badge">AWS S3</span>
+                        <span class="tech-badge">Encryption</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Funcionalidades Principais -->
+            <div style="margin: 32px 0;">
+                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; text-align: center; color: var(--text-dark);">
+                    🎯 Funcionalidades Principais
+                </h3>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <div class="feature-title">IA Conversacional</div>
+                        <div class="feature-desc">
+                            Base de conhecimento modular com processamento de linguagem natural para orientação instantânea
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-title">Processamento Real-time</div>
+                        <div class="feature-desc">
+                            Análise automática de atestados e tomada de decisão em tempo real sobre fluxo INSS
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🔔</div>
+                        <div class="feature-title">Notificações Inteligentes</div>
+                        <div class="feature-desc">
+                            Sistema multi-canal (email, SMS, push) com alertas contextuais para colaboradores e gestores
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-title">Analytics Avançado</div>
+                        <div class="feature-desc">
+                            Dashboard com métricas de absenteísmo, tendências e insights preditivos para RH
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <div class="feature-title">Segurança & LGPD</div>
+                        <div class="feature-desc">
+                            Criptografia end-to-end, controle de acesso granular e compliance total com LGPD
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <div class="feature-title">Integrações Nativas</div>
+                        <div class="feature-desc">
+                            Conectores prontos para INSS, sistemas de RH (SAP, Totvs) e plataformas de comunicação
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Benefícios Técnicos -->
+            <div style="background: linear-gradient(135deg, rgba(66, 153, 225, 0.08) 0%, rgba(107, 70, 193, 0.08) 100%); border: 2px solid var(--border-color); border-radius: 16px; padding: 24px; margin: 28px 0;">
+                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 16px; color: var(--text-dark);">
+                    💡 Diferenciais Técnicos
+                </h3>
+                <ul style="line-height: 2; color: var(--text-dark); padding-left: 20px; margin: 0;">
+                    <li><strong>🚀 Arquitetura serverless:</strong> Escalabilidade automática e custos otimizados</li>
+                    <li><strong>🧩 Microserviços modulares:</strong> Facilita manutenção e evolução incremental</li>
+                    <li><strong>🔐 Zero-trust security:</strong> Autenticação em todas as camadas com JWT/OAuth</li>
+                    <li><strong>📱 Progressive Web App:</strong> Funciona offline e pode ser instalado em dispositivos móveis</li>
+                    <li><strong>♿ Acessibilidade (WCAG):</strong> Interface inclusiva para todos os colaboradores</li>
+                    <li><strong>🌍 Multi-tenant:</strong> Suporte a múltiplas empresas com isolamento total de dados</li>
+                </ul>
+            </div>
+
+            <!-- Roadmap Técnico -->
+            <div style="background: #f7fafc; border-radius: 12px; padding: 24px; margin: 28px 0;">
+                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 16px; color: var(--text-dark);">
+                    🗺️ Roadmap de Evolução
+                </h3>
+                <div style="position: relative; padding-left: 32px;">
+                    <div style="position: absolute; left: 12px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #4299E1, #6B46C1);"></div>
+                    
+                    <div style="position: relative; margin-bottom: 20px;">
+                        <div style="position: absolute; left: -26px; width: 12px; height: 12px; background: #4299E1; border-radius: 50%; border: 3px solid white;"></div>
+                        <div style="font-weight: 700; color: #2d3748; margin-bottom: 4px;">✅ Fase 1: MVP (Atual)</div>
+                        <div style="font-size: 14px; color: #718096;">Core de licenças + Chat IA + Dashboard básico</div>
+                    </div>
+                    
+                    <div style="position: relative; margin-bottom: 20px;">
+                        <div style="position: absolute; left: -26px; width: 12px; height: 12px; background: #48BB78; border-radius: 50%; border: 3px solid white;"></div>
+                        <div style="font-weight: 700; color: #2d3748; margin-bottom: 4px;">🔄 Fase 2: Integrações</div>
+                        <div style="font-size: 14px; color: #718096;">APIs INSS + Sistemas RH + Telemedicina</div>
+                    </div>
+                    
+                    <div style="position: relative; margin-bottom: 20px;">
+                        <div style="position: absolute; left: -26px; width: 12px; height: 12px; background: #ED8936; border-radius: 50%; border: 3px solid white;"></div>
+                        <div style="font-weight: 700; color: #2d3748; margin-bottom: 4px;">🎯 Fase 3: IA Preditiva</div>
+                        <div style="font-size: 14px; color: #718096;">Machine Learning para predição de absenteísmo + Insights automáticos</div>
+                    </div>
+                    
+                    <div style="position: relative;">
+                        <div style="position: absolute; left: -26px; width: 12px; height: 12px; background: #9F7AEA; border-radius: 50%; border: 3px solid white;"></div>
+                        <div style="font-weight: 700; color: #2d3748; margin-bottom: 4px;">🚀 Fase 4: Enterprise</div>
+                        <div style="font-size: 14px; color: #718096;">White-label + Marketplace de serviços + API pública</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 32px;">
+                <a href="tela-01-entrada.html" class="btn btn-primary">
+                    ← Voltar à Página Inicial
+                </a>
+                <a href="evolucao-nivel3.html" class="btn btn-secondary" style="margin-left: 12px;">
+                    🚀 Ver Visão Enterprise
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>🏗️ Arquitetura pensada para escala, segurança e evolução contínua</p>
+    </div>
+</body>
+</html>

@@ -312,8 +312,8 @@
             messageDiv.appendChild(content);
             container.appendChild(messageDiv);
             
-            // Scroll para baixo
-            container.scrollTop = container.scrollHeight;
+            // Auto scroll para o final
+            scrollToBottom();
         }
 
         // Mostra/esconde indicador de digitação
@@ -326,11 +326,26 @@
                 indicator.classList.add('active');
                 sendBtn.disabled = true;
                 input.disabled = true;
+                sendBtn.style.opacity = '0.5';
+                sendBtn.style.cursor = 'not-allowed';
             } else {
                 indicator.classList.remove('active');
                 sendBtn.disabled = false;
                 input.disabled = false;
+                sendBtn.style.opacity = '1';
+                sendBtn.style.cursor = 'pointer';
             }
+        }
+
+        // Scroll automático para o final do chat
+        function scrollToBottom() {
+            const container = document.getElementById('chatContainer');
+            setTimeout(() => {
+                container.scrollTo({
+                    top: container.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }, 100);
         }
 
         // Envia mensagem
@@ -346,11 +361,15 @@
             adicionarMensagem(mensagem, true);
             input.value = '';
             
+            // Auto scroll
+            scrollToBottom();
+            
             // Mostra digitando
             setDigitando(true);
             
-            // Simula delay
-            await new Promise(resolve => setTimeout(resolve, 600));
+            // Simula delay de digitação mais realista (varia entre 800-1400ms)
+            const typingDelay = 800 + Math.random() * 600;
+            await new Promise(resolve => setTimeout(resolve, typingDelay));
             
             // Processa com LIA
             console.log('🤖 Processando com LIA...');
@@ -360,6 +379,9 @@
             // Esconde digitando e mostra resposta
             setDigitando(false);
             adicionarMensagem(resposta, false);
+            
+            // Auto scroll novamente após resposta
+            scrollToBottom();
         }
 
         // Pergunta rápida
