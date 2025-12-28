@@ -200,11 +200,12 @@
             const licenses = liaSync.getLicenses();
             console.log('📦 Total de licenças:', licenses.length);
             
-            const license = licenses.find(l => l.id === licenseId);
+            // Converte ambos para string para comparação
+            const license = licenses.find(l => String(l.id) === String(licenseId));
 
             if (!license) {
                 console.error('❌ Licença não encontrada. ID:', licenseId);
-                console.log('Licenças disponíveis:', licenses.map(l => l.id));
+                console.log('Licenças disponíveis:', licenses.map(l => ({ id: l.id, tipo: typeof l.id })));
                 alert('Licença não encontrada');
                 window.location.href = 'tela-g1-visao-geral.html';
                 return;
