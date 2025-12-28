@@ -25,7 +25,7 @@ class LiaIA {
 
             // Cache busting - força recarregar sempre
             const timestamp = new Date().getTime();
-            const version = '20251228_v2'; // Versão fixa para forçar reload
+            const version = '20251228_v3'; // Versão fixa para forçar reload
             console.log('🔄 Carregando bases de conhecimento... (v' + version + '_' + timestamp + ')');
             
             const promises = bases.map(url => 
@@ -214,8 +214,9 @@ class LiaIA {
             return this.getRandomResponse(responses);
         }
         
-        // Está funcionando / você funciona
-        if (input.includes('funciona') || input.includes('funcionando')) {
+        // Está funcionando / você funciona (mas NÃO para perguntas sobre perícia)
+        if ((input.includes('funciona') || input.includes('funcionando')) && 
+            !input.includes('pericia') && !input.includes('inss')) {
             return 'Sim, estou funcionando perfeitamente! ✅ Pronta para te ajudar com suas dúvidas sobre licenças médicas. O que você gostaria de saber?';
         }
         
