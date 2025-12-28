@@ -25,10 +25,18 @@ class LiaIA {
 
             // Cache busting - força recarregar sempre
             const timestamp = new Date().getTime();
-            console.log('🔄 Carregando bases de conhecimento... (v' + timestamp + ')');
+            const version = '20251228_v2'; // Versão fixa para forçar reload
+            console.log('🔄 Carregando bases de conhecimento... (v' + version + '_' + timestamp + ')');
             
             const promises = bases.map(url => 
-                fetch(url + '?v=' + timestamp)
+                fetch(url + '?v=' + version + '_' + timestamp, {
+                    cache: 'no-store',
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    }
+                })
                     .then(res => res.json())
                     .catch(err => {
                         console.warn(`⚠️ Erro ao carregar ${url}:`, err);
