@@ -125,6 +125,47 @@
             line-height: 1.6;
         }
         
+        .roadmap-container {
+            position: relative;
+            padding-left: 32px;
+        }
+        
+        .roadmap-line {
+            position: absolute;
+            left: 12px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #4299E1, #6B46C1);
+        }
+        
+        .roadmap-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .roadmap-dot {
+            position: absolute;
+            left: -26px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+        
+        .roadmap-title {
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 4px;
+            font-size: 15px;
+        }
+        
+        .roadmap-desc {
+            font-size: 14px;
+            color: #718096;
+            line-height: 1.5;
+        }
+        
         @media (max-width: 768px) {
             .arch-diagram {
                 padding: 20px;
@@ -136,6 +177,68 @@
             
             .feature-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .roadmap-container {
+                padding-left: 24px;
+            }
+            
+            .roadmap-line {
+                left: 8px;
+            }
+            
+            .roadmap-dot {
+                left: -18px;
+                width: 10px;
+                height: 10px;
+            }
+            
+            .roadmap-title {
+                font-size: 14px;
+            }
+            
+            .roadmap-desc {
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .arch-diagram {
+                padding: 16px;
+            }
+            
+            .arch-layer {
+                padding: 16px;
+            }
+            
+            .arch-layer-title {
+                font-size: 14px;
+            }
+            
+            .arch-component {
+                font-size: 13px;
+                padding: 10px 12px;
+            }
+            
+            .tech-badge {
+                font-size: 11px;
+                padding: 3px 10px;
+            }
+            
+            .feature-card {
+                padding: 16px;
+            }
+            
+            .feature-icon {
+                font-size: 28px;
+            }
+            
+            .feature-title {
+                font-size: 15px;
+            }
+            
+            .feature-desc {
+                font-size: 13px;
             }
         }
     </style>
@@ -333,40 +436,40 @@
                 <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 16px; color: var(--text-dark);">
                     🗺️ Roadmap de Evolução
                 </h3>
-                <div style="position: relative; padding-left: 32px;">
-                    <div style="position: absolute; left: 12px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #4299E1, #6B46C1);"></div>
+                <div class="roadmap-container">
+                    <div class="roadmap-line"></div>
                     
-                    <div style="position: relative; margin-bottom: 20px;">
-                        <div style="position: absolute; left: -26px; width: 12px; height: 12px; background: #4299E1; border-radius: 50%; border: 3px solid white;"></div>
-                        <div style="font-weight: 700; color: #2d3748; margin-bottom: 4px;">✅ Fase 1: MVP (Atual)</div>
-                        <div style="font-size: 14px; color: #718096;">Core de licenças + Chat IA + Dashboard básico</div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-dot" style="background: #4299E1;"></div>
+                        <div class="roadmap-title">✅ Fase 1: MVP (Atual)</div>
+                        <div class="roadmap-desc">Core de licenças + Chat IA + Dashboard básico</div>
                     </div>
                     
-                    <div style="position: relative; margin-bottom: 20px;">
-                        <div style="position: absolute; left: -26px; width: 12px; height: 12px; background: #48BB78; border-radius: 50%; border: 3px solid white;"></div>
-                        <div style="font-weight: 700; color: #2d3748; margin-bottom: 4px;">🔄 Fase 2: Integrações</div>
-                        <div style="font-size: 14px; color: #718096;">APIs INSS + Sistemas RH + Telemedicina</div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-dot" style="background: #48BB78;"></div>
+                        <div class="roadmap-title">🔄 Fase 2: Integrações</div>
+                        <div class="roadmap-desc">APIs INSS + Sistemas RH + Telemedicina</div>
                     </div>
                     
-                    <div style="position: relative; margin-bottom: 20px;">
-                        <div style="position: absolute; left: -26px; width: 12px; height: 12px; background: #ED8936; border-radius: 50%; border: 3px solid white;"></div>
-                        <div style="font-weight: 700; color: #2d3748; margin-bottom: 4px;">🎯 Fase 3: IA Preditiva</div>
-                        <div style="font-size: 14px; color: #718096;">Machine Learning para predição de absenteísmo + Insights automáticos</div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-dot" style="background: #ED8936;"></div>
+                        <div class="roadmap-title">🎯 Fase 3: IA Preditiva</div>
+                        <div class="roadmap-desc">Machine Learning para predição de absenteísmo + Insights automáticos</div>
                     </div>
                     
-                    <div style="position: relative;">
-                        <div style="position: absolute; left: -26px; width: 12px; height: 12px; background: #9F7AEA; border-radius: 50%; border: 3px solid white;"></div>
-                        <div style="font-weight: 700; color: #2d3748; margin-bottom: 4px;">🚀 Fase 4: Enterprise</div>
-                        <div style="font-size: 14px; color: #718096;">White-label + Marketplace de serviços + API pública</div>
+                    <div class="roadmap-item" style="margin-bottom: 0;">
+                        <div class="roadmap-dot" style="background: #9F7AEA;"></div>
+                        <div class="roadmap-title">🚀 Fase 4: Enterprise</div>
+                        <div class="roadmap-desc">White-label + Marketplace de serviços + API pública</div>
                     </div>
                 </div>
             </div>
 
-            <div style="text-align: center; margin-top: 32px;">
-                <a href="tela-01-entrada.html" class="btn btn-primary">
+            <div style="text-align: center; margin-top: 32px; display: flex; flex-direction: column; gap: 12px; align-items: center;">
+                <a href="tela-01-entrada.html" class="btn btn-primary" style="width: 100%; max-width: 320px;">
                     ← Voltar à Página Inicial
                 </a>
-                <a href="evolucao-nivel3.html" class="btn btn-secondary" style="margin-left: 12px;">
+                <a href="evolucao-nivel3.html" class="btn btn-secondary" style="width: 100%; max-width: 320px;">
                     🚀 Ver Visão Enterprise
                 </a>
             </div>
