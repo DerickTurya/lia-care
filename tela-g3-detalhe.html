@@ -167,15 +167,28 @@
     </div>
 
     <script>
+        // Aguarda o liaSync estar pronto antes de carregar
+        function waitForLiaSync() {
+            if (!window.liaSync) {
+                console.log('⏳ Aguardando liaSync carregar...');
+                setTimeout(waitForLiaSync, 100);
+                return;
+            }
+            console.log('✅ liaSync carregado!');
+            loadLicenseDetails();
+        }
+
         // Carrega dados da licença
         window.addEventListener('DOMContentLoaded', () => {
-            loadLicenseDetails();
+            waitForLiaSync();
         });
 
         function loadLicenseDetails() {
             // Pega o ID da URL ou sessionStorage
             const urlParams = new URLSearchParams(window.location.search);
             const licenseId = urlParams.get('id') || sessionStorage.getItem('currentLicenseId');
+            
+            console.log('🔍 Buscando licença com ID:', licenseId);
             
             if (!licenseId) {
                 alert('Licença não encontrada');
@@ -185,13 +198,19 @@
 
             // Busca a licença
             const licenses = liaSync.getLicenses();
+            console.log('📦 Total de licenças:', licenses.length);
+            
             const license = licenses.find(l => l.id === licenseId);
 
             if (!license) {
+                console.error('❌ Licença não encontrada. ID:', licenseId);
+                console.log('Licenças disponíveis:', licenses.map(l => l.id));
                 alert('Licença não encontrada');
                 window.location.href = 'tela-g1-visao-geral.html';
                 return;
             }
+
+            console.log('✅ Licença encontrada:', license);
 
             // Preenche os dados
             const employeeName = license.employeeName || license.employee || 'Colaborador';
