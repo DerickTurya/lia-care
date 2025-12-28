@@ -256,9 +256,16 @@
 
         // Visualizar licença
         function viewLicense(licenseId) {
-            console.log('Visualizando licença:', licenseId);
+            console.log('👁️ Visualizando licença:', licenseId);
+            
+            // Marca como visualizada
             liaSync.markAsViewed(licenseId);
-            updateDashboard();
+            
+            // Salva o ID da licença para a página de detalhes
+            sessionStorage.setItem('currentLicenseId', licenseId);
+            
+            // Redireciona para página de detalhes
+            window.location.href = 'tela-g3-detalhe.html?id=' + licenseId;
         }
 
         // Mostrar notificação

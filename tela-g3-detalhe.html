@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes da Licença - Lia Care</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/lia-sync.js?v=20251228"></script>
 </head>
 <body>
     <div class="header">
@@ -30,15 +31,15 @@
                 <p class="card-subtitle">Acompanhamento completo do afastamento</p>
             </div>
 
-            <div style="background-color: var(--bg-light); padding: 24px; border-radius: 8px; margin-bottom: 24px;">
+            <div style="background-color: var(--bg-light); padding: 24px; border-radius: 8px; margin-bottom: 24px;" id="employeeHeader">
                 <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
-                    <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-color), #3b82f6); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: 600;">
-                        JS
+                    <div id="employeeAvatar" style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-color), #3b82f6); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: 600;">
+                        --
                     </div>
                     <div>
-                        <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 4px;">João Silva</h3>
-                        <p style="color: var(--text-gray); margin-bottom: 8px;">Desenvolvedor Frontend • Tecnologia</p>
-                        <span class="status-badge status-pending">Aguardando INSS</span>
+                        <h3 id="employeeName" style="font-size: 20px; font-weight: 600; margin-bottom: 4px;">Carregando...</h3>
+                        <p id="employeePosition" style="color: var(--text-gray); margin-bottom: 8px;">...</p>
+                        <span id="licenseStatus" class="status-badge status-pending">...</span>
                     </div>
                 </div>
             </div>
@@ -46,15 +47,15 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-label">Período da licença</div>
-                    <div class="stat-value" style="font-size: 24px;">15 dias</div>
+                    <div id="licenseDays" class="stat-value" style="font-size: 24px;">-- dias</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Data de início</div>
-                    <div class="stat-value" style="font-size: 20px;">26/12/2025</div>
+                    <div id="startDate" class="stat-value" style="font-size: 20px;">--/--/----</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Retorno previsto</div>
-                    <div class="stat-value" style="font-size: 20px;">10/01/2026</div>
+                    <div id="endDate" class="stat-value" style="font-size: 20px;">--/--/----</div>
                 </div>
             </div>
 
@@ -63,18 +64,18 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
                 <div>
                     <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px;">Informações do processo</h3>
-                    <div style="display: grid; gap: 12px;">
+                    <div id="processInfo" style="display: grid; gap: 12px;">
                         <div>
                             <div style="font-size: 13px; color: var(--text-gray); margin-bottom: 4px;">Tipo de licença</div>
-                            <div style="font-weight: 500;">Licença médica (INSS)</div>
+                            <div id="licenseType" style="font-weight: 500;">Carregando...</div>
                         </div>
                         <div>
-                            <div style="font-size: 13px; color: var(--text-gray); margin-bottom: 4px;">Protocolo INSS</div>
-                            <div style="font-weight: 500;">123.456.789-0</div>
+                            <div style="font-size: 13px; color: var(--text-gray); margin-bottom: 4px;">Condição/Lesão</div>
+                            <div id="condition" style="font-weight: 500;">Carregando...</div>
                         </div>
                         <div>
-                            <div style="font-size: 13px; color: var(--text-gray); margin-bottom: 4px;">Tipo de processo</div>
-                            <div style="font-weight: 500;">Análise documental</div>
+                            <div style="font-size: 13px; color: var(--text-gray); margin-bottom: 4px;">Médico responsável</div>
+                            <div id="doctorInfo" style="font-weight: 500;">Carregando...</div>
                         </div>
                     </div>
                 </div>
@@ -159,10 +160,91 @@
 
             <div style="margin-top: 32px;">
                 <a href="tela-g1-visao-geral.html" class="btn btn-secondary btn-block">
-                    Voltar à visão geral
+                    ← Voltar à visão geral
                 </a>
             </div>
         </div>
     </div>
+
+    <script>
+        // Carrega dados da licença
+        window.addEventListener('DOMContentLoaded', () => {
+            loadLicenseDetails();
+        });
+
+        function loadLicenseDetails() {
+            // Pega o ID da URL ou sessionStorage
+            const urlParams = new URLSearchParams(window.location.search);
+            const licenseId = urlParams.get('id') || sessionStorage.getItem('currentLicenseId');
+            
+            if (!licenseId) {
+                alert('Licença não encontrada');
+                window.location.href = 'tela-g1-visao-geral.html';
+                return;
+            }
+
+            // Busca a licença
+            const licenses = liaSync.getLicenses();
+            const license = licenses.find(l => l.id === licenseId);
+
+            if (!license) {
+                alert('Licença não encontrada');
+                window.location.href = 'tela-g1-visao-geral.html';
+                return;
+            }
+
+            // Preenche os dados
+            const employeeName = license.employeeName || license.employee || 'Colaborador';
+            const initials = getInitials(employeeName);
+            
+            document.getElementById('employeeAvatar').textContent = initials;
+            document.getElementById('employeeName').textContent = employeeName;
+            
+            const position = license.position || 'Cargo não informado';
+            const department = license.department || 'Departamento não informado';
+            document.getElementById('employeePosition').textContent = `${position} • ${department}`;
+            
+            const status = license.status || 'Pendente';
+            const statusBadge = document.getElementById('licenseStatus');
+            statusBadge.textContent = status;
+            statusBadge.className = 'status-badge ' + getStatusClass(status);
+            
+            document.getElementById('licenseDays').textContent = (license.days || '--') + ' dias';
+            document.getElementById('startDate').textContent = license.startDate || '--/--/----';
+            document.getElementById('endDate').textContent = license.endDate || '--/--/----';
+            
+            const licenseType = license.days > 15 ? 'Licença médica (INSS)' : 'Licença médica (até 15 dias)';
+            document.getElementById('licenseType').textContent = licenseType;
+            
+            document.getElementById('condition').textContent = license.condition || license.injury || 'Não especificada';
+            
+            const doctorName = license.doctorName || 'Não informado';
+            const doctorCRM = license.doctorCRM || '';
+            document.getElementById('doctorInfo').textContent = doctorCRM ? `${doctorName} - ${doctorCRM}` : doctorName;
+            
+            console.log('✅ Dados da licença carregados:', license);
+        }
+
+        function getInitials(name) {
+            const parts = name.trim().split(' ');
+            if (parts.length >= 2) {
+                return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+            }
+            return name.substring(0, 2).toUpperCase();
+        }
+
+        function getStatusClass(status) {
+            const statusMap = {
+                'Aguardando INSS': 'status-pending',
+                'Em análise': 'status-pending',
+                'Aprovada': 'status-approved',
+                'Deferida': 'status-approved',
+                'Ativa': 'status-approved',
+                'Concluída': 'status-completed',
+                'Indeferida': 'status-denied'
+            };
+            return statusMap[status] || 'status-pending';
+        }
+    </script>
 </body>
 </html>
